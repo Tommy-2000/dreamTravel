@@ -1,0 +1,50 @@
+import { json, Response } from "express";
+// import qs from "qs";
+import { HotelOffersSearchParams, ResponseError } from "amadeus-ts";
+import { testAmadeusApi, amadeusClient } from "../../amadeusClient";
+import { flightRouter } from "./flightRouter";
+import { TypedRequestQuery } from "../../utils/custom_types";
+
+// Set the content type for the router to use JSON
+flightRouter.use(json)
+
+// Start the flight booking process by calling each endpoint in the correct order
+// Find all available hotels in a given city or location
+flightRouter.get(`${testAmadeusApi}/hotelSearch`, async (req: TypedRequestQuery<{query: string, hotelIds: string, countryOfResidence: string, adults: number, checkInDate: string, checkOutDate: string, priceRange: string, boardType: "ROOM_ONLY" | "BREAKFAST" | "HALF_BOARD" | "FULL_BOARD" | "ALL_INCLUSIVE" | undefined}>, res: Response) => {
+    // Define the param object containing the search params to request
+    const hotelOffersSearch: HotelOffersSearchParams = {
+        hotelIds: req.query.hotelIds,
+        countryOfResidence: req.query.countryOfResidence,
+        adults: req.query.adults,
+        checkInDate: req.query.checkInDate,
+        checkOutDate: req.query.checkOutDate,
+        priceRange: req.query.priceRange,
+        boardType: req.query.boardType
+    }
+    const searchResponse = await amadeusClient.shopping.hotelOffersSearch.get(hotelOffersSearch);
+
+    try {
+        await res.json(JSON.parse(searchResponse.body)); // Return the JSON body if successful
+    } catch (err: unknown) {
+        if (err instanceof ResponseError) {
+            await res.json(err);
+        } // Return a JSON error from the reponse if failed
+    }
+
+});
+
+
+// // Find
+// amadeusRouter.get(`${testAmadeusApi}/hotels`, async (req: Request, res: Response) => {
+//     const { countryOfResidenceQ, adultsQ, checkInDateQ, checkOutDateQ, priceRangeQ, boardTypeQ } = req.query;
+//     // Define an object containing the search params
+
+//     try {
+//         await res.json(JSON.parse(searchResponse.body)); // Return the JSON body if successful
+//     } catch (err: unknown) {
+//         if (err instanceof ResponseError) {
+//             await res.json(err);
+//         } // Return a JSON error from the reponse if failed
+//     }
+
+// });

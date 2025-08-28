@@ -1,0 +1,15 @@
+node_modules
+jspm_packages
+.npm
+.eslintcache
+.env
+.env.*
+!.env.example
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+Dockerfile
+.dockerignore
