@@ -1,6 +1,6 @@
 # dreamTravel
 
-Travel platform and application built with Flutter for Android, iOS and Web.
+Travel platform and application consisting of a Flutter front-end for Android, iOS and Web that's combined with a Node.JS back-end with TypeScript.
 
 ## Project Details
 
