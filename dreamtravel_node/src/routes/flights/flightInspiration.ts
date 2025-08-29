@@ -1,16 +1,18 @@
-import { json, Response } from "express";
+import { json, Response, Router } from "express";
 // import qs from "qs";
 import { HotelOffersSearchParams, ResponseError } from "amadeus-ts";
-import { testAmadeusApi, amadeusClient } from "../../amadeusClient";
-import { flightRouter } from "./flightRouter";
+import { amadeusClient } from "../../amadeusClient";
 import { TypedRequestQuery } from "../../utils/custom_types";
 
+// Declare the router for searching and booking flights
+export const flightInspirationRouter = Router();
+
 // Set the content type for the router to use JSON
-flightRouter.use(json)
+flightInspirationRouter.use(json)
 
 // Start the flight booking process by calling each endpoint in the correct order
 // Find all available hotels in a given city or location
-flightRouter.get(`${testAmadeusApi}/hotelSearch`, async (req: TypedRequestQuery<{query: string, hotelIds: string, countryOfResidence: string, adults: number, checkInDate: string, checkOutDate: string, priceRange: string, boardType: "ROOM_ONLY" | "BREAKFAST" | "HALF_BOARD" | "FULL_BOARD" | "ALL_INCLUSIVE" | undefined}>, res: Response) => {
+flightInspirationRouter.get(`/hotelSearch`, async (req: TypedRequestQuery<{query: string, hotelIds: string, countryOfResidence: string, adults: number, checkInDate: string, checkOutDate: string, priceRange: string, boardType: "ROOM_ONLY" | "BREAKFAST" | "HALF_BOARD" | "FULL_BOARD" | "ALL_INCLUSIVE" | undefined}>, res: Response) => {
     // Define the param object containing the search params to request
     const hotelOffersSearch: HotelOffersSearchParams = {
         hotelIds: req.query.hotelIds,

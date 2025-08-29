@@ -6,6 +6,10 @@ export const amadeusClient = new Amadeus({
     clientSecret: nodeConfig.amadeus_secret
 });
 
-export const testAmadeusApi = "test.api.amadeus.com";
+export const baseTestAmadeusApi = "test.api.amadeus.com";
 
-// const prodAmadeusApi = "";
+export const tokenTestAmadeusApi = "test.api.amadeus.com/";
+
+// export const baseProdAmadeusApi = "";
+
+// export const tokenTestAmadeusApi = "";

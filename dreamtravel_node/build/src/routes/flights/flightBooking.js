@@ -1,15 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.flightRouter = void 0;
 const express_1 = require("express");
 // import qs from "qs";
 const amadeus_ts_1 = require("amadeus-ts");
 const amadeusClient_1 = require("../../amadeusClient");
-const flightRouter_1 = require("./flightRouter");
+// Declare the router for searching and booking flights
+exports.flightRouter = (0, express_1.Router)();
 // Set the content type for the router to use JSON
-flightRouter_1.flightRouter.use(express_1.json);
+// flightBookingRouter.use(json);
+exports.flightRouter.get("/flightBookingStatus", async (request, response) => {
+    response.send("flightBookingStatus");
+});
 // Start the flight booking process by calling each endpoint in the correct order
 // Following from the City and Airport Search, find flights between cities at specific dates
-flightRouter_1.flightRouter.get(`${amadeusClient_1.testAmadeusApi}/flightSearch`, async (req, res) => {
+exports.flightRouter.route(`/flightSearch`).get(async (req, res) => {
     // Define the param object containing the search params to request
     const flightOffersSearchParams = {
         originLocationCode: req.query.originLocationCode,
@@ -29,7 +34,7 @@ flightRouter_1.flightRouter.get(`${amadeusClient_1.testAmadeusApi}/flightSearch`
     }
 });
 // When a flight is chosen, check its price and availability with the airline with a POST
-// flightRouter.post(`${testAmadeusApi}/flightConfirmation`, async (req: RequestBody<{flight: string}>, res: Response) => {
+// flightRouter.post(`flightConfirmation`, async (req: RequestBody<{flight: string}>, res: Response) => {
 //     const hotelOffersSearchParams: FlightOffersPricingParams = {
 //         data: req.body.flight
 //     }

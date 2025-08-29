@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hotelRouter = void 0;
+const express_1 = require("express");
 // import qs from "qs";
 const amadeus_ts_1 = require("amadeus-ts");
 const amadeusClient_1 = require("../../amadeusClient");
-const hotelRouter_1 = require("./hotelRouter");
+// Declare the router for searching and booking hotels
+exports.hotelRouter = (0, express_1.Router)();
 // Find all available hotels in a given city or location
-hotelRouter_1.hotelRouter.get(`${amadeusClient_1.testAmadeusApi}/hotels`, async (req, res) => {
+exports.hotelRouter.get(`${amadeusClient_1.baseTestAmadeusApi}/hotels`, async (req, res) => {
     // Define the param object containing the search params to request
     const hotelbyCityParams = {
         cityCode: req.query.cityCode,

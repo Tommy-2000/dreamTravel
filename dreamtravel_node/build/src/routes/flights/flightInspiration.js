@@ -1,15 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.flightInspirationRouter = void 0;
 const express_1 = require("express");
 // import qs from "qs";
 const amadeus_ts_1 = require("amadeus-ts");
 const amadeusClient_1 = require("../../amadeusClient");
-const flightRouter_1 = require("./flightRouter");
+// Declare the router for searching and booking flights
+exports.flightInspirationRouter = (0, express_1.Router)();
 // Set the content type for the router to use JSON
-flightRouter_1.flightRouter.use(express_1.json);
+exports.flightInspirationRouter.use(express_1.json);
 // Start the flight booking process by calling each endpoint in the correct order
 // Find all available hotels in a given city or location
-flightRouter_1.flightRouter.get(`${amadeusClient_1.testAmadeusApi}/hotelSearch`, async (req, res) => {
+exports.flightInspirationRouter.get(`/hotelSearch`, async (req, res) => {
     // Define the param object containing the search params to request
     const hotelOffersSearch = {
         hotelIds: req.query.hotelIds,
