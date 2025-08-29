@@ -1,6 +1,6 @@
 # dreamTravel
 
-Travel platform and application consisting of a Flutter front-end for Android, iOS and Web. This Flutter application is combined with a Node.JS back-end with TypeScript to manage authentication and API calls made to Amadeus Travel API's.
+Travel booking platform and application consisting of a Flutter front-end for Android, iOS and Web. This Flutter application is combined with a Node.JS back-end with TypeScript to manage authentication and API calls made to Amadeus Travel API's.
 
 
 ## Project Details
