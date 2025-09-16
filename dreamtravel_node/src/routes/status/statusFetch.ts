@@ -8,6 +8,6 @@ statusRouter.get(`/amadeusStatus`, async (request: Request, response: Response) 
   response.send("Amadeus Server Connected");
 });
 
-statusRouter.get(`/clientStatus`, async (request: Request, response: Response) => {
+statusRouter.get(`/nodeStatus`, async (request: Request, response: Response) => {
   response.send("Node Server Connected");
 });
