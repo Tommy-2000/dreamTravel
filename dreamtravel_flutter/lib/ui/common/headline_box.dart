@@ -16,13 +16,11 @@ class _HeadlineBoxState extends State<HeadlineBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(25),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(48),
-          child: widget.child,
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: widget.child,
       ),
     );
   }

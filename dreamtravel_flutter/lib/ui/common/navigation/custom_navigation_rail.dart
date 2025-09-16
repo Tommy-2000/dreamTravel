@@ -22,7 +22,7 @@ class _NavigationRailState extends ConsumerState<CustomNavigationRail> {
       print("CustomNavigationRail has been built");
     }
     return ClipRRect(
-      borderRadius: BorderRadius.circular(60),
+      borderRadius: BorderRadius.circular(50),
       child: Container(
         color: Colors.lightBlue,
         width: 125,
@@ -35,15 +35,10 @@ class _NavigationRailState extends ConsumerState<CustomNavigationRail> {
               children: List.generate(navScreens.length, (navIndex) {
                 return Column(
                   children: [
-                    MaterialButton(
+                    IconButton(
                       mouseCursor: SystemMouseCursors.click,
                       focusColor: Colors.white,
-                      child: Column(
-                        children: [
-                          Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
-                          Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
+                      icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
                       onPressed: () {
                         if (kDebugMode) {
                           print(
@@ -56,6 +51,7 @@ class _NavigationRailState extends ConsumerState<CustomNavigationRail> {
                         );
                       },
                     ),
+                    Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
                   ],
                 );
               }),
