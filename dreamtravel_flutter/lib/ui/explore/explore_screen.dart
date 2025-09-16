@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dreamtravel/ui/common/cards/image_cards/portrait_image_card.dart';
-import 'package:dreamtravel/ui/common/grid/adaptive_quilted_grid_tile.dart';
+import 'package:dreamtravel/ui/common/grid/adaptive_quilted_grid_tiles.dart';
 import 'package:dreamtravel/ui/common/cards/image_cards/landscape_image_card.dart';
 import 'package:dreamtravel/ui/common/screen_padding.dart';
 import 'package:dreamtravel/ui/common/travel_search_bar.dart';
@@ -53,13 +53,13 @@ class _ExploreGridState extends State<ExploreGrid> {
             child: Text(
               "Go explore!",
               style: GoogleFonts.montserrat(
-                fontSize: 40,
+                fontSize: 50,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
               ),
-              textAlign: TextAlign.end,
             ),
           ),
+          TravelSearchBar(),
           Expanded(
             child: SingleChildScrollView(
               child: Directionality(
@@ -71,29 +71,25 @@ class _ExploreGridState extends State<ExploreGrid> {
                     crossAxisCount: 8,
                     pattern: [
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildLandscapeGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(3)
                       else
-                        AdaptiveGridTiles().buildLandscapeGridTile(5), // Image carousel
+                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(5), // Image carousel
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildLandscapeGridTile(1)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
                       else
-                        AdaptiveGridTiles().buildLandscapeGridTile(3), // Search Box
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(5),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(5),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(5),
-                      if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(3)
-                      else
-                        AdaptiveGridTiles().buildPortraitGridTile(5),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
                     ],
                   ),
                   childrenDelegate: SliverChildListDelegate([
@@ -103,7 +99,6 @@ class _ExploreGridState extends State<ExploreGrid> {
                       contentImageUrl:
                           "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?&w=1200",
                     ),
-                    TravelSearchBar(),
                     PortraitImageCard(
                       contentTitle: "contentTitle",
                       contentSubtitle: "contentSubtitle",
