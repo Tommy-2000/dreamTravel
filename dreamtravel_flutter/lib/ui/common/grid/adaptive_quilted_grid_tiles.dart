@@ -1,6 +1,6 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class AdaptiveGridTiles {
+class AdaptiveQuiltedGridTiles {
 
   QuiltedGridTile buildPortraitGridTile(int mainAxisCount) {
     return QuiltedGridTile(mainAxisCount, 4);
