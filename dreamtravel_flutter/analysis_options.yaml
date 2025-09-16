@@ -28,7 +28,7 @@ analyzer:
 #  plugins:
 #    - custom_lint
   errors:
-    invalid_annotation_target: ignore
+    invalid_annotation_target: ignore # Use this if you are combining JSON_Serializable with Freezed
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

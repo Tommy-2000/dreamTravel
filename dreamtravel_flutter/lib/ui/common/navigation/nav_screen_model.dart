@@ -1,7 +1,12 @@
 import 'package:dreamtravel/ui/bookings/bookings_screen.dart';
+import 'package:dreamtravel/ui/bookings/flights_screen.dart';
+import 'package:dreamtravel/ui/bookings/hotel_screen.dart';
+import 'package:dreamtravel/ui/bookings/rentals_screen.dart';
 import 'package:dreamtravel/ui/explore/explore_screen.dart';
 import 'package:dreamtravel/ui/search/search_screen.dart';
-import 'package:dreamtravel/ui/trips/trips_screen.dart';
+import 'package:dreamtravel/ui/test_screen.dart';
+// import 'package:dreamtravel/ui/test_screen.dart';
+// import 'package:dreamtravel/ui/trips/trips_screen.dart';
 import 'package:dreamtravel/ui/user/user_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +14,8 @@ import 'package:flutter/material.dart';
 
 class NavScreenModel {
   final Widget navScreen;
-  final Text navScreenName;
-  final Icon navScreenIcon;
+  final String navScreenName;
+  final IconData navScreenIcon;
 
   // final RiveModel riveModel;
 
@@ -22,45 +27,69 @@ class NavScreenModel {
   });
 }
 
-List<NavScreenModel> navScreenItems = [
+List<NavScreenModel> navScreens = [
   NavScreenModel(
     navScreen: ExploreScreen(),
-    navScreenName: Text("Explore", style: TextStyle(color: Colors.white)),
-    navScreenIcon: Icon(Icons.travel_explore_rounded, color: Colors.white),
+    navScreenName: "Explore",
+    navScreenIcon: Icons.travel_explore_rounded,
     // riveModel: RiveModel(riveSrc: "riveSrc",
     //     riveArtboard: "EXPLORE",
     //     riveStateMachineName: "EXPLORE"),
   ),
   NavScreenModel(
-    navScreen: TripsScreen(),
-    navScreenName: Text("Trips", style: TextStyle(color: Colors.white)),
-    navScreenIcon: Icon(Icons.beach_access_rounded, color: Colors.white),
-    // riveModel: RiveModel(riveSrc: "riveSrc",
-    //     riveArtboard: "TRIPS",
-    //     riveStateMachineName: "TRIPS"),
-  ),
-  NavScreenModel(
-    navScreen: BookingsScreen(),
-    navScreenName: Text("Bookings", style: TextStyle(color: Colors.white)),
-    navScreenIcon: Icon(Icons.airplane_ticket_rounded, color: Colors.white),
-    // riveModel: RiveModel(riveSrc: "riveSrc",
-    //     riveArtboard: "BOOKINGS",
-    //     riveStateMachineName: "BOOKINGS"),
-  ),
-  NavScreenModel(
     navScreen: SearchScreen(),
-    navScreenName: Text("Search", style: TextStyle(color: Colors.white)),
-    navScreenIcon: Icon(Icons.search_rounded, color: Colors.white),
+    navScreenName: "Search",
+    navScreenIcon: Icons.search_rounded
     // riveModel: RiveModel(riveSrc: "riveSrc",
     //     riveArtboard: "SEARCH",
     //     riveStateMachineName: "SEARCH"),
   ),
   NavScreenModel(
+    navScreen: BookingsScreen(),
+    navScreenName: "Bookings",
+    navScreenIcon: Icons.airplane_ticket_rounded,
+    // riveModel: RiveModel(riveSrc: "riveSrc",
+    //     riveArtboard: "BOOKINGS",
+    //     riveStateMachineName: "BOOKINGS"),
+  ),
+  NavScreenModel(
     navScreen: UserScreen(),
-    navScreenName: Text("User", style: TextStyle(color: Colors.white)),
-    navScreenIcon: Icon(Icons.account_circle_rounded, color: Colors.white),
+    navScreenName: "User",
+    navScreenIcon: Icons.account_circle_rounded,
     // riveModel: RiveModel(riveSrc: "riveSrc",
     //     riveArtboard: "USER",
     //     riveStateMachineName: "USER"),
+  ),
+  NavScreenModel(
+    navScreen: TestScreen(),
+    navScreenName: "Test",
+    navScreenIcon: Icons.api_rounded,
+    // riveModel: RiveModel(riveSrc: "riveSrc",
+    //     riveArtboard: "USER",
+    //     riveStateMachineName: "USER"),
+  ),
+  // NavScreenModel(
+  //   navScreen: TestScreen(),
+  //   navScreenName: Text("Test", style: TextStyle(color: Colors.white)),
+  //   navScreenIcon: Icon(Icons.question_mark_rounded, color: Colors.white),
+  // ),
+];
+
+
+List<NavScreenModel> subNavScreens = [
+  NavScreenModel(
+    navScreen: FlightsScreen(),
+    navScreenName: "Flights",
+    navScreenIcon: Icons.flight_rounded,
+  ),
+  NavScreenModel(
+    navScreen: HotelsScreen(),
+    navScreenName: "Hotels",
+    navScreenIcon: Icons.hotel_rounded,
+  ),
+  NavScreenModel(
+    navScreen: RentalsScreen(),
+    navScreenName: "Rentals",
+    navScreenIcon: Icons.holiday_village_rounded,
   ),
 ];

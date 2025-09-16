@@ -52,32 +52,34 @@ class _CustomBottomNavigationBarState
       padding: const EdgeInsets.all(30),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(30)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 75, sigmaY: 75),
-          child: SizedBox(
-            height: 60,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(navScreenItems.length, (navIndex) {
-                // final riveModel = bottomNavItems[index].riveModel;
-                return Column(
-                  children: [
-                    IconButton(
-                      color: Colors.teal,
-                      mouseCursor: SystemMouseCursors.click,
-                      icon: navScreenItems[navIndex].navScreenIcon,
-                      isSelected: true,
-                      onPressed: () {
-                        if (kDebugMode) {
-                          print("CustomBottomNavigationBar button has been tapped");
-                        }
-                        GoBranch().goToBranch(navIndex, widget.navigationShell);
-                      },
-                    ),
-                    navScreenItems[navIndex].navScreenName
-                  ],
-                );
-              }),
+        child: Container(
+          color: Colors.lightBlue,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
+            child: SizedBox(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(navScreens.length, (navIndex) {
+                  // final riveModel = bottomNavItems[index].riveModel;
+                  return Column(
+                    children: [
+                      IconButton(
+                        mouseCursor: SystemMouseCursors.click,
+                        icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                        isSelected: true,
+                        onPressed: () {
+                          if (kDebugMode) {
+                            print("CustomBottomNavigationBar button has been tapped");
+                          }
+                          GoBranch().goToBranch(navIndex, widget.navigationShell);
+                        },
+                      ),
+                      Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white))
+                    ],
+                  );
+                }),
+              ),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
-import 'package:dreamtravel/ui/common/cards/top_bar_card.dart';
 import 'package:flutter/material.dart';
+
+import '../common/headline_box.dart';
 
 class NotFoundScreen extends StatefulWidget {
   const NotFoundScreen({super.key});
@@ -11,6 +12,11 @@ class NotFoundScreen extends StatefulWidget {
 class _NotFoundScreenState extends State<NotFoundScreen> {
   @override
   Widget build(BuildContext context) {
-    return const TopBarCard(child: Text("Page cannot be found, please try again later", style: TextStyle(fontSize: 40)));
+    return const HeadlineBox(child: Column(
+      children: [
+        Text("404", style: TextStyle(fontSize: 60)),
+        Text("This page cannot be found, please try again later", style: TextStyle(fontSize: 35)),
+      ],
+    ));
   }
 }

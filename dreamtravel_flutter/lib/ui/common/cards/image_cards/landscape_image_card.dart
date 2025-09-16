@@ -40,7 +40,7 @@ class _LandscapeImageCardState extends State<LandscapeImageCard> {
     return Positioned.fill(
       child: CachedNetworkImage(
         key: _getGlobalKey(),
-        fit: BoxFit.scaleDown,
+        fit: BoxFit.fill,
         imageUrl:
             widget.contentImageUrl, // Load a progress placeholder while fetching image url
         placeholder: (context, url) =>
