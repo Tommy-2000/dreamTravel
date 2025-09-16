@@ -14,7 +14,7 @@
       "./custom_types",
       "./node_modules/@types"
     ],
-    "outDir": "output",
+    "outDir": "build",
     "module": "nodenext",
     "target": "es2022",
     "strict": true,

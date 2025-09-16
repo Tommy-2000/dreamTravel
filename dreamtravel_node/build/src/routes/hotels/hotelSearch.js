@@ -4,9 +4,9 @@ const express_1 = require("express");
 // import qs from 'qs';
 // import { ReferenceDataLocationsCitiesParams, ResponseError } from "amadeus-ts";
 // import { testAmadeusApi, amadeusClient } from "../../amadeusClient";
-const hotelRouter_1 = require("./hotelRouter");
+const hotelRouter = (0, express_1.Router)();
 // Set the content type for the router to use JSON
-hotelRouter_1.hotelRouter.use(express_1.json);
+hotelRouter.use(express_1.json);
 // Hotel Offers Search
 // hotelRouter.get(`${testAmadeusApi}/search`, async (req: Request, res: Response) => {
 //     // Define an object containing the search params

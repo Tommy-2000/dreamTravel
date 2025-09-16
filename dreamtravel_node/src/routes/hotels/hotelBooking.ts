@@ -1,12 +1,14 @@
-import { Response } from "express";
+import { Response, Router } from "express";
 // import qs from "qs";
 import { ReferenceDataLocationsHotelsByCityParams, ResponseError } from "amadeus-ts";
-import { testAmadeusApi, amadeusClient } from "../../amadeusClient";
-import { hotelRouter } from "./hotelRouter";
+import { baseTestAmadeusApi, amadeusClient } from "../../amadeusClient";
 import { TypedRequestQuery } from "../../utils/custom_types";
 
+// Declare the router for searching and booking hotels
+export const hotelRouter = Router();
+
 // Find all available hotels in a given city or location
-hotelRouter.get(`${testAmadeusApi}/hotels`, async (req: TypedRequestQuery<{query: string, cityCode: string, radius: number, radiusUnit: "MILE" | "KM" | undefined}>, res: Response) => {
+hotelRouter.get(`${baseTestAmadeusApi}/hotels`, async (req: TypedRequestQuery<{query: string, cityCode: string, radius: number, radiusUnit: "MILE" | "KM" | undefined}>, res: Response) => {
     // Define the param object containing the search params to request
     const hotelbyCityParams: ReferenceDataLocationsHotelsByCityParams = {
         cityCode: req.query.cityCode,
@@ -59,4 +61,3 @@ hotelRouter.get(`${testAmadeusApi}/hotels`, async (req: TypedRequestQuery<{query
 //         }
 //     }
 // });
-

@@ -1,6 +1,6 @@
 import 'package:dreamtravel/ui/common/cards/padding_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vector_math/vector_math_64.dart';
 
 class AnimatedGradientBackground extends StatefulWidget {
   final Size gradientSize;
@@ -84,6 +84,6 @@ class CustomGradientTransform implements GradientTransform {
   @override
   Matrix4? transform(Rect bounds, {TextDirection? textDirection}) {
     final radialDist = transformValue * (bounds.width + transformOffset);
-    return Matrix4.identity()..translate(radialDist);
+    return Matrix4.identity()..translateByVector3(Vector3(radialDist, 0, 0));
   }
 }

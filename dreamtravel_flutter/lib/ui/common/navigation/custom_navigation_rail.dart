@@ -16,86 +16,50 @@ class CustomNavigationRail extends ConsumerStatefulWidget {
 
 class _NavigationRailState extends ConsumerState<CustomNavigationRail> {
   bool toggleButtonIsSelected = true;
-
-  double navigationRailWidthOpen = 300;
-
   @override
   Widget build(BuildContext context) {
-    final navigationRailAdaptiveWidth = MediaQuery.of(context).size.width;
-    double navigationRailWidthClosed = navigationRailAdaptiveWidth * 0.15;
-
     if (kDebugMode) {
       print("CustomNavigationRail has been built");
     }
-    return Container(
-      color: Colors.deepOrange,
-      width: toggleButtonIsSelected
-          ? navigationRailWidthOpen
-          : navigationRailWidthClosed,
-      child: Padding(
-        padding: const EdgeInsets.all(30),
-        child: SizedBox(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    toggleButtonIsSelected = true;
-                    navigationRailWidthClosed =
-                        navigationRailAdaptiveWidth * 0.30;
-                  });
-                },
-                icon: Icon(Icons.menu_rounded, color: Colors.white),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(navScreenItems.length, (navIndex) {
-                    if (toggleButtonIsSelected = false) {
-                      return Row(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(60),
+      child: Container(
+        color: Colors.lightBlue,
+        width: 125,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(navScreens.length, (navIndex) {
+                return Column(
+                  children: [
+                    MaterialButton(
+                      mouseCursor: SystemMouseCursors.click,
+                      focusColor: Colors.white,
+                      child: Column(
                         children: [
-                          navScreenItems[navIndex].navScreenName,
-                          IconButton(
-                            mouseCursor: SystemMouseCursors.click,
-                            icon: navScreenItems[navIndex].navScreenIcon,
-                            onPressed: () {
-                              if (kDebugMode) {
-                                print(
-                                  "CustomNavigationRail button has been tapped",
-                                );
-                              }
-                              GoBranch().goToBranch(
-                                navIndex,
-                                widget.navigationShell,
-                              );
-                            },
-                          ),
+                          Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                          Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
                         ],
-                      );
-                    } else {
-                      return IconButton(
-                        mouseCursor: SystemMouseCursors.click,
-                        focusColor: Colors.teal,
-                        icon: navScreenItems[navIndex].navScreenIcon,
-                        onPressed: () {
-                          if (kDebugMode) {
-                            print(
-                              "CustomNavigationRail button has been tapped",
-                            );
-                          }
-                          GoBranch().goToBranch(
-                            navIndex,
-                            widget.navigationShell,
+                      ),
+                      onPressed: () {
+                        if (kDebugMode) {
+                          print(
+                            "CustomNavigationRail button has been tapped",
                           );
-                        },
-                      );
-                    }
-                  }),
-                ),
-              ),
-            ],
+                        }
+                        GoBranch().goToBranch(
+                          navIndex,
+                          widget.navigationShell,
+                        );
+                      },
+                    ),
+                  ],
+                );
+              }),
+            ),
           ),
         ),
       ),

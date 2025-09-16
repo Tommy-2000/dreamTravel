@@ -1,18 +1,25 @@
-import { json, Response } from "express";
+import { Request, Response, Router } from "express";
 // import qs from "qs";
 import { FlightOffersSearchGetParams, ResponseError } from "amadeus-ts";
-import { testAmadeusApi, amadeusClient } from "../../amadeusClient";
-import { flightRouter } from "./flightRouter";
+import { amadeusClient } from "../../amadeusClient";
 import { TypedRequestQuery } from "../../utils/custom_types";
 
+// Declare the router for searching and booking flights
+export const flightRouter = Router();
 
 // Set the content type for the router to use JSON
-flightRouter.use(json);
+// flightBookingRouter.use(json);
+
+
+flightRouter.get("/flightBookingStatus", async (request: Request, response: Response) => {
+
+    response.send("flightBookingStatus");
+})
 
 // Start the flight booking process by calling each endpoint in the correct order
 
 // Following from the City and Airport Search, find flights between cities at specific dates
-flightRouter.get(`${testAmadeusApi}/flightSearch`, async (req: TypedRequestQuery<{query: string, originLocationCode: string, destinationLocationCode: string, departureDate: string, returnDate: string, adults: number }>, res: Response) => {
+flightRouter.route(`/flightSearch`).get(async (req: TypedRequestQuery<{query: string, originLocationCode: string, destinationLocationCode: string, departureDate: string, returnDate: string, adults: number }>, res: Response) => {
     // Define the param object containing the search params to request
     const flightOffersSearchParams: FlightOffersSearchGetParams = {
         originLocationCode: req.query.originLocationCode,
@@ -35,7 +42,7 @@ flightRouter.get(`${testAmadeusApi}/flightSearch`, async (req: TypedRequestQuery
 
 
 // When a flight is chosen, check its price and availability with the airline with a POST
-// flightRouter.post(`${testAmadeusApi}/flightConfirmation`, async (req: RequestBody<{flight: string}>, res: Response) => {
+// flightRouter.post(`flightConfirmation`, async (req: RequestBody<{flight: string}>, res: Response) => {
 
 //     const hotelOffersSearchParams: FlightOffersPricingParams = {
 //         data: req.body.flight

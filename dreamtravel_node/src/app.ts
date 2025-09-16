@@ -1,14 +1,13 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-
-
-import { errorHandler } from './middleware/errorHandler';
-import { flightRouter } from './routes/flights/flightRouter';
-import { hotelRouter } from './routes/hotels/hotelRouter';
+import { Response, Request } from "express";
+// import { errorHandler } from './middleware/errorHandler';
+import { flightRouter } from './routes/flights/flightBooking';
+import { hotelRouter } from './routes/hotels/hotelBooking';
 import { experienceRouter } from './routes/experiences/experienceRouter';
-import { tokenRouter } from './routes/security/tokenRouter';
-import { statusRouter } from './routes/status/statusRouter';
+import { tokenRouter } from './routes/security/accessTokenFetch';
+import { statusRouter } from './routes/status/statusFetch';
 import { nodeConfig } from './nodeConfig';
 
 const app = express();
@@ -17,6 +16,14 @@ const app = express();
 app.use(express.json());
 
 // Set the endpoints to use their corresponding routers
+app.get(`/`, async (request: Request, response: Response) => {
+  response.send("root");
+})
+
+app.get(`/test`, async (request: Request, response: Response) => {
+  response.send("test");
+});
+
 app.use('/status', statusRouter);
 app.use('/security', tokenRouter);
 app.use('/flights', flightRouter);
@@ -25,7 +32,7 @@ app.use('/experience', experienceRouter);
 
 
 // Use the global error handler -- AFTER setting endpoint routes
-app.use(errorHandler);
+// app.use(errorHandler);
 
 
 // In development mode, use Swagger to test API routers

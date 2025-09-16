@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class PaddingCard extends StatelessWidget {
+class HeadlineBox extends StatefulWidget {
   final Widget child;
 
-  const PaddingCard({super.key,
+  const HeadlineBox({super.key,
     required this.child
   });
+
+  @override
+  State<HeadlineBox> createState() => _HeadlineBoxState();
+}
+
+class _HeadlineBoxState extends State<HeadlineBox> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class PaddingCard extends StatelessWidget {
         padding: const EdgeInsets.all(25),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(48),
-          child: child,
+          child: widget.child,
         ),
       ),
     );

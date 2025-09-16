@@ -1,8 +1,9 @@
-import { json } from 'express';
+import { json, Router } from 'express';
 // import qs from 'qs';
 // import { ReferenceDataLocationsCitiesParams, ResponseError } from "amadeus-ts";
 // import { testAmadeusApi, amadeusClient } from "../../amadeusClient";
-import { hotelRouter } from './hotelRouter';
+
+const hotelRouter = Router();
 
 // Set the content type for the router to use JSON
 hotelRouter.use(json)
