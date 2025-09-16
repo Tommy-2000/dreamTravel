@@ -45,14 +45,14 @@ const swaggerOptions = {
       description: '',
     },
   },
-  apis: ['./src/routes/*.ts'],
+  apis: ['./src/*.ts'],
 }
 
 // Return the Swagger specs in JSON
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 // Serve Swagger with the doc options to this route
-app.use('/dreamtravel-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/swagger-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Check if node is listening on the correct port
 app.listen(nodeConfig.nodePort, () => {
