@@ -51,11 +51,11 @@ class _CustomBottomNavigationBarState
     return Padding(
       padding: const EdgeInsets.all(30),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(30)),
+        borderRadius: BorderRadius.circular(30),
         child: Container(
           color: Colors.lightBlue,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
+            filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
             child: SizedBox(
               height: 60,
               child: Row(
