@@ -1,6 +1,3 @@
-import 'package:dreamtravel/ui/bookings/flights_screen.dart';
-import 'package:dreamtravel/ui/bookings/hotel_screen.dart';
-import 'package:dreamtravel/ui/bookings/rentals_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,35 +37,6 @@ class TravelGoRouter {
                 path: "/bookings",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[2].navScreen),
-                routes: <RouteBase>[
-                  GoRoute(
-                    path: "flights",
-                    pageBuilder: (context, state) => MaterialPage(
-                      child: HeroControllerScope(
-                        controller: MaterialApp.createMaterialHeroController(),
-                        child: FlightsScreen(),
-                      ),
-                    ),
-                  ),
-                  GoRoute(
-                    path: "hotels",
-                    pageBuilder: (context, state) => MaterialPage(
-                      child: HeroControllerScope(
-                        controller: MaterialApp.createMaterialHeroController(),
-                        child: HotelsScreen(),
-                      ),
-                    ),
-                  ),
-                  GoRoute(
-                    path: "rentals",
-                    pageBuilder: (context, state) => MaterialPage(
-                      child: HeroControllerScope(
-                        controller: MaterialApp.createMaterialHeroController(),
-                        child: RentalsScreen(),
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
