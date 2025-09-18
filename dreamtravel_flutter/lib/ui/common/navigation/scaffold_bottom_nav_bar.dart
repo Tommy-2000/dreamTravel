@@ -1,48 +1,29 @@
 import 'dart:ui';
-
 import 'package:dreamtravel/logic/navigation/go_branch.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logging/logging.dart';
 
 
 
-class CustomBottomNavigationBar extends ConsumerStatefulWidget {
-  const CustomBottomNavigationBar(this.navigationShell, {super.key});
+class ScaffoldBottomNavBar extends ConsumerStatefulWidget {
+  ScaffoldBottomNavBar(this.navigationShell, {super.key});
 
   final StatefulNavigationShell navigationShell;
 
+  final uiDebugLogger = Logger("uiDebugLogger");
 
-  // // Check the rive of the Rive icons when navigating
-  // List<SMIBool> riveIconInputs = [];
-
-  // void animateRiveIcon(int riveIndex) {
-  //   riveIconInputs[riveIndex].change(true);
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     riveIconInputs[riveIndex].change(false);
-  //   });
-  // }
-
-  // void riveOnInit(Artboard artboard, {required String riveStateMachine}) {
-  //   StateMachineController? riveController =
-  //       StateMachineController.fromArtboard(artboard, riveStateMachine);
-  //   artboard.addController(
-  //     riveController!,
-  //   ); // Check for nulls when animating Rive icons
-  //   riveIconInputs.add(
-  //     riveController.findInput<bool>('active') as SMIBool,
-  //   ); // Check the type as bool
-  // }
 
   @override
-  ConsumerState<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
+  ConsumerState<ScaffoldBottomNavBar> createState() =>
+      _CustomBottomNavBarState();
 }
 
-class _CustomBottomNavigationBarState
-    extends ConsumerState<CustomBottomNavigationBar> {
+class _CustomBottomNavBarState
+    extends ConsumerState<ScaffoldBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {

@@ -1,4 +1,4 @@
-import 'package:dreamtravel/ui/common/grid/adaptive_quilted_grid_tile.dart';
+import 'package:dreamtravel/ui/common/grid/adaptive_quilted_grid_tiles.dart';
 import 'package:dreamtravel/ui/common/screen_padding.dart';
 import 'package:dreamtravel/ui/common/travel_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -52,9 +52,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     crossAxisCount: 8,
                     pattern: [
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildLandscapeGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(3)
                       else
-                        AdaptiveGridTiles().buildLandscapeGridTile(3), // Search Box
+                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(3), // Search Box
                     ],
                   ),
                   childrenDelegate: SliverChildListDelegate([

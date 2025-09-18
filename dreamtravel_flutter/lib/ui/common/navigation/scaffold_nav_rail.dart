@@ -4,17 +4,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logging/logging.dart';
 
-class CustomNavigationRail extends ConsumerStatefulWidget {
-  const CustomNavigationRail(this.navigationShell, {super.key});
+class ScaffoldNavRail extends ConsumerStatefulWidget {
+  ScaffoldNavRail(this.navigationShell, {super.key});
 
   final StatefulNavigationShell navigationShell;
 
+  final uiDebugLogger = Logger("uiDebugLogger");
+
   @override
-  ConsumerState<CustomNavigationRail> createState() => _NavigationRailState();
+  ConsumerState<ScaffoldNavRail> createState() => _CustomNavRailState();
 }
 
-class _NavigationRailState extends ConsumerState<CustomNavigationRail> {
+class _CustomNavRailState extends ConsumerState<ScaffoldNavRail> {
   bool toggleButtonIsSelected = true;
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class _NavigationRailState extends ConsumerState<CustomNavigationRail> {
                     IconButton(
                       mouseCursor: SystemMouseCursors.click,
                       focusColor: Colors.white,
+		      isSelected: true,
                       icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
                       onPressed: () {
                         if (kDebugMode) {

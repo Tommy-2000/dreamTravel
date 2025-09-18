@@ -1,12 +1,12 @@
-import 'package:dreamtravel/ui/common/buttons/filter_travel_button.dart';
-import 'package:dreamtravel/ui/common/cards/image_cards/portrait_image_card.dart';
-import 'package:dreamtravel/ui/common/screen_padding.dart';
+import '../common/buttons/filter_bookings_button.dart';
+import '../common/cards/image_cards/portrait_image_card.dart';
+import '../common/screen_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../common/headline_box.dart';
-import '../common/grid/adaptive_quilted_grid_tile.dart';
+import '../common/grid/adaptive_quilted_grid_tiles.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});
@@ -40,6 +40,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                   color: Colors.blue
               )
           ),),
+          FilterBookingsButton(),
           Expanded(
             child: SingleChildScrollView(
               child: Directionality(
@@ -52,21 +53,21 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     crossAxisCount: 8,
                     pattern: [
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(4)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(4),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4),
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(6)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(6),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6),
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(6)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(6),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6),
                       if (landscapeWindow)
-                        AdaptiveGridTiles().buildPortraitGridTile(4)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4)
                       else
-                        AdaptiveGridTiles().buildPortraitGridTile(4),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4),
                     ],
                   ),
                   childrenDelegate: SliverChildListDelegate([

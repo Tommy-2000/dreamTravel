@@ -1,5 +1,5 @@
-import 'package:dreamtravel/ui/common/navigation/custom_bottom_navigation_bar.dart';
-import 'package:dreamtravel/ui/common/navigation/custom_navigation_rail.dart';
+import 'package:dreamtravel/ui/common/navigation/scaffold_bottom_nav_bar.dart';
+import 'package:dreamtravel/ui/common/navigation/scaffold_nav_rail.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,13 +30,13 @@ class _RootScaffoldState extends State<RootScaffold> {
       extendBody: true,
       body: Row(
         children: [
-          if (landscapeWindow) CustomNavigationRail(widget.navigationShell),
+          if (landscapeWindow) ScaffoldNavRail(widget.navigationShell),
           Expanded(child: widget.navigationShell),
         ],
       ),
       bottomNavigationBar: landscapeWindow
           ? null
-          : CustomBottomNavigationBar(widget.navigationShell),
+          : ScaffoldBottomNavBar(widget.navigationShell),
     );
   }
 }
