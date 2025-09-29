@@ -1,38 +1,20 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dreamtravel/ui/common/cards/image_cards/portrait_image_card.dart';
-import 'package:dreamtravel/ui/common/grid/adaptive_quilted_grid_tiles.dart';
-import 'package:dreamtravel/ui/common/cards/image_cards/landscape_image_card.dart';
-import 'package:dreamtravel/ui/common/screen_padding.dart';
-import 'package:dreamtravel/ui/common/travel_search_bar.dart';
+import '../../common/buttons/filter_bookings_button.dart';
+import '../../common/cards/image_cards/portrait_image_card.dart';
+import '../../common/grid/adaptive_quilted_grid_tiles.dart';
+import '../../common/headline_box.dart';
+import '../../common/screen_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../common/headline_box.dart';
-import '../common/cards/padding_card.dart';
-
-class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({super.key});
+class BookingsScreen extends StatefulWidget {
+  const BookingsScreen({super.key});
 
   @override
-  State<ExploreScreen> createState() => _ExploreScreenState();
+  State<BookingsScreen> createState() => _BookingsScreenState();
 }
 
-class _ExploreScreenState extends State<ExploreScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(extendBody: true, body: ExploreGrid());
-  }
-}
-
-class ExploreGrid extends StatefulWidget {
-  const ExploreGrid({super.key});
-
-  @override
-  State<ExploreGrid> createState() => _ExploreGridState();
-}
-
-class _ExploreGridState extends State<ExploreGrid> {
+class _BookingsScreenState extends State<BookingsScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
 
@@ -51,15 +33,15 @@ class _ExploreGridState extends State<ExploreGrid> {
         children: [
           HeadlineBox(
             child: Text(
-              "Go explore!",
+              "Bookings",
               style: GoogleFonts.montserrat(
-                fontSize: 50,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
               ),
             ),
           ),
-          TravelSearchBar(),
+          FilterBookingsButton(),
           Expanded(
             child: SingleChildScrollView(
               child: Directionality(
@@ -67,38 +49,29 @@ class _ExploreGridState extends State<ExploreGrid> {
                 child: GridView.custom(
                   clipBehavior: Clip.antiAlias,
                   shrinkWrap: true,
+                  semanticChildCount: 8,
                   gridDelegate: SliverQuiltedGridDelegate(
                     crossAxisCount: 8,
                     pattern: [
                       if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4)
                       else
-                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(5), // Image carousel
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4),
                       if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6)
                       else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6),
                       if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6)
                       else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(6),
                       if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4)
                       else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
-                      if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
-                      else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
+                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(4),
                     ],
                   ),
                   childrenDelegate: SliverChildListDelegate([
-                    LandscapeImageCard(
-                      contentTitle: "contentTitle",
-                      contentSubtitle: "contentSubtitle",
-                      contentImageUrl:
-                          "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?&w=1200",
-                    ),
                     PortraitImageCard(
                       contentTitle: "contentTitle",
                       contentSubtitle: "contentSubtitle",

@@ -1,9 +1,10 @@
-import 'package:dreamtravel/ui/bookings/bookings_screen.dart';
-import 'package:dreamtravel/ui/explore/explore_screen.dart';
-import 'package:dreamtravel/ui/search/search_screen.dart';
-import 'package:dreamtravel/ui/test_screen.dart';
-import 'package:dreamtravel/ui/user/user_screen.dart';
+import 'package:dreamtravel/ui/screens/test_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../screens/bookings/bookings_screen.dart';
+import '../../screens/explore/explore_screen.dart';
+import '../../screens/search/search_screen.dart';
+import '../../screens/user/user_screen.dart';
 
 class NavScreenModel {
   final Widget navScreen;
