@@ -1,14 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dreamtravel/ui/common/cards/image_cards/portrait_image_card.dart';
+import 'package:dreamtravel/logic/navigation/go_branch.dart';
+import 'package:dreamtravel/ui/common/buttons/filter_bookings_button.dart';
 import 'package:dreamtravel/ui/common/grid/adaptive_quilted_grid_tiles.dart';
-import 'package:dreamtravel/ui/common/cards/image_cards/landscape_image_card.dart';
 import 'package:dreamtravel/ui/common/screen_padding.dart';
 import 'package:dreamtravel/ui/common/travel_search_bar.dart';
+import 'package:dreamtravel/ui/root/root_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../common/headline_box.dart';
+import '../../common/cards/image_card.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -18,20 +20,6 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(extendBody: true, body: ExploreGrid());
-  }
-}
-
-class ExploreGrid extends StatefulWidget {
-  const ExploreGrid({super.key});
-
-  @override
-  State<ExploreGrid> createState() => _ExploreGridState();
-}
-
-class _ExploreGridState extends State<ExploreGrid> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
 
@@ -46,87 +34,64 @@ class _ExploreGridState extends State<ExploreGrid> {
   @override
   Widget build(BuildContext context) {
     return ScreenPadding(
-      child: Column(
-        children: [
-          HeadlineBox(
-            child: Text(
-              "Go explore!",
-              style: GoogleFonts.montserrat(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            centerTitle: true,
+            expandedHeight: 60,
+            floating: true,
+            snap: true,
+            stretch: true,
+            backgroundColor: Colors.lightBlue,
+            title: Text(
+              "Go Explore!"
             ),
+            titleTextStyle: GoogleFonts.montserrat(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            leading: IconButton(
+              onPressed: () => {},
+              icon: Icon(Icons.search_rounded, color: Colors.white,),
+            ),
+            automaticallyImplyLeading: true,
           ),
-          TravelSearchBar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: GridView.custom(
-                  clipBehavior: Clip.antiAlias,
-                  shrinkWrap: true,
-                  gridDelegate: SliverQuiltedGridDelegate(
-                    crossAxisCount: 8,
-                    pattern: [
-                      if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(3)
-                      else
-                        AdaptiveQuiltedGridTiles().buildLandscapeGridTile(
-                          5,
-                        ), // Image carousel
-                      if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
-                      else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
-                      if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
-                      else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
-                      if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
-                      else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
-                      if (landscapeWindow)
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(3)
-                      else
-                        AdaptiveQuiltedGridTiles().buildPortraitGridTile(5),
-                    ],
-                  ),
-                  childrenDelegate: SliverChildListDelegate([
-                    LandscapeImageCard(
-                      contentTitle: "contentTitle",
-                      contentSubtitle: "contentSubtitle",
-                      contentImageUrl:
-                          "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?&w=1200",
-                    ),
-                    PortraitImageCard(
-                      contentTitle: "contentTitle",
-                      contentSubtitle: "contentSubtitle",
-                      contentImageUrl:
-                          "https://images.unsplash.com/photo-1750801321932-3d3e3fcdfdcd?&w=1200",
-                    ),
-                    PortraitImageCard(
-                      contentTitle: "contentTitle",
-                      contentSubtitle: "contentSubtitle",
-                      contentImageUrl:
-                          "https://images.unsplash.com/photo-1750779941284-09ee2d6a619c?&w=1200",
-                    ),
-                    PortraitImageCard(
-                      contentTitle: "contentTitle",
-                      contentSubtitle: "contentSubtitle",
-                      contentImageUrl:
-                          "https://images.unsplash.com/photo-1750688650387-48fbdc7399b3?&w=1200",
-                    ),
-                    PortraitImageCard(
-                      contentTitle: "contentTitle",
-                      contentSubtitle: "contentSubtitle",
-                      contentImageUrl:
-                          "https://images.unsplash.com/photo-1752035680950-79d735be5499?&w=1200",
-                    ),
-                  ]),
-                ),
+          SliverGrid(
+            gridDelegate: SliverQuiltedGridDelegate(
+              crossAxisCount: 8,
+              repeatPattern: QuiltedGridRepeatPattern.same,
+              pattern: [
+                if (landscapeWindow)
+                  AdaptiveQuiltedGridTiles().buildMediumHorizontalGridTile(3)
+                else
+                  AdaptiveQuiltedGridTiles().buildMediumHorizontalGridTile(5),
+                if (landscapeWindow)
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(6)
+                else
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(6),
+                if (landscapeWindow)
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(4)
+                else
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(4),
+                if (landscapeWindow)
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(6)
+                else
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(6),
+                if (landscapeWindow)
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(4)
+                else
+                  AdaptiveQuiltedGridTiles().buildMediumVerticalGridTile(4),
+              ],
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => ImageCard(
+                contentTitle: "ijoewifw",
+                contentSubtitle: "fwefwef",
+                contentImageUrl:
+                    "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?&w=1200",
               ),
+              childCount: 12,
             ),
           ),
         ],

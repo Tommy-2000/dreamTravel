@@ -1,3 +1,4 @@
+import 'package:dreamtravel/logic/utils/disable_transitions_on_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../logic/navigation/travel_go_router.dart';
@@ -18,7 +19,7 @@ class _RootScreenState extends ConsumerState<RootApp> {
       theme: ThemeData(
         useMaterial3: true,
         useSystemColors: true,
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.lightBlue
       ),
       routerConfig: TravelGoRouter().travelGoRouter,
     );

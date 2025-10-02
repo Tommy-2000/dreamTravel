@@ -1,8 +1,7 @@
-import 'package:dreamtravel/ui/common/cards/padding_card.dart';
+import 'package:dreamtravel/ui/common/cards/title_card.dart';
+import '../common/cards/padding_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/src/misc/errors.dart';
-
-import '../common/headline_box.dart';
 
 class NotFoundScreen extends StatefulWidget {
   const NotFoundScreen({super.key, required this.goRouterException});
@@ -18,13 +17,18 @@ class _NotFoundScreenState extends State<NotFoundScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: PaddingCard(
-        child: HeadlineBox(child: Column(
-          children: [
-            const Text("404", style: TextStyle(fontSize: 50)),
-            const Text("This page cannot be found, please try again later", style: TextStyle(fontSize: 25)),
-            Text("GoRouter Exception: "),
-          ],
-        )),
+        child: TitleCard(
+          childWidget: Column(
+            children: [
+              const Text("404", style: TextStyle(fontSize: 50)),
+              const Text(
+                "This page cannot be found, please try again later",
+                style: TextStyle(fontSize: 25),
+              ),
+              Text("GoRouter Exception: "),
+            ],
+          ),
+        ),
       ),
     );
   }

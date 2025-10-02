@@ -3,12 +3,12 @@ import 'package:dreamtravel/ui/common/image_not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LandscapeImageCard extends StatefulWidget {
+class ImageCard extends StatefulWidget {
   final String? contentTitle;
   final String? contentSubtitle;
   final String contentImageUrl;
 
-  const LandscapeImageCard({
+  const ImageCard({
     super.key,
     this.contentTitle,
     this.contentSubtitle,
@@ -16,21 +16,23 @@ class LandscapeImageCard extends StatefulWidget {
   });
 
   @override
-  State<LandscapeImageCard> createState() => _LandscapeImageCardState();
+  State<ImageCard> createState() => _ImageCardState();
 }
 
-class _LandscapeImageCardState extends State<LandscapeImageCard> {
+class _ImageCardState extends State<ImageCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(48),
-          child: Stack(
-            children: [cardBackground(context), cardGradient(), cardText()],
-          ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Stack(
+          children: [
+            cardBackground(context),
+            cardGradient(),
+            cardText(),
+            cardFavouriteButton(),
+          ],
         ),
       ),
     );
@@ -41,8 +43,8 @@ class _LandscapeImageCardState extends State<LandscapeImageCard> {
       child: CachedNetworkImage(
         key: _getGlobalKey(),
         fit: BoxFit.fill,
-        imageUrl:
-            widget.contentImageUrl, // Load a progress placeholder while fetching image url
+        imageUrl: widget.contentImageUrl,
+        // Load a progress placeholder while fetching image url
         placeholder: (context, url) =>
             Center(child: const CircularProgressIndicator()),
         errorWidget: (context, url, error) =>
@@ -70,7 +72,7 @@ class _LandscapeImageCardState extends State<LandscapeImageCard> {
         child: DecoratedBox(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.transparent, Colors.black.withValues(alpha: 1)],
+              colors: [Colors.transparent, Colors.black.withValues(alpha: 0.7)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: const [0.6, 0.95],
@@ -99,9 +101,26 @@ class _LandscapeImageCardState extends State<LandscapeImageCard> {
           ),
           Text(
             widget.contentSubtitle!,
-            style: GoogleFonts.montserrat(color: Colors.white, fontSize: 14),
+            style: const TextStyle(color: Colors.white, fontSize: 14),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget cardFavouriteButton() {
+    return Positioned(
+      right: 20,
+      bottom: 20,
+      child: IconButton(
+        splashColor: Colors.yellow,
+        mouseCursor: SystemMouseCursors.click,
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Trip added to favourites")),
+          );
+        },
+        icon: Icon(Icons.favorite_outline_rounded, color: Colors.white)
       ),
     );
   }

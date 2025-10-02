@@ -1,3 +1,4 @@
+import 'package:dreamtravel/ui/root/not_found_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +63,7 @@ class TravelGoRouter {
       ),
     ],
     redirect: (context, state) {
-      final validWebRoutes = [
+      final validRoutes = [
         '/explore',
         '/bookings',
         '/search',
@@ -72,12 +73,13 @@ class TravelGoRouter {
         '/bookings/hotels'
         '/bookings/rentals'
       ];
-      if (!validWebRoutes.contains(state.uri.path)) {
+      if (!validRoutes.contains(state.uri.path)) {
         return '/404';
       } else {
         return null;
       }
     },
+    errorBuilder: (context, state) => NotFoundScreen(goRouterException: state.error)
   );
 
   GoRouterDelegate getGoRouterDelegate() {

@@ -10,12 +10,10 @@ class ImageNotFound extends StatefulWidget {
 class _ImageNotFoundState extends State<ImageNotFound> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      alignment: AlignmentGeometry.center,
       children: [
         Icon(Icons.image_not_supported_rounded, size: 100.0),
-        Text("Image not found, try refreshing the page"),
       ],
     );
   }
