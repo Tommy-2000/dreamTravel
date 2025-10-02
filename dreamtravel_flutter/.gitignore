@@ -51,3 +51,4 @@ app.*.map.json
 /amadeus-api.txt
 /.firebaserc
 lib/firebase_options_private.dart
+/windows/
