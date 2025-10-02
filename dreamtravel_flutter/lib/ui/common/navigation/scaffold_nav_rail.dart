@@ -28,7 +28,7 @@ class _CustomNavRailState extends ConsumerState<ScaffoldNavRail> {
       borderRadius: BorderRadius.circular(50),
       child: Container(
         color: Colors.lightBlue,
-        width: 125,
+        width: 100,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: SizedBox(

@@ -7,8 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
-
-
 class ScaffoldBottomNavBar extends ConsumerStatefulWidget {
   ScaffoldBottomNavBar(this.navigationShell, {super.key});
 
@@ -38,26 +36,21 @@ class _CustomBottomNavBarState
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
             child: SizedBox(
-              height: 60,
+              height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(navScreens.length, (navIndex) {
                   // final riveModel = bottomNavItems[index].riveModel;
-                  return Column(
-                    children: [
-                      IconButton(
-                        mouseCursor: SystemMouseCursors.click,
-                        icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
-                        isSelected: true,
-                        onPressed: () {
-                          if (kDebugMode) {
-                            print("CustomBottomNavigationBar button has been tapped");
-                          }
-                          GoBranch().goToBranch(navIndex, widget.navigationShell);
-                        },
-                      ),
-                      Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white))
-                    ],
+                  return IconButton(
+                    mouseCursor: SystemMouseCursors.click,
+                    icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                    isSelected: true,
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print("CustomBottomNavigationBar button has been tapped");
+                      }
+                      GoBranch().goToBranch(navIndex, widget.navigationShell);
+                    },
                   );
                 }),
               ),
