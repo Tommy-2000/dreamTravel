@@ -1,5 +1,5 @@
 name: dreamtravel
-description: "A new Flutter project."
+description: "Travel booking platform consisting of a Flutter front-end for Android, iOS and Web combined with a Node.JS back-end."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -30,7 +30,6 @@ dependencies:
   go_router: ^16.0.0
   auto_size_text: ^3.0.0
   pretty_dio_logger: ^1.4.0
-  get_it: ^8.2.0
   connectivity_plus: ^7.0.0
   vector_math: ^2.2.0
 
