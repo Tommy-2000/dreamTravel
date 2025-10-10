@@ -12,11 +12,8 @@ class _TravelSearchBarState extends State<TravelSearchBar> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 36),
-      child: AspectRatio(
-        aspectRatio: 16 / 3,
-        child: SearchBar(leading: Icon(Icons.search_rounded), hintText: "Where will you travel next?", onTap: () => {
-        },),
-      ),
+      child: SearchBar(leading: Icon(Icons.search_rounded), hintText: "Where will you travel next?", onTap: () => {
+      },),
     );
   }
 }

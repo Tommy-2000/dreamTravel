@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dreamtravel/logic/navigation/go_branch.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
@@ -29,36 +31,39 @@ class _CustomNavRailState extends ConsumerState<ScaffoldNavRail> {
       child: Container(
         color: Colors.lightBlue,
         width: 100,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(navScreens.length, (navIndex) {
-                return Column(
-                  children: [
-                    IconButton(
-                      mouseCursor: SystemMouseCursors.click,
-                      focusColor: Colors.white,
-		      isSelected: true,
-                      icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
-                      onPressed: () {
-                        if (kDebugMode) {
-                          print(
-                            "CustomNavigationRail button has been tapped",
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(navScreens.length, (navIndex) {
+                  return Column(
+                    children: [
+                      IconButton(
+                        mouseCursor: SystemMouseCursors.click,
+                        focusColor: Colors.white,
+          		      isSelected: true,
+                        icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                        onPressed: () {
+                          if (kDebugMode) {
+                            print(
+                              "CustomNavigationRail button has been tapped",
+                            );
+                          }
+                          GoBranch().goToBranch(
+                            navIndex,
+                            widget.navigationShell,
                           );
-                        }
-                        GoBranch().goToBranch(
-                          navIndex,
-                          widget.navigationShell,
-                        );
-                      },
-                    ),
-                    Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
-                  ],
-                );
-              }),
+                        },
+                      ),
+                      Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
+                    ],
+                  );
+                }),
+              ),
             ),
           ),
         ),

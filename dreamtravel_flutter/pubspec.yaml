@@ -32,6 +32,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   connectivity_plus: ^7.0.0
   vector_math: ^2.2.0
+  flutter_dotenv: ^6.0.0
 
 
 dev_dependencies:

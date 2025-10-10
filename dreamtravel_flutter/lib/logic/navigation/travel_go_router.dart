@@ -26,7 +26,7 @@ class TravelGoRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/search",
+                path: "/trip_planner",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[1].navScreen),
               ),
@@ -66,7 +66,7 @@ class TravelGoRouter {
       final validRoutes = [
         '/explore',
         '/bookings',
-        '/search',
+        '/trip_planner',
         '/user',
         '/test',
         '/bookings/flights'

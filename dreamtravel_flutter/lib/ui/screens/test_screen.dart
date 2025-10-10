@@ -28,7 +28,6 @@ class _TestScreenState extends ConsumerState<TestScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           Text("Received response: ")
         ],
       ),

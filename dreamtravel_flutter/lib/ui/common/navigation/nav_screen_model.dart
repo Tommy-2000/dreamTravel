@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../screens/bookings/bookings_screen.dart';
 import '../../screens/explore/explore_screen.dart';
-import '../../screens/search/search_screen.dart';
+import '../../screens/planner/planner_screen.dart';
 import '../../screens/user/user_screen.dart';
 
 class NavScreenModel {
@@ -26,9 +26,9 @@ List<NavScreenModel> navScreens = [
     navScreenIcon: Icons.travel_explore_rounded,
   ),
   NavScreenModel(
-    navScreen: SearchScreen(),
-    navScreenName: "Search",
-    navScreenIcon: Icons.search_rounded
+    navScreen: PlannerScreen(),
+    navScreenName: "Planner",
+    navScreenIcon: Icons.map_rounded
   ),
   NavScreenModel(
     navScreen: BookingsScreen(),

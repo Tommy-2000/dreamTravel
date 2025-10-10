@@ -19,9 +19,9 @@ class _RootScaffoldState extends State<RootScaffold> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Check the width of the window using MediaQuery if greater than 600 in a state change
+    // Check the width of the window using MediaQuery if greater than 800 in a state change
     final double windowWidth = MediaQuery.of(context).size.width;
-    landscapeWindow = windowWidth > 600;
+    landscapeWindow = windowWidth > 800;
   }
 
   @override

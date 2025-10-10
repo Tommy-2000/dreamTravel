@@ -3,12 +3,12 @@ import 'package:dreamtravel/ui/common/image_not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ImageCard extends StatefulWidget {
+class TripCard extends StatefulWidget {
   final String? contentTitle;
   final String? contentSubtitle;
   final String contentImageUrl;
 
-  const ImageCard({
+  const TripCard({
     super.key,
     this.contentTitle,
     this.contentSubtitle,
@@ -16,10 +16,10 @@ class ImageCard extends StatefulWidget {
   });
 
   @override
-  State<ImageCard> createState() => _ImageCardState();
+  State<TripCard> createState() => _TripCardState();
 }
 
-class _ImageCardState extends State<ImageCard> {
+class _TripCardState extends State<TripCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
