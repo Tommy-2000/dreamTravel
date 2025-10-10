@@ -1,12 +1,12 @@
 import { Request, Response, Router } from 'express';
-import { tokenTestAmadeusApi } from '../../amadeusClient'; 
+import { testAmadeusApi } from '../../amadeusClient'; 
 import { nodeConfig } from '../../nodeConfig';
 
 // Declare the router for accessing token credentials
 export const tokenRouter = Router();
 
 // Access Granted Client Credentials
-tokenRouter.post(`${tokenTestAmadeusApi}/accessToken`, async (req: Request, res: Response) => {
+tokenRouter.post(`${testAmadeusApi}/v1/security/oauth2/token`, async (req: Request, res: Response) => {
     res.contentType('application/x-www-form-urlencoded')
     res.header('Authorisation: Bearer') // Set the headers with the client API keys
     req.body({
@@ -16,10 +16,5 @@ tokenRouter.post(`${tokenTestAmadeusApi}/accessToken`, async (req: Request, res:
     })
 })
 
-
-// Get Token Information
-// tokenRouter.get(`${testAmadeusApi}/v1/security/oauth2/token`, async (req: Request, res: Response) => {
-    
-// })
 
 

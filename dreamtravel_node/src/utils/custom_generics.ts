@@ -2,7 +2,7 @@
 // Declare generic functions when handling specific types
 
 // Type-safe generic
-export function typeSafe<Type>(safe: Type):Type {
+export function typeSafe<Type>(safe: Type): Type {
     return safe
 }
 

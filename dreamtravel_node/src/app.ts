@@ -5,7 +5,7 @@ import { Response, Request } from "express";
 // import { errorHandler } from './middleware/errorHandler';
 import { flightRouter } from './routes/flights/flightBooking';
 import { hotelRouter } from './routes/hotels/hotelBooking';
-import { experienceRouter } from './routes/experiences/experienceRouter';
+import { travelRouter } from './routes/travel/travelSearch';
 import { tokenRouter } from './routes/security/accessTokenFetch';
 import { statusRouter } from './routes/status/statusFetch';
 import { nodeConfig } from './nodeConfig';
@@ -28,10 +28,10 @@ app.use('/status', statusRouter);
 app.use('/security', tokenRouter);
 app.use('/flights', flightRouter);
 app.use('/hotels', hotelRouter);
-app.use('/experience', experienceRouter);
+app.use('/travel', travelRouter);
 
 
-// Use the global error handler -- AFTER setting endpoint routes
+// Use the global error handler after setting endpoint routes
 // app.use(errorHandler);
 
 

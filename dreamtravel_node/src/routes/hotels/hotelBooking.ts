@@ -1,19 +1,30 @@
-import { Response, Router } from "express";
-// import qs from "qs";
-import { ReferenceDataLocationsHotelsByCityParams, ResponseError } from "amadeus-ts";
-import { baseTestAmadeusApi, amadeusClient } from "../../amadeusClient";
+import { Request, Response, Router } from "express";
+import { HotelScore, ReferenceDataLocationsHotelsByCityParams, ResponseError } from "amadeus-ts";
+import { amadeusClient } from "../../amadeusClient";
 import { TypedRequestQuery } from "../../utils/custom_types";
 
-// Declare the router for searching and booking hotels
 export const hotelRouter = Router();
 
+// Check if booking a hotel is available
+hotelRouter.get(`bookingStatus`, async (request: Request, response: Response) => {
+    response.send(`Hotel booking is available`);
+})
+
+// Start the hotel booking process by calling each endpoint in the correct order
+
 // Find all available hotels in a given city or location
-hotelRouter.get(`${baseTestAmadeusApi}/hotels`, async (req: TypedRequestQuery<{query: string, cityCode: string, radius: number, radiusUnit: "MILE" | "KM" | undefined}>, res: Response) => {
+hotelRouter.route(`/hotelSearch`).get(async (req: TypedRequestQuery<
+    {query: string, cityCode: string, radius: number, radiusUnit: "MILE" | "KM", chainCodes: string, amenities: (string & {}), ratings: string, hotelScore: HotelScore}
+    >, res: Response) => {
     // Define the param object containing the search params to request
     const hotelbyCityParams: ReferenceDataLocationsHotelsByCityParams = {
         cityCode: req.query.cityCode,
         radius: req.query.radius,
-        radiusUnit: req.query.radiusUnit
+        radiusUnit: req.query.radiusUnit,
+        chainCodes: req.query.chainCodes,
+        amenities: req.query.amenities,
+        ratings: req.query.ratings,
+        hotelScore: req.query.hotelScore
     }
     const searchResponse = await amadeusClient.referenceData.locations.hotels.byCity.get(hotelbyCityParams);
 
@@ -24,7 +35,6 @@ hotelRouter.get(`${baseTestAmadeusApi}/hotels`, async (req: TypedRequestQuery<{q
             await res.json(responseError);
         } // Return a JSON error from the reponse if failed
     }
-
 });
 
 

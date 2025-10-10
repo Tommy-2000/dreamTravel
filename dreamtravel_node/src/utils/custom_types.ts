@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Query } from 'express-serve-static-core';
+import * as zod from "zod";
 
 // Declare custom types when handling requests
 
@@ -7,11 +8,11 @@ import { Query } from 'express-serve-static-core';
 export type ResParams = { [key: string]: string }; // ParamsDirectory
 export type ResBody = object; // Any
 export type ReqBody = object; // Any
-export type TypedQuery = { // Use this if all query params have different param types
+export type ReqQuery = { // Use this if all query params have different param types
     query: string
 }
 
-// Type Generics
+// Type Interfaces
 
 export interface RequestBody<Type> extends Request {
     body: Type
@@ -21,11 +22,11 @@ export interface ResponseBody<Type> extends Response {
     body: Type
 }
 
-export interface TypedRequestQuery<Type extends TypedQuery> extends Request {
+export interface TypedRequestQuery<Type extends ReqQuery> extends Request {
     query: Type
 }
 
-export interface TypedResponseQuery<Type extends TypedQuery> extends Request {
+export interface TypedResponseQuery<Type extends ReqQuery> extends Request {
     query: Type
 }
 
@@ -36,4 +37,20 @@ export interface RequestQuery<Type extends Query> extends Request {
 export interface ResponseQuery<Type extends Query> extends Response {
     query: Type // QueryString.ParsedQs
 }
+
+
+// Setup type validators for each custom type
+
+export async function validateQuery(zodSchema: zod.ZodObject<any, any>) {
+      return () => {
+        try {
+        return await zodSchema.safeParseAsync(query)
+    } catch (zodError) {
+        if (zodError instanceof zod.ZodError) {
+            return zodError.issues
+        }
+    }
+}
+}
+
 
