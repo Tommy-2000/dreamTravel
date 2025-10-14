@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Query } from 'express-serve-static-core';
-import * as zod from "zod";
 
 // Declare custom types when handling requests
 
@@ -36,21 +35,6 @@ export interface RequestQuery<Type extends Query> extends Request {
 
 export interface ResponseQuery<Type extends Query> extends Response {
     query: Type // QueryString.ParsedQs
-}
-
-
-// Setup type validators for each custom type
-
-export async function validateQuery(zodSchema: zod.ZodObject<any, any>) {
-      return () => {
-        try {
-        return await zodSchema.safeParseAsync(query)
-    } catch (zodError) {
-        if (zodError instanceof zod.ZodError) {
-            return zodError.issues
-        }
-    }
-}
 }
 
 

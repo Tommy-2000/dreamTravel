@@ -1,31 +1,20 @@
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
+import { ReferenceDataLocationsParams, ReferenceDataLocationsPoisBySquareParams, ReferenceDataLocationsPoisParams, ResponseError } from "amadeus-ts";
 import { amadeusClient } from "../../amadeusClient";
-import Amadeus, { ReferenceDataLocationsParams, ResponseError } from "amadeus-ts";
-import { TypedRequestQuery } from "../../utils/custom_types";
 
-export const travelRouter = Router();
 
-// Check if searching for a travel experience is available
-travelRouter.get(`status`, async (request: Request, response: Response) => {
-    response.send(`Travel experience searching is available`);
-})
 
-// Select origin and destination through the airport and city search API
-travelRouter.get(`/cityAndAirportSearch`, async (req: TypedRequestQuery<
-    {
-        query: string,
-        subType: "AIRPORT,CITY" | "AIRPORT" | "CITY",
-        countryCode: string,
-        page: { limit: number, offset: number },
-        sort: "analytics.travelers.score",
-        view: "FULL" | "LIGHT"
-    }>, res: Response) => {
-    const cityAndAirportSearchParams: ReferenceDataLocationsParams = {
-        keyword: req.params.parameter,
-        subType: Amadeus.location.any // Either an AIRPORT or CITY subtype
-    }
+export const cityAndAirportSearch = async (req: Request, res: Response) => {
+    const { subType, keyword, countryCode, page, sort, view }: ReferenceDataLocationsParams = req.body;
     
-    const searchResponse = await amadeusClient.referenceData.locations.get(cityAndAirportSearchParams);
+    const searchResponse = await amadeusClient.referenceData.locations.get({
+        subType,
+        keyword,
+        countryCode,
+        page,
+        sort,
+        view
+    });
 
     try {
         await res.json(JSON.parse(searchResponse.body));
@@ -34,8 +23,49 @@ travelRouter.get(`/cityAndAirportSearch`, async (req: TypedRequestQuery<
             await res.json(responseError);
         }
     }
-});
+}
 
 
-travelRouter.get(`/pointsOfInterest`)
+
+export const pointsOfInterest = async (req: Request, res: Response) => {
+    const { latitude, longitude, radius, page, categories }: ReferenceDataLocationsPoisParams = req.body;
+
+    const searchResponse = await amadeusClient.referenceData.locations.pointsOfInterest.get({
+        latitude,
+        longitude,
+        radius,
+        page,
+        categories
+    });
+
+    try {
+        await res.json(JSON.parse(searchResponse.body));
+    } catch (responseError: unknown) {
+        if (responseError instanceof ResponseError) {
+            await res.json(responseError);
+        }
+    }
+}
+
+
+export const pointsOfInterestBySquare = async (req: Request, res: Response) => {
+    const { north, west, south, east, page, categories }: ReferenceDataLocationsPoisBySquareParams = req.body;
+
+    const searchResponse = await amadeusClient.referenceData.locations.pointsOfInterest.bySquare.get({
+        north,
+        west,
+        south,
+        east,
+        page,
+        categories
+    });
+
+    try {
+        await res.json(JSON.parse(searchResponse.body));
+    } catch (responseError: unknown) {
+        if (responseError instanceof ResponseError) {
+            await res.json(responseError);
+        }
+    }
+}
 

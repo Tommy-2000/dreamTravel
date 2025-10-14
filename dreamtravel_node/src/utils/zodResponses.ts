@@ -31,7 +31,7 @@ export const AnalyticsSchema = z.object({
 });
 export type Analytics = z.infer<typeof AnalyticsSchema>;
 
-export const AirportAndCitySearchSchema = z.object({
+export const AirportAndCityResponseSchema = z.object({
     "type": z.string(),
     "subType": z.string(),
     "name": z.string(),
@@ -151,7 +151,7 @@ export const TravelerPricingSchema = z.object({
 });
 export type TravelerPricing = z.infer<typeof TravelerPricingSchema>;
 
-export const FlightOffersSearchSchema = z.object({
+export const FlightOffersResponseSchema = z.object({
     "type": z.string(),
     "id": z.string(),
     "source": z.string(),
@@ -179,7 +179,7 @@ export const RetailingSchema = z.object({
 });
 export type Retailing = z.infer<typeof RetailingSchema>;
 
-export const HotelByCitySearchSchema = z.object({
+export const HotelByCityResponseSchema = z.object({
     "chainCode": z.string(),
     "iataCode": z.string(),
     "dupeId": z.number(),
@@ -304,7 +304,7 @@ export const OfferSchema = z.object({
 });
 export type Offer = z.infer<typeof OfferSchema>;
 
-export const HotelOffersSearchSchema = z.object({
+export const HotelOffersResponseSchema = z.object({
     "type": z.string(),
     "hotel": HotelSchema,
     "available": z.boolean(),
@@ -312,14 +312,204 @@ export const HotelOffersSearchSchema = z.object({
     "self": z.string(),
 });
 
+export const CabinSchema = z.enum([
+    "ECONOMY",
+]);
+export type Cabin = z.infer<typeof CabinSchema>;
 
-// Flight Types
-export type AirportAndCitySearch = z.infer<typeof AirportAndCitySearchSchema>;
-export type FlightOffersSearch = z.infer<typeof FlightOffersSearchSchema>;
+
+export const TourNameSchema = z.enum([
+    "tour",
+]);
+export type TourName = z.infer<typeof TourNameSchema>;
 
 
-// Hotel Types
-export type HotelByCitySearch = z.infer<typeof HotelByCitySearchSchema>;
-export type HotelOffersSearch = z.infer<typeof HotelOffersSearchSchema>;
+export const TourReferenceSchema = z.enum([
+    "ref",
+]);
+export type TourReference = z.infer<typeof TourReferenceSchema>;
+
+
+export const BrandedFareSchema = z.enum([
+    "LIGHTONE",
+]);
+export type BrandedFare = z.infer<typeof BrandedFareSchema>;
+
+
+export const ClassEnumSchema = z.enum([
+    "A",
+]);
+export type ClassEnum = z.infer<typeof ClassEnumSchema>;
+
+
+export const FareBasisSchema = z.enum([
+    "ANNNNF4K",
+]);
+export type FareBasis = z.infer<typeof FareBasisSchema>;
+
+
+export const SliceDiceIndicatorSchema = z.enum([
+    "ABCDEF",
+]);
+export type SliceDiceIndicator = z.infer<typeof SliceDiceIndicatorSchema>;
+
+export const AssociatedRecordSchema = z.object({
+    "reference": z.string(),
+    "creationDateTime": z.coerce.date(),
+    "originSystemCode": z.string(),
+    "flightOfferId": z.string(),
+});
+export type AssociatedRecord = z.infer<typeof AssociatedRecordSchema>;
+
+
+export const PurplePhoneSchema = z.object({
+    "deviceType": z.string(),
+    "countryCallingCode": z.string(),
+    "number": z.string(),
+});
+export type PurplePhone = z.infer<typeof PurplePhoneSchema>;
+
+export const CdgSchema = z.object({
+    "cityCode": z.string(),
+    "countryCode": z.string(),
+});
+export type Cdg = z.infer<typeof CdgSchema>;
+
+export const Co2EmissionSchema = z.object({
+    "weight": z.string(),
+    "weightUnit": z.string(),
+    "cabin": CabinSchema,
+});
+export type Co2Emission = z.infer<typeof Co2EmissionSchema>;
+
+
+export const ChargeableCheckedBagsSchema = z.object({
+    "quantity": z.number(),
+    "weight": z.number(),
+});
+export type ChargeableCheckedBags = z.infer<typeof ChargeableCheckedBagsSchema>;
+
+export const AllotmentDetailsSchema = z.object({
+    "tourName": TourNameSchema,
+    "tourReference": TourReferenceSchema,
+});
+export type AllotmentDetails = z.infer<typeof AllotmentDetailsSchema>;
+
+export const IncludedCheckedBagsSchema = z.object({
+    "quantity": z.number(),
+});
+export type IncludedCheckedBags = z.infer<typeof IncludedCheckedBagsSchema>;
+
+
+export const TicketingAggreementSchema = z.object({
+    "option": z.string(),
+    "dateTime": z.coerce.date(),
+});
+export type TicketingAggreement = z.infer<typeof TicketingAggreementSchema>;
+
+export const FluffyPhoneSchema = z.object({
+    "countryCallingCode": z.string(),
+    "number": z.string(),
+});
+export type FluffyPhone = z.infer<typeof FluffyPhoneSchema>;
+
+export const DocumentSchema = z.object({
+    "documentType": z.string(),
+    "number": z.string(),
+    "expiryDate": z.string(),
+    "issuanceCountry": z.string(),
+    "nationality": z.string(),
+    "holder": z.boolean(),
+});
+export type Document = z.infer<typeof DocumentSchema>;
+
+
+export const ContactElementSchema = z.object({
+    "companyName": z.string(),
+    "purpose": z.string(),
+    "phones": z.array(PurplePhoneSchema),
+    "emailAddress": z.string(),
+    "address": AddressSchema,
+});
+export type ContactElement = z.infer<typeof ContactElementSchema>;
+
+export const LocationsSchema = z.object({
+    "CDG": CdgSchema,
+    "ORY": CdgSchema,
+    "MAD": CdgSchema,
+});
+export type Locations = z.infer<typeof LocationsSchema>;
+
+
+export const FlightOfferPriceSchema = z.object({
+    "grandTotal": z.string(),
+    "total": z.string(),
+    "base": z.string(),
+    "currency": z.string(),
+    "billingCurrency": z.string(),
+    "fees": z.array(AdditionalServiceSchema),
+    "additionalServices": z.array(AdditionalServiceSchema),
+});
+export type FlightOfferPrice = z.infer<typeof FlightOfferPriceSchema>;
+
+export const AdditionalServicesSchema = z.object({
+    "chargeableCheckedBags": ChargeableCheckedBagsSchema,
+    "chargeableSeatNumber": z.string(),
+});
+export type AdditionalServices = z.infer<typeof AdditionalServicesSchema>;
+
+export const TravelerContactSchema = z.object({
+    "phones": z.array(FluffyPhoneSchema),
+});
+export type TravelerContact = z.infer<typeof TravelerContactSchema>;
+
+export const DictionariesSchema = z.object({
+    "locations": LocationsSchema,
+});
+export type Dictionaries = z.infer<typeof DictionariesSchema>;
+
+
+export const TravelerSchema = z.object({
+    "id": z.string(),
+    "dateOfBirth": z.string(),
+    "name": NameSchema,
+    "contact": TravelerContactSchema.optional(),
+    "documents": z.array(DocumentSchema).optional(),
+});
+export type Traveler = z.infer<typeof TravelerSchema>;
+
+
+export const FlightOfferSchema = z.object({
+    "id": z.string(),
+    "type": z.string(),
+    "source": z.string(),
+    "itineraries": z.array(ItinerarySchema),
+    "price": FlightOfferPriceSchema,
+    "pricingOptions": PricingOptionsSchema,
+    "validatingAirlineCodes": z.array(z.string()),
+    "travelerPricings": z.array(TravelerPricingSchema),
+});
+export type FlightOffer = z.infer<typeof FlightOfferSchema>;
+
+export const FlightOrderStatusSchema = z.object({
+    "type": z.string(),
+    "id": z.string(),
+    "queuingOfficeId": z.string(),
+    "associatedRecords": z.array(AssociatedRecordSchema),
+    "travelers": z.array(TravelerSchema),
+    "flightOffers": z.array(FlightOfferSchema),
+    "ticketingAggreement": TicketingAggreementSchema,
+    "contacts": z.array(ContactElementSchema),
+    "dictionaries": DictionariesSchema,
+});
+
+
+// Zod Types created from Schemas
+
+export type AirportAndCityResponse = z.infer<typeof AirportAndCityResponseSchema>;
+export type FlightOffersResponse = z.infer<typeof FlightOffersResponseSchema>;
+export type FlightOrderStatus = z.infer<typeof FlightOrderStatusSchema>;
+export type HotelByCityResponse = z.infer<typeof HotelByCityResponseSchema>;
+export type HotelOffersResponse = z.infer<typeof HotelOffersResponseSchema>;
 
 

@@ -2,12 +2,11 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { Response, Request } from "express";
-// import { errorHandler } from './middleware/errorHandler';
-import { flightRouter } from './routes/flights/flightBooking';
-import { hotelRouter } from './routes/hotels/hotelBooking';
-import { travelRouter } from './routes/travel/travelSearch';
-import { tokenRouter } from './routes/security/accessTokenFetch';
-import { statusRouter } from './routes/status/statusFetch';
+import { flightRouter } from './routes/flights/flightRouter';
+import { hotelRouter } from './routes/hotels/hotelRouter';
+import { travelRouter } from './routes/travel/travelRouter';
+import { securityRouter } from './routes/security/securityRouter';
+import { statusRouter } from './routes/status/statusRouter';
 import { nodeConfig } from './nodeConfig';
 
 const app = express();
@@ -25,7 +24,7 @@ app.get(`/test`, async (request: Request, response: Response) => {
 });
 
 app.use('/status', statusRouter);
-app.use('/security', tokenRouter);
+app.use('/security', securityRouter);
 app.use('/flights', flightRouter);
 app.use('/hotels', hotelRouter);
 app.use('/travel', travelRouter);

@@ -4,7 +4,7 @@ export interface ApiError extends Error {
     status?: number;
 }
 
-export const errorHandler = (
+export const typedErrorHandler = (
     err: ApiError
 ) => {
     console.error(err);
