@@ -11,7 +11,7 @@ class _TravelSearchBarState extends State<TravelSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 36),
+      padding: const EdgeInsets.all(15),
       child: SearchBar(leading: Icon(Icons.search_rounded), hintText: "Where will you travel next?", onTap: () => {
       },),
     );

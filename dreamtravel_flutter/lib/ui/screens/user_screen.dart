@@ -1,18 +1,19 @@
 import 'package:dreamtravel/ui/common/screen_padding.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../common/cards/trip_card.dart';
-import '../../common/slivers/travel_app_bar.dart';
+import '../common/cards/trip_card.dart';
+import '../common/slivers/travel_bar.dart';
 
-class UserScreen extends StatefulWidget {
+class UserScreen extends ConsumerStatefulWidget {
   const UserScreen({super.key});
 
   @override
-  State<UserScreen> createState() => _UserScreenState();
+  ConsumerState<UserScreen> createState() => _UserScreenState();
 }
 
-class _UserScreenState extends State<UserScreen> {
+class _UserScreenState extends ConsumerState<UserScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
 
@@ -28,15 +29,15 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        TravelAppBar(appBarTitle: "User"),
+        TravelBar(appBarTitle: "User"),
         SliverGrid(
           gridDelegate: SliverQuiltedGridDelegate(
-            crossAxisCount: 8,
+            crossAxisCount: 32,
             pattern: [
               if (landscapeWindow)
-                QuiltedGridTile(2, 8)
+                QuiltedGridTile(20, 32)
               else
-                QuiltedGridTile(4, 8),
+                QuiltedGridTile(20, 32),
             ],
           ),
           delegate: SliverChildBuilderDelegate(

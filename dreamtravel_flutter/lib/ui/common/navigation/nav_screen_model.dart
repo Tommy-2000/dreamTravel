@@ -1,16 +1,15 @@
-import 'package:dreamtravel/ui/screens/test_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../screens/bookings/bookings_screen.dart';
-import '../../screens/explore/explore_screen.dart';
-import '../../screens/planner/planner_screen.dart';
-import '../../screens/user/user_screen.dart';
+import '../../screens/bookings_screen.dart';
+import '../../screens/explore_screen.dart';
+import '../../screens/hub_screen.dart';
+import '../../screens/test_screen.dart';
+import '../../screens/user_screen.dart';
 
 class NavScreenModel {
   final Widget navScreen;
   final String navScreenName;
   final IconData navScreenIcon;
-
 
   NavScreenModel({
     required this.navScreen,
@@ -26,9 +25,9 @@ List<NavScreenModel> navScreens = [
     navScreenIcon: Icons.travel_explore_rounded,
   ),
   NavScreenModel(
-    navScreen: PlannerScreen(),
-    navScreenName: "Planner",
-    navScreenIcon: Icons.map_rounded
+    navScreen: HubScreen(),
+    navScreenName: "Hub",
+    navScreenIcon: Icons.explore_rounded,
   ),
   NavScreenModel(
     navScreen: BookingsScreen(),
@@ -43,6 +42,6 @@ List<NavScreenModel> navScreens = [
   NavScreenModel(
     navScreen: TestScreen(),
     navScreenName: "Test",
-    navScreenIcon: Icons.api_rounded
+    navScreenIcon: Icons.api_rounded,
   ),
 ];

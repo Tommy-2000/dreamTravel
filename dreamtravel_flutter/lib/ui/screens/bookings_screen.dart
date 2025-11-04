@@ -1,21 +1,22 @@
-import 'package:dreamtravel/ui/common/screen_padding.dart';
-import 'package:dreamtravel/ui/common/travel_search_bar.dart';
+import 'package:dreamtravel/ui/common/slivers/sliver_header_delegate.dart';
+import 'package:dreamtravel/ui/common/slivers/travel_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../common/buttons/filter_bookings_button.dart';
+import '../common/cards/trip_card.dart';
+import '../common/screen_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../common/cards/trip_card.dart';
-import '../../common/slivers/sliver_header_delegate.dart';
-import '../../common/slivers/travel_app_bar.dart';
-
-class PlannerScreen extends StatefulWidget {
-  const PlannerScreen({super.key});
+class BookingsScreen extends ConsumerStatefulWidget {
+  const BookingsScreen({super.key});
 
   @override
-  State<PlannerScreen> createState() => _PlannerScreenState();
+  ConsumerState<BookingsScreen> createState() => _BookingsScreenState();
 }
 
-class _PlannerScreenState extends State<PlannerScreen> {
+class _BookingsScreenState extends ConsumerState<BookingsScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
 
@@ -55,28 +56,16 @@ class _PlannerScreenState extends State<PlannerScreen> {
 
     return CustomScrollView(
       slivers: <Widget>[
-        TravelAppBar(appBarTitle: "Trip Planner"),
-        paintSliverHeader("My Trip Plan"),
+        TravelBar(appBarTitle: "Bookings"),
+        paintSliverHeader("Upcoming Bookings"),
         SliverGrid(
           gridDelegate: SliverQuiltedGridDelegate(
-            crossAxisCount: 16,
+            crossAxisCount: 32,
             pattern: [
               if (landscapeWindow)
-                QuiltedGridTile(12, 8)
+                QuiltedGridTile(20, 32)
               else
-                QuiltedGridTile(12, 8),
-              if (landscapeWindow)
-                QuiltedGridTile(8, 8)
-              else
-                QuiltedGridTile(8, 8),
-              if (landscapeWindow)
-                QuiltedGridTile(12, 8)
-              else
-                QuiltedGridTile(12, 8),
-              if (landscapeWindow)
-                QuiltedGridTile(8, 8)
-              else
-                QuiltedGridTile(8, 8),
+                QuiltedGridTile(20, 32),
             ],
           ),
           delegate: SliverChildBuilderDelegate(
@@ -92,7 +81,27 @@ class _PlannerScreenState extends State<PlannerScreen> {
                 contentImageUrl: "fwewfef",
               );
             },
-            childCount: 8,
+            childCount: 5,
+          ),
+        ),
+        paintSliverHeader("Past Bookings"),
+        SliverGrid(
+          gridDelegate: SliverQuiltedGridDelegate(
+            crossAxisCount: 32,
+            pattern: [
+              if (landscapeWindow)
+                QuiltedGridTile(20, 32)
+              else
+                QuiltedGridTile(20, 32),
+            ],
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => TripCard(
+              contentTitle: "fsofjpwe",
+              contentSubtitle: "dpfospdfs",
+              contentImageUrl: "fpweofjpwe",
+            ),
+            childCount: 5,
           ),
         ),
       ],

@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TravelAppBar extends StatefulWidget {
-  const TravelAppBar({
+class TravelBar extends StatefulWidget {
+  const TravelBar({
     super.key, required this.appBarTitle,
   });
 
   final String appBarTitle;
 
   @override
-  State<TravelAppBar> createState() => _TravelAppBarState();
+  State<TravelBar> createState() => _TravelBarState();
 }
 
-class _TravelAppBarState extends State<TravelAppBar> {
+class _TravelBarState extends State<TravelBar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       centerTitle: true,
-      expandedHeight: 60,
+      expandedHeight: 50,
       floating: true,
       snap: true,
       stretch: true,
-      systemOverlayStyle: SystemUiOverlayStyle(),
+      shape: RoundedSuperellipseBorder(borderRadius: BorderRadius.circular(30)),
       backgroundColor: Colors.lightBlue,
       title: Text(
           widget.appBarTitle
@@ -34,7 +34,7 @@ class _TravelAppBarState extends State<TravelAppBar> {
       ),
       leading: IconButton(
         onPressed: () => {},
-        icon: Icon(Icons.search_rounded, color: Colors.white,),
+        icon: Icon(Icons.search_rounded, color: Colors.white),
       ),
       automaticallyImplyLeading: true,
     );

@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../ui/common/navigation/nav_screen_model.dart';
 import '../../ui/root/root_scaffold.dart';
 
-class TravelGoRouter {
-  final travelGoRouter = GoRouter(
+class NavRouter {
+  final goRouter = GoRouter(
     initialLocation: "/explore",
     routes: [
       StatefulShellRoute.indexedStack(
@@ -26,7 +26,7 @@ class TravelGoRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/trip_planner",
+                path: "/hub",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[1].navScreen),
               ),
@@ -65,8 +65,8 @@ class TravelGoRouter {
     redirect: (context, state) {
       final validRoutes = [
         '/explore',
+        '/hub',
         '/bookings',
-        '/trip_planner',
         '/user',
         '/test',
         '/bookings/flights'
@@ -82,7 +82,30 @@ class TravelGoRouter {
     errorBuilder: (context, state) => NotFoundScreen(goRouterException: state.error)
   );
 
-  GoRouterDelegate getGoRouterDelegate() {
-    return travelGoRouter.routerDelegate;
+  GoRouterState getState() {
+    return goRouter.state;
   }
+
+  GoRouterDelegate getDelegate() {
+    return goRouter.routerDelegate;
+  }
+
+  RouteConfiguration getRouteConfiguration() {
+    return goRouter.configuration;
+  }
+
+  RouteInformationParser getRouteInfoParser() {
+    return goRouter.routeInformationParser;
+  }
+
+  RouteInformationProvider getRouteInfoProvider() {
+    return goRouter.routeInformationProvider;
+  }
+
+  BackButtonDispatcher getBackButtonDispatcher() {
+    return goRouter.backButtonDispatcher;
+  }
+
+
+
 }

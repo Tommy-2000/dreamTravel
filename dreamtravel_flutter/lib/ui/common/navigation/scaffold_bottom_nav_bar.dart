@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:dreamtravel/logic/navigation/go_branch.dart';
+import 'package:dreamtravel/logic/navigation/nav_branch.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,6 @@ class _CustomBottomNavBarState
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(navScreens.length, (navIndex) {
-                  // final riveModel = bottomNavItems[index].riveModel;
                   return IconButton(
                     mouseCursor: SystemMouseCursors.click,
                     icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
@@ -49,7 +48,7 @@ class _CustomBottomNavBarState
                       if (kDebugMode) {
                         print("CustomBottomNavigationBar button has been tapped");
                       }
-                      GoBranch().goToBranch(navIndex, widget.navigationShell);
+                      NavBranch().goToBranch(navIndex, widget.navigationShell);
                     },
                   );
                 }),

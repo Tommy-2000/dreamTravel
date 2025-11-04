@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dreamtravel/logic/navigation/go_branch.dart';
+import 'package:dreamtravel/logic/navigation/nav_branch.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,6 @@ class ScaffoldNavRail extends ConsumerStatefulWidget {
 }
 
 class _CustomNavRailState extends ConsumerState<ScaffoldNavRail> {
-  bool toggleButtonIsSelected = true;
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
@@ -45,21 +44,27 @@ class _CustomNavRailState extends ConsumerState<ScaffoldNavRail> {
                       IconButton(
                         mouseCursor: SystemMouseCursors.click,
                         focusColor: Colors.white,
-          		      isSelected: true,
-                        icon: Icon(navScreens[navIndex].navScreenIcon, color: Colors.white),
+                        isSelected: true,
+                        icon: Icon(
+                          navScreens[navIndex].navScreenIcon,
+                          color: Colors.white,
+                        ),
                         onPressed: () {
                           if (kDebugMode) {
                             print(
                               "CustomNavigationRail button has been tapped",
                             );
                           }
-                          GoBranch().goToBranch(
+                          NavBranch().goToBranch(
                             navIndex,
                             widget.navigationShell,
                           );
                         },
                       ),
-                      Text(navScreens[navIndex].navScreenName, style: TextStyle(color: Colors.white)),
+                      Text(
+                        navScreens[navIndex].navScreenName,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   );
                 }),

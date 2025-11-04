@@ -52,3 +52,6 @@ app.*.map.json
 /.firebaserc
 lib/firebase_options_private.dart
 /windows/
+
+# Android Studio Problem Report
+/android/build/reports/problems/problems-report.html

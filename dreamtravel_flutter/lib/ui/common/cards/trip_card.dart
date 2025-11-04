@@ -23,13 +23,13 @@ class _TripCardState extends State<TripCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: const EdgeInsets.all(10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Stack(
           children: [
             cardBackground(context),
-            cardGradient(),
+            cardInkWell(),
             cardText(),
             cardFavouriteButton(),
           ],
@@ -42,7 +42,7 @@ class _TripCardState extends State<TripCard> {
     return Positioned.fill(
       child: CachedNetworkImage(
         key: _getGlobalKey(),
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
         imageUrl: widget.contentImageUrl,
         // Load a progress placeholder while fetching image url
         placeholder: (context, url) =>
@@ -53,7 +53,7 @@ class _TripCardState extends State<TripCard> {
     );
   }
 
-  Widget cardGradient() {
+  Widget cardInkWell() {
     bool cardOnHover = false;
     return Positioned.fill(
       child: InkWell(

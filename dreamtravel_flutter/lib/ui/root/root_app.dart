@@ -1,16 +1,14 @@
-import 'package:dreamtravel/logic/utils/disable_transitions_on_web.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../logic/navigation/travel_go_router.dart';
+import '../../logic/navigation/nav_router.dart';
 
-class RootApp extends ConsumerStatefulWidget {
+class RootApp extends StatefulWidget {
   const RootApp({super.key});
 
   @override
-  ConsumerState<RootApp> createState() => _RootScreenState();
+  State<RootApp> createState() => _RootScreenState();
 }
 
-class _RootScreenState extends ConsumerState<RootApp> {
+class _RootScreenState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -21,7 +19,7 @@ class _RootScreenState extends ConsumerState<RootApp> {
         useSystemColors: true,
         primarySwatch: Colors.lightBlue
       ),
-      routerConfig: TravelGoRouter().travelGoRouter,
+      routerConfig: NavRouter().goRouter,
     );
   }
 }
