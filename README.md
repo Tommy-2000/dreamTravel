@@ -1,6 +1,6 @@
 # dreamTravel
 
-Travel booking application consisting of a Flutter front-end for Android, iOS and Web combined with a Node.JS back-end running on Microsoft Azure architecture.
+Travel booking application consisting of a Flutter front-end for Android, iOS and Web combined with a Node.JS back-end running on Microsoft Azure architecture. 
 
 <<<<<<< HEAD
 ## Pages
