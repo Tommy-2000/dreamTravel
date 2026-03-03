@@ -1,0 +1,132 @@
+import 'location.dart';
+
+final sampleLocationList = [
+  Location(
+    locationCity: "Naples",
+    locationCountry: "Italy",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1715702803426-39aa0d4c39a9?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "New York City",
+    locationCountry: "USA",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1758967905380-f62a8c8fd373?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Amsterdam",
+    locationCountry: "Netherlands",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1759512909680-aeb5e7c23671?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Gold Coast City",
+    locationCountry: "Australia",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1759222977064-7a75dc2b83b1?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Tokyo",
+    locationCountry: "Japan",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Paris",
+    locationCountry: "France",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Hanoi",
+    locationCountry: "Vietnam",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1771132666487-3d7a048a36df?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Santorini",
+    locationCountry: "Greece",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Banff",
+    locationCountry: "Canada",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1497373637916-e47a55e22d0a?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Zimbabwe",
+    locationCountry: "Africa",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1488158302608-a31885ac02ff?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Berlin",
+    locationCountry: "Germany",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1560969184-10fe8719e047?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "San Francisco",
+    locationCountry: "USA",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Taipei",
+    locationCountry: "Taiwan",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1552993873-0dd1110e025f?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Dubai",
+    locationCountry: "UAE",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1528702748617-c64d49f918af?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Amsterdam",
+    locationCountry: "Netherlands",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1576924542622-772281b13aa8?&auto=format&fit=crop&q=100&w=1200",
+  ),
+  Location(
+    locationCity: "Amsterdam",
+    locationCountry: "Netherlands",
+    locationStartDate: "September 27th",
+    locationEndDate: "October 20th",
+    locationImageUrl:
+        "https://images.unsplash.com/photo-1576924542622-772281b13aa8?&auto=format&fit=crop&q=100&w=1200",
+  ),
+];
