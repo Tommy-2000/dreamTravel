@@ -1,0 +1,13 @@
+import { Request, Response } from "express";
+import { Router } from "express";
+
+// Declare the router for checking status
+export const statusRouter = Router();
+
+statusRouter.get(`/amadeusStatus`, async (request: Request, response: Response) => {
+  response.send(JSON.stringify("Amadeus Server Connected"));
+});
+
+statusRouter.get(`/nodeStatus`, async (request: Request, response: Response) => {
+  response.send(JSON.stringify("Node Server Connected"));
+});
