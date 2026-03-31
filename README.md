@@ -2,14 +2,20 @@
 
 Travel booking application consisting of a Flutter front-end for Android, iOS and Web combined with a Node.JS back-end running on Microsoft Azure architecture.
 
-## Pages
+## Values
 
-- Explore - Users can search for trips and find flights, hotels, travel experiences and personalised trip itineraries (called adventures).
-- Hub - Social media space for sharing custom adventures, photos, videos and locations with other travellers. Photos and videos can be added to an adventure and shared amongst others through this space.
+- Connective
+- Personal
+- Inclusive
+
+## Pages and Features
+
+- Explore - Users can search for trips and find flights, hotels, travel experiences and personalised trip itineraries (called Adventure Cards).
+- Campfire - Social media space for sharing custom adventures, photos, videos and locations with other travellers. Photos and videos can be added to an adventure and shared amongst others through this space. User experinces are shared as Social Cards (consisting of one photo) and trip itineraries that users create are published as Adventure Cards (consisting of up to six photos), describing their journey through them.
 - Bookings - Users can manage their upcoming and past bookings for flights and hotels.
+- Journal - Users can build a personal diary with photos, stickers, text and free drawing. Cards that they publish on the Campfire page can be added to their personal travel journal here.
 - User - Users can manage their personal preferences and their overall travel account.
 
-## Features
 
 ## Project Motivation
 
