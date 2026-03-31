@@ -23,14 +23,14 @@ Future<void> main() async {
     usePathUrlStrategy();
   }
 
-  if (kDebugMode) {
-    // Check if the web build is rendering with CanvasKit or WASM
-    if (bool.fromEnvironment('dart.tool.dart2wasm') == true) {
-      print("Web build is rendering with WebAssembly");
-    } else {
-      print("Web build is rendering with CanvasKit");
-    }
-  }
+  // if (kDebugMode) {
+  //   // Check if the web build is rendering with CanvasKit or WASM
+  //   if (bool.fromEnvironment('dart.tool.dart2wasm') == true) {
+  //     print("Web build is rendering with WebAssembly");
+  //   } else {
+  //     print("Web build is rendering with CanvasKit");
+  //   }
+  // }
 
   // Run the core Flutter app from the root
   runApp(ProviderScope(child: RootApp()));
