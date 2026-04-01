@@ -32,7 +32,7 @@ This project was developed as a "full-stack" improvement on the TravelHopper And
 
 ## Important Note Regarding The Amadeus Self-Service API
 
-Amadeus for Developers self-service portal will be decommissioned on July 17th, 2026. Enterprise APIs remain available via the Enterprise portal. Therefore, other travel API's are being tested and implemented into the back-end side of this project with Sabre, Travelport NDC and TripAdvisor as popular and capable options.
+Amadeus for Developers self-service portal will be decommissioned on July 17th, 2026. Enterprise APIs remain available via the Enterprise portal. Therefore, other travel API's are being tested and implemented into the back-end side of this project with Sabre, Travelport NDC and TripAdvisor as popular and capable options managed through a API gateway using Azure API management.
 
 A TypeScript-based fork of the Amadeus Node SDK was used to perform CRUD-based calls through an Azure Function for Amadeus before being sent to the Flutter client following a BFF (Back-end For Front-end) design pattern. See [amadeus-ts by darseen](https://github.com/darseen/amadeus-ts).
 
