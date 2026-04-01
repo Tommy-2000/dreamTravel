@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dreamtravel/ui/common/buttons/campfire_reaction_button.dart';
+import 'package:dreamtravel/ui/common/buttons/campfire_share_button.dart';
 import 'package:dreamtravel/ui/common/image_not_found.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,6 @@ class CampfireAdventureCard extends StatefulWidget {
 }
 
 class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,8 +36,8 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
             cardBackground(context),
             cardInkWell(),
             cardText(),
-            cardShareButton(),
-            cardReactionButton()
+            Positioned(right: 5, bottom: 50, child: CampfireReactionButton()),
+            Positioned(right: 5, bottom: 10, child: CampfireShareButton()),
           ],
         ),
       ),
@@ -175,34 +176,4 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
       ),
     );
   }
-
-  Widget cardReactionButton() {
-    return Positioned(
-        right: 5,
-        bottom: 50,
-        child: IconButton(onPressed: () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text("Post has been shared")));
-        },
-          icon: Icon(FluentIcons.emoji_24_filled, color: Colors.white),)
-    );
-  }
-
-  Widget cardShareButton() {
-    return Positioned(
-      right: 5,
-      bottom: 10,
-      child: IconButton(
-        color: Colors.green,
-        splashColor: Colors.greenAccent,
-        onPressed: () {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text("Post has a reaction")));
-      },
-        icon: Icon(FluentIcons.share_24_filled, color: Colors.white),)
-    );
-  }
-
 }

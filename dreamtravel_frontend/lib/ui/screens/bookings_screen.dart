@@ -1,16 +1,12 @@
-import 'package:dreamtravel/logic/api/models/search/sample_flight_booking_list.dart';
+import 'package:dreamtravel/logic/api/models/sample_flight_booking_list.dart';
 import 'package:dreamtravel/ui/common/bookings_search_bar.dart';
 import 'package:dreamtravel/ui/common/cards/booking_cards/flight/flight_booking_card.dart';
-import 'package:dreamtravel/ui/common/painters/ticket_painter.dart';
 import 'package:dreamtravel/ui/common/slivers/sliver_header_delegate.dart';
 import 'package:dreamtravel/ui/common/slivers/sliver_title_bar.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
 // import '../common/buttons/filter_bookings_button.dart';
-import '../../logic/api/models/search/sample_location_list.dart';
-import '../common/cards/location_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,41 +61,44 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
       );
     }
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverTitleBar(data: "Bookings"),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: BookingsSearchBar(),
-          ),
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MaterialButton(child: Text("Flights"), onPressed: () {}),
-                MaterialButton(child: Text("Hotels"), onPressed: () {}),
-                MaterialButton(child: Text("Travel Experiences"), onPressed: () {}),
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverTitleBar(data: "Bookings"),
+          SliverToBoxAdapter(child: Gap(10)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: BookingsSearchBar(),
             ),
           ),
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverGrid(
-          gridDelegate: landscapeWindow
-              ? paintLandscapeQuiltedGridDelegate()
-              : paintPortraitQuiltedGridDelegate(),
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => paintFlightBookingCard(index, 0),
-            childCount: 5,
+          SliverToBoxAdapter(child: Gap(10)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MaterialButton(child: Text("Flights"), onPressed: () {}),
+                  MaterialButton(child: Text("Hotels"), onPressed: () {}),
+                  MaterialButton(child: Text("Travel Experiences"), onPressed: () {}),
+                ],
+              ),
+            ),
           ),
-        ),
-      ],
+          SliverToBoxAdapter(child: Gap(10)),
+          SliverGrid(
+            gridDelegate: landscapeWindow
+                ? paintLandscapeQuiltedGridDelegate()
+                : paintPortraitQuiltedGridDelegate(),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => paintFlightBookingCard(index, 0),
+              childCount: 5,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

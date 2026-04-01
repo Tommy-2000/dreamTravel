@@ -1,4 +1,4 @@
-import 'package:dreamtravel/ui/screens/journal_screen.dart';
+import 'package:dreamtravel/ui/screens/diary_screen.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +57,7 @@ List<NavScreenModel> navScreens = [
     ),
   ),
   NavScreenModel(
-    navScreen: JournalScreen(),
+    navScreen: DiaryScreen(),
     navScreenName: "Journal",
     navScreenIcon: Icon(FluentIcons.book_24_regular, color: Colors.black),
     navScreenSelectedIcon: Icon(

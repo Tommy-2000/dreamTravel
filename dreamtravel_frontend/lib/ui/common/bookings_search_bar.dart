@@ -1,6 +1,7 @@
-import 'package:dreamtravel/logic/api/models/search/sample_location_list.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+
+import '../../logic/api/models/sample_location_list.dart';
 
 class BookingsSearchBar extends StatefulWidget {
   const BookingsSearchBar({super.key});

@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
-class BottomNavBarScaffold extends ConsumerStatefulWidget {
+class BottomNavBarScaffold extends StatefulWidget {
   BottomNavBarScaffold(this.navigationShell, this.navScreenIconIsSelected, {super.key});
 
   final StatefulNavigationShell navigationShell;
@@ -16,11 +16,11 @@ class BottomNavBarScaffold extends ConsumerStatefulWidget {
   final uiDebugLogger = Logger("uiDebugLogger");
 
   @override
-  ConsumerState<BottomNavBarScaffold> createState() =>
+  State<BottomNavBarScaffold> createState() =>
       _BottomNavBarScaffoldState();
 }
 
-class _BottomNavBarScaffoldState extends ConsumerState<BottomNavBarScaffold> {
+class _BottomNavBarScaffoldState extends State<BottomNavBarScaffold> {
   @override
   Widget build(BuildContext context) {
 

@@ -3,18 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SliverTitleBar extends StatefulWidget {
-  const SliverTitleBar({
-    super.key, required this.data,
-  });
+class SliverTitleBar extends StatelessWidget {
+  const SliverTitleBar({super.key, required this.data});
 
   final String data;
 
-  @override
-  State<SliverTitleBar> createState() => _SliverTitleBarState();
-}
-
-class _SliverTitleBarState extends State<SliverTitleBar> {
   @override
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
@@ -26,9 +19,7 @@ class _SliverTitleBarState extends State<SliverTitleBar> {
       snap: true,
       shape: RoundedSuperellipseBorder(borderRadius: BorderRadius.circular(35)),
       backgroundColor: colourScheme.primary,
-      title: Text(
-          widget.data
-      ),
+      title: Text(data),
       titleTextStyle: GoogleFonts.montserrat(
         fontSize: 35,
         fontWeight: FontWeight.bold,

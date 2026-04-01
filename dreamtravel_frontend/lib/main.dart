@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dreamtravel/ui/root/root_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
@@ -23,14 +24,19 @@ Future<void> main() async {
     usePathUrlStrategy();
   }
 
-  if (kDebugMode) {
-    // Check if the web build is rendering with CanvasKit or WASM
-    if (bool.fromEnvironment('dart.tool.dart2wasm') == true) {
-      print("Web build is rendering with WebAssembly");
-    } else {
-      print("Web build is rendering with CanvasKit");
-    }
-  }
+  // Ensure Screen Reader support is automatically enabled if accessibility tools are enabled on the browser
+  SemanticsBinding.instance.ensureSemantics();
+
+
+  // if (kDebugMode) {
+  //   // Check if the web build is rendering with CanvasKit or WASM
+  // const isRenderingWasm = bool.fromEnvironment('dart.tool.dart2wasm');
+  //   if (isRenderingWasm === true) {
+  //     print("Web build is rendering with WebAssembly");
+  //   } else {
+  //     print("Web build is rendering with CanvasKit");
+  //   }
+  // }
 
   // Run the core Flutter app from the root
   runApp(ProviderScope(child: RootApp()));

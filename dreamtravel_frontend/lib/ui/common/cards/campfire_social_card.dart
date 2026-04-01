@@ -4,6 +4,9 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../buttons/campfire_reaction_button.dart';
+import '../buttons/campfire_share_button.dart';
+
 class CampfireSocialCard extends StatefulWidget {
   final String? cardMessage;
   final String cardContent;
@@ -34,8 +37,8 @@ class _CampfireSocialCardState extends State<CampfireSocialCard> {
             cardBackground(context),
             cardInkWell(),
             cardText(),
-            cardReactionButton(),
-            cardShareButton(),
+            Positioned(right: 5, bottom: 50, child: CampfireReactionButton()),
+            Positioned(right: 5, bottom: 10, child: CampfireShareButton()),
           ],
         ),
       ),
@@ -104,35 +107,6 @@ class _CampfireSocialCardState extends State<CampfireSocialCard> {
           fontWeight: FontWeight.bold,
         ),
       ),
-    );
-  }
-
-  Widget cardReactionButton() {
-    return Positioned(
-        right: 5,
-        bottom: 50,
-        child: IconButton(onPressed: () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text("Post has been shared")));
-        },
-          icon: Icon(FluentIcons.emoji_24_filled, color: Colors.white),)
-    );
-  }
-
-  Widget cardShareButton() {
-    return Positioned(
-        right: 5,
-        bottom: 10,
-        child: IconButton(
-          color: Colors.green,
-          splashColor: Colors.greenAccent,
-          onPressed: () {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text("Post has a reaction")));
-          },
-          icon: Icon(FluentIcons.share_24_filled, color: Colors.white),)
     );
   }
 }

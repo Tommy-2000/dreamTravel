@@ -8,46 +8,46 @@ import '../common/cards/text_card.dart';
 import '../common/delegates/parallax_flow_delegate.dart';
 import '../common/image_not_found.dart';
 
-class LocationDetailsScreen extends StatefulWidget {
-  LocationDetailsScreen({
+class TripDetailsScreen extends StatefulWidget {
+  TripDetailsScreen({
     super.key,
-    required this.locationId,
+    required this.tripId,
     required this.heroTag,
-    required this.locationCity,
-    required this.locationCountry,
-    required this.locationStartDate,
-    required this.locationEndDate,
-    required this.locationImageUrl,
-    required this.locationCardIsLandscape,
-    required this.locationCardIsFavourite,
+    required this.tripCity,
+    required this.tripCountry,
+    required this.tripStartDate,
+    required this.tripEndDate,
+    required this.tripImageUrl,
+    required this.tripCardIsLandscape,
+    required this.tripCardIsFavourite,
   });
 
-  final String locationId;
+  final String tripId;
   final String heroTag;
-  final String locationCity;
-  final String locationCountry;
-  final String locationStartDate;
-  final String locationEndDate;
-  final String locationImageUrl;
-  final bool locationCardIsLandscape;
-  late bool locationCardIsFavourite = false;
+  final String tripCity;
+  final String tripCountry;
+  final String tripStartDate;
+  final String tripEndDate;
+  final String tripImageUrl;
+  final bool tripCardIsLandscape;
+  late bool tripCardIsFavourite = false;
 
   @override
-  State<LocationDetailsScreen> createState() => _LocationDetailsScreenState();
+  State<TripDetailsScreen> createState() => _TripDetailsScreenState();
 }
 
-class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
+class _TripDetailsScreenState extends State<TripDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
-    final GlobalKey locationCardBackgroundKey = GlobalKey();
+    final GlobalKey tripCardBackgroundKey = GlobalKey();
 
     return Card(child: Column(children: [cardText(colourScheme)]));
   }
 
   Widget cardText(ColorScheme colourScheme) {
     return Hero(
-      tag: "LOCATION_CARD_HERO",
+      tag: "TRIP_CARD_HERO",
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -56,8 +56,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextCard(
-                data: widget.locationCity!,
-                fontSize: widget.locationCardIsLandscape ? 20 : 15,
+                data: widget.tripCity!,
+                fontSize: widget.tripCardIsLandscape ? 20 : 15,
                 fontWeight: FontWeight.bold,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
                 fontColour: colourScheme.primary,
@@ -68,8 +68,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                 textOverflow: TextOverflow.fade,
               ),
               TextCard(
-                data: widget.locationCountry!,
-                fontSize: widget.locationCardIsLandscape ? 20 : 15,
+                data: widget.tripCountry!,
+                fontSize: widget.tripCardIsLandscape ? 20 : 15,
                 fontWeight: FontWeight.bold,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
                 fontColour: colourScheme.primary,
@@ -80,8 +80,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                 textOverflow: TextOverflow.fade,
               ),
               TextCard(
-                data: widget.locationStartDate!,
-                fontSize: widget.locationCardIsLandscape ? 15 : 10,
+                data: widget.tripStartDate!,
+                fontSize: widget.tripCardIsLandscape ? 15 : 10,
                 fontWeight: FontWeight.normal,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
                 fontColour: colourScheme.primary,
@@ -92,8 +92,8 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
                 textOverflow: TextOverflow.fade,
               ),
               TextCard(
-                data: widget.locationEndDate!,
-                fontSize: widget.locationCardIsLandscape ? 15 : 10,
+                data: widget.tripEndDate!,
+                fontSize: widget.tripCardIsLandscape ? 15 : 10,
                 fontWeight: FontWeight.normal,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
                 fontColour: colourScheme.primary,
@@ -123,7 +123,7 @@ class _LocationDetailsScreenState extends State<LocationDetailsScreen> {
           height: 1500,
           width: 1000,
           fit: BoxFit.cover,
-          imageUrl: widget.locationImageUrl,
+          imageUrl: widget.tripImageUrl,
           // Load a progress placeholder while fetching image url
           placeholder: (context, url) =>
               Center(child: const CircularProgressIndicator()),

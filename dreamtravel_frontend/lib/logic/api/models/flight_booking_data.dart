@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class FlightBooking {
+import 'location_data.dart';
+
+class FlightBookingData {
   final int flightBookingId;
   final String flightBookingName;
   final String flightBookingImageUrl;
   final List<FlightBoardingPass> flightBoardingPassList;
 
-  const FlightBooking({
+  const FlightBookingData({
     required this.flightBookingId,
     required this.flightBookingName,
     required this.flightBookingImageUrl,
@@ -27,6 +29,7 @@ class FlightBoardingPass {
   final String passengerClass;
   final String flightNumber;
   final FlightDuration flightDuration;
+  final LocationData locationData;
 
   const FlightBoardingPass({
     required this.passengerName,
@@ -41,6 +44,7 @@ class FlightBoardingPass {
     required this.passengerClass,
     required this.flightNumber,
     required this.flightDuration,
+    required this.locationData,
   });
 }
 

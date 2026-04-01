@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
-class NavRailScaffold extends ConsumerStatefulWidget {
+class NavRailScaffold extends StatefulWidget {
   NavRailScaffold(this.navigationShell, this.navigationIndex, {super.key});
 
   final StatefulNavigationShell navigationShell;
@@ -20,10 +20,10 @@ class NavRailScaffold extends ConsumerStatefulWidget {
   final uiDebugLogger = Logger("uiDebugLogger");
 
   @override
-  ConsumerState<NavRailScaffold> createState() => _NavRailScaffoldState();
+  State<NavRailScaffold> createState() => _NavRailScaffoldState();
 }
 
-class _NavRailScaffoldState extends ConsumerState<NavRailScaffold> {
+class _NavRailScaffoldState extends State<NavRailScaffold> {
   @override
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;

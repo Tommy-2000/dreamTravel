@@ -7,14 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import '../common/slivers/sliver_header_delegate.dart';
 import '../common/slivers/sliver_title_bar.dart';
 
-class JournalScreen extends ConsumerStatefulWidget {
-  const JournalScreen({super.key});
+class DiaryScreen extends ConsumerStatefulWidget {
+  const DiaryScreen({super.key});
 
   @override
-  ConsumerState<JournalScreen> createState() => _JournalScreenState();
+  ConsumerState<DiaryScreen> createState() => _JournalScreenState();
 }
 
-class _JournalScreenState extends ConsumerState<JournalScreen> {
+class _JournalScreenState extends ConsumerState<DiaryScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
 
@@ -30,20 +30,23 @@ class _JournalScreenState extends ConsumerState<JournalScreen> {
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverTitleBar(data: "Journal"),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverGrid(
-          gridDelegate: landscapeWindow
-              ? paintLandscapeQuiltedGridDelegate()
-              : paintPortraitQuiltedGridDelegate(),
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => Container(color: Colors.red),
-            childCount: 5,
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverTitleBar(data: "Diary"),
+          SliverToBoxAdapter(child: Gap(10)),
+          SliverGrid(
+            gridDelegate: landscapeWindow
+                ? paintLandscapeQuiltedGridDelegate()
+                : paintPortraitQuiltedGridDelegate(),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => Container(color: Colors.red),
+              childCount: 5,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
