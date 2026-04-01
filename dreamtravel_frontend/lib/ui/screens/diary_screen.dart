@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../common/slivers/sliver_header_delegate.dart';
 import '../common/slivers/sliver_title_bar.dart';
 
 class DiaryScreen extends ConsumerStatefulWidget {

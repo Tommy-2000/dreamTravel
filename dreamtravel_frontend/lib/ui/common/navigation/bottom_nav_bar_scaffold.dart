@@ -8,12 +8,10 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 class BottomNavBarScaffold extends StatefulWidget {
-  BottomNavBarScaffold(this.navigationShell, this.navScreenIconIsSelected, {super.key});
+  const BottomNavBarScaffold(this.navigationShell, this.navScreenIconIsSelected, {super.key});
 
   final StatefulNavigationShell navigationShell;
   final bool navScreenIconIsSelected;
-
-  final uiDebugLogger = Logger("uiDebugLogger");
 
   @override
   State<BottomNavBarScaffold> createState() =>
@@ -23,7 +21,7 @@ class BottomNavBarScaffold extends StatefulWidget {
 class _BottomNavBarScaffoldState extends State<BottomNavBarScaffold> {
   @override
   Widget build(BuildContext context) {
-
+    late Logger uiDebugLogger = Logger("uiDebugLogger");
     final colourScheme = Theme.of(context).colorScheme;
     bool iconIsSelected = widget.navScreenIconIsSelected;
 

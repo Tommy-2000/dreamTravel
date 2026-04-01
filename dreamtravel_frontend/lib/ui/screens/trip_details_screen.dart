@@ -3,7 +3,6 @@ import 'package:cached_network_image_platform_interface/cached_network_image_pla
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../common/cards/booking_cards/flight/flight_booking_card.dart';
 import '../common/cards/text_card.dart';
 import '../common/delegates/parallax_flow_delegate.dart';
 import '../common/image_not_found.dart';
@@ -56,7 +55,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextCard(
-                data: widget.tripCity!,
+                data: widget.tripCity,
                 fontSize: widget.tripCardIsLandscape ? 20 : 15,
                 fontWeight: FontWeight.bold,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -68,7 +67,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
                 textOverflow: TextOverflow.fade,
               ),
               TextCard(
-                data: widget.tripCountry!,
+                data: widget.tripCountry,
                 fontSize: widget.tripCardIsLandscape ? 20 : 15,
                 fontWeight: FontWeight.bold,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -80,7 +79,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
                 textOverflow: TextOverflow.fade,
               ),
               TextCard(
-                data: widget.tripStartDate!,
+                data: widget.tripStartDate,
                 fontSize: widget.tripCardIsLandscape ? 15 : 10,
                 fontWeight: FontWeight.normal,
                 fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -92,7 +91,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
                 textOverflow: TextOverflow.fade,
               ),
               TextCard(
-                data: widget.tripEndDate!,
+                data: widget.tripEndDate,
                 fontSize: widget.tripCardIsLandscape ? 15 : 10,
                 fontWeight: FontWeight.normal,
                 fontStyle: GoogleFonts.montserrat().fontStyle,

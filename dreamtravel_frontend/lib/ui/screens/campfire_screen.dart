@@ -3,7 +3,6 @@ import 'package:dreamtravel/ui/common/cards/campfire_social_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../common/slivers/sliver_title_bar.dart';
 

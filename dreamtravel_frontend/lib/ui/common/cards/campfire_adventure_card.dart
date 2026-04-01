@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dreamtravel/ui/common/buttons/campfire_reaction_button.dart';
 import 'package:dreamtravel/ui/common/buttons/campfire_share_button.dart';
 import 'package:dreamtravel/ui/common/image_not_found.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

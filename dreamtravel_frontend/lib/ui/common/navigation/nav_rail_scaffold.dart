@@ -4,20 +4,15 @@ import 'package:dreamtravel/logic/navigation/nav_branch.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 class NavRailScaffold extends StatefulWidget {
-  NavRailScaffold(this.navigationShell, this.navigationIndex, {super.key});
+  const NavRailScaffold(this.navigationShell, this.navigationIndex, {super.key});
 
   final StatefulNavigationShell navigationShell;
 
   final int navigationIndex;
-
-  late bool navScreenIconIsSelected = false;
-
-  final uiDebugLogger = Logger("uiDebugLogger");
 
   @override
   State<NavRailScaffold> createState() => _NavRailScaffoldState();
@@ -26,8 +21,9 @@ class NavRailScaffold extends StatefulWidget {
 class _NavRailScaffoldState extends State<NavRailScaffold> {
   @override
   Widget build(BuildContext context) {
+    late Logger uiDebugLogger = Logger("uiDebugLogger");
     final colourScheme = Theme.of(context).colorScheme;
-    bool iconIsSelected = widget.navScreenIconIsSelected;
+    late bool iconIsSelected = false;
 
     if (kDebugMode) {
       print("NavRailScaffold is rendering");
