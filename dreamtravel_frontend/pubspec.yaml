@@ -1,6 +1,6 @@
 name: dreamtravel
-description: "Travel booking and social platform built with a Flutter front-end and a Node.JS back-end that integrates with a Microsoft Azure serverless architecture."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: "Travel booking and social media platform built and designed to be personal and expressive"
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -20,14 +20,14 @@ dependencies:
   equatable: ^2.0.0
   flutter_animate: ^4.5.2
   intl: ^0.20.2
-  google_fonts: ^6.2.1
+  google_fonts: ^8.0.2
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
   flutter_riverpod: ^3.0.0-dev.16
   transparent_image: ^2.0.1
   cached_network_image: ^3.4.1
   flutter_staggered_grid_view: ^0.7.0
-  go_router: ^16.0.0
+  go_router: ^17.1.0
   auto_size_text: ^3.0.0
   pretty_dio_logger: ^1.4.0
   connectivity_plus: ^7.0.0
@@ -37,13 +37,18 @@ dependencies:
   fluentui_system_icons: ^1.1.273
   gap: ^3.0.1
   mocktail: ^1.0.4
+  url_launcher: ^6.3.2
+  flutter_local_notifications: ^20.1.0
+  video_player: ^2.10.1
+  video_player_web: ^2.4.0
+  feedback: ^3.2.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   build_runner: ^2.5.4
   freezed: ^3.1.0
   json_serializable: ^6.9.5
@@ -52,28 +57,15 @@ dev_dependencies:
   test: ^1.25.15
 
 
-
-# The following section is specific to Flutter packages.
 flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   # fonts:
   #   - family: Montserrat
   #     fonts:
@@ -95,6 +87,3 @@ flutter:
   #       - asset: fonts/Montserrat/Montserrat-Thin.ttf
   #       - asset: fonts/Montserrat/Montserrat-ThinItalic.ttf
 
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package

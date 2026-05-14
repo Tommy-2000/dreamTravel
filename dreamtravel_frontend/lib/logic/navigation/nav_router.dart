@@ -47,7 +47,7 @@ class NavRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/journal",
+                path: "/diary",
                 pageBuilder: (context, state) =>
                     MaterialPage(child: navScreens[3].navScreen),
               ),
@@ -80,7 +80,7 @@ class NavRouter {
         '/bookings/flights',
         '/bookings/hotels',
         '/bookings/rentals',
-        '/journal',
+        '/diary',
         '/user',
         '/search/:searchQuery',
         '/location_details',

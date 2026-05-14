@@ -1,21 +1,14 @@
-import 'package:dreamtravel/logic/api/models/search/sample_flight_booking_list.dart';
-import 'package:dreamtravel/ui/common/bookings_search_bar.dart';
-import 'package:dreamtravel/ui/common/cards/booking_cards/flight/flight_booking_card.dart';
-import 'package:dreamtravel/ui/common/painters/ticket_painter.dart';
+import 'package:dreamtravel/ui/common/cards/booking_cards/booking_card.dart';
 import 'package:dreamtravel/ui/common/slivers/sliver_header_delegate.dart';
-import 'package:dreamtravel/ui/common/slivers/sliver_title_bar.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-// import '../common/buttons/filter_bookings_button.dart';
-import '../../logic/api/models/search/sample_location_list.dart';
-import '../common/cards/location_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../common/travel_search_bar.dart';
+import '../../logic/models/examples/sample_flight_booking_list.dart';
+import '../common/slivers/sliver_root_appbar.dart';
 
 class BookingsScreen extends ConsumerStatefulWidget {
   const BookingsScreen({super.key});
@@ -27,6 +20,21 @@ class BookingsScreen extends ConsumerStatefulWidget {
 class _BookingsScreenState extends ConsumerState<BookingsScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
+
+  bool filterButtonToggled = false;
+
+  bool showFlightBookings = false;
+  bool showHotelBookings = false;
+  bool showTourBookings = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    showFlightBookings = true;
+    showHotelBookings = false;
+    showTourBookings = false;
+  }
 
   @override
   void didChangeDependencies() {
@@ -65,41 +73,38 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
       );
     }
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverTitleBar(data: "Bookings"),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: BookingsSearchBar(),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverRootAppBar(
+            sliverRootTitle: "Bookings",
+            sliverRootFilterButtonToggled: false,
           ),
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MaterialButton(child: Text("Flights"), onPressed: () {}),
-                MaterialButton(child: Text("Hotels"), onPressed: () {}),
-                MaterialButton(child: Text("Travel Experiences"), onPressed: () {}),
-              ],
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverGrid(
-          gridDelegate: landscapeWindow
-              ? paintLandscapeQuiltedGridDelegate()
-              : paintPortraitQuiltedGridDelegate(),
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => paintFlightBookingCard(index, 0),
-            childCount: 5,
-          ),
-        ),
-      ],
+          SliverToBoxAdapter(child: Gap(10)),
+          renderBookingsGrid(),
+        ],
+      ),
+    );
+  }
+
+  SliverGrid renderBookingsGrid() {
+    return SliverGrid(
+      gridDelegate: landscapeWindow
+          ? paintLandscapeQuiltedGridDelegate()
+          : paintPortraitQuiltedGridDelegate(),
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          if (showFlightBookings) {
+            return renderFlightBookingCard(index, index);
+          } else if (showHotelBookings) {
+            return renderHotelBookingCard(index, index);
+          } else if (showTourBookings) {
+            return renderTourBookingCard(index, index);
+          }
+        },
+        childCount: 1,
+      ),
     );
   }
 
@@ -107,7 +112,7 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 32,
       repeatPattern: QuiltedGridRepeatPattern.same,
-      pattern: [QuiltedGridTile(25, 32)],
+      pattern: [QuiltedGridTile(32, 32), QuiltedGridTile(32, 32)],
     );
   }
 
@@ -115,27 +120,54 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 32,
       repeatPattern: QuiltedGridRepeatPattern.same,
-      pattern: [
-        QuiltedGridTile(8, 16),
-        QuiltedGridTile(8, 16),
-        QuiltedGridTile(8, 16),
-        QuiltedGridTile(8, 16),
-      ],
+      pattern: [QuiltedGridTile(16, 16), QuiltedGridTile(16, 16)],
     );
   }
 }
 
+Widget renderFlightBookingCard(
+  int bookingRenderIndex,
+  int flightBoardingPassRenderIndex,
+) {
+  return BookingCard(
+    bookingData: sampleFlightBookingList[bookingRenderIndex],
+    bookingIndex: bookingRenderIndex,
+    bookingIncludesFlight: true,
+    bookingIncludesHotel: false,
+    bookingIncludesTour: false,
+    onClick: () {},
+    appIsLandscape: false,
+  );
+}
 
-Widget paintFlightBookingCard(int flightBookingIndex, int flightBoardingPassIndex) {
-  return FlightBookingCard(
-    flightBookingCity: sampleFlightBookingList[flightBookingIndex].flightBoardingPassList[flightBoardingPassIndex].flightDestination.airportCity,
-    flightBookingCountry: sampleFlightBookingList[flightBookingIndex].flightBoardingPassList[flightBoardingPassIndex].flightDestination.airportCode,
-    flightBookingStartDate:
-    "Starts: ${sampleFlightBookingList[flightBookingIndex].flightBoardingPassList[flightBoardingPassIndex].flightDepartureTime}",
-    flightBookingEndDate:
-    "Ends: ${sampleFlightBookingList[flightBookingIndex].flightBoardingPassList[flightBoardingPassIndex].flightArrivalTime}",
-    flightBookingImageUrl: sampleFlightBookingList[flightBookingIndex].flightBookingImageUrl,
-    flightBookingCardIsLandscape: false,
-    flightBookingCardIsFavourite: false,
+
+Widget renderHotelBookingCard(
+    int bookingRenderIndex,
+    int hotelBookingPassRenderIndex,
+    ) {
+  return BookingCard(
+    bookingData: sampleFlightBookingList[bookingRenderIndex],
+    bookingIndex: bookingRenderIndex,
+    bookingIncludesFlight: false,
+    bookingIncludesHotel: true,
+    bookingIncludesTour: false,
+    onClick: () {},
+    appIsLandscape: false,
+  );
+}
+
+
+Widget renderTourBookingCard(
+    int bookingRenderIndex,
+    int tourBookingPassRenderIndex,
+    ) {
+  return BookingCard(
+    bookingData: sampleFlightBookingList[bookingRenderIndex],
+    bookingIndex: bookingRenderIndex,
+    bookingIncludesFlight: false,
+    bookingIncludesHotel: false,
+    bookingIncludesTour: true,
+    onClick: () {},
+    appIsLandscape: false,
   );
 }

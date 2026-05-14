@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dreamtravel/ui/common/buttons/campfire_reaction_button.dart';
+import 'package:dreamtravel/ui/common/buttons/campfire_share_button.dart';
 import 'package:dreamtravel/ui/common/image_not_found.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,11 +24,10 @@ class CampfireAdventureCard extends StatefulWidget {
 }
 
 class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(15),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Stack(
@@ -35,8 +35,8 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
             cardBackground(context),
             cardInkWell(),
             cardText(),
-            cardShareButton(),
-            cardReactionButton()
+            Positioned(right: 20, bottom: 50, child: CampfireReactionButton()),
+            Positioned(right: 20, bottom: 10, child: CampfireShareButton()),
           ],
         ),
       ),
@@ -162,47 +162,20 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
       bottom: 15,
       height: 110,
       width: 250,
-      child: Text(
-        widget.cardMessage!,
-        softWrap: true,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 5,
-        style: GoogleFonts.montserrat(
-          color: Colors.white,
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Text(
+          widget.cardMessage!,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 5,
+          style: GoogleFonts.montserrat(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
   }
-
-  Widget cardReactionButton() {
-    return Positioned(
-        right: 5,
-        bottom: 50,
-        child: IconButton(onPressed: () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text("Post has been shared")));
-        },
-          icon: Icon(FluentIcons.emoji_24_filled, color: Colors.white),)
-    );
-  }
-
-  Widget cardShareButton() {
-    return Positioned(
-      right: 5,
-      bottom: 10,
-      child: IconButton(
-        color: Colors.green,
-        splashColor: Colors.greenAccent,
-        onPressed: () {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text("Post has a reaction")));
-      },
-        icon: Icon(FluentIcons.share_24_filled, color: Colors.white),)
-    );
-  }
-
 }

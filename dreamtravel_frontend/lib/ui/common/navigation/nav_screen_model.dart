@@ -1,11 +1,10 @@
-import 'package:dreamtravel/ui/screens/journal_screen.dart';
+import 'package:dreamtravel/ui/screens/diary_screen.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/bookings_screen.dart';
 import '../../screens/explore_screen.dart';
 import '../../screens/campfire_screen.dart';
-import '../../screens/test_screen.dart';
 import '../../screens/user_screen.dart';
 
 class NavScreenModel {
@@ -57,8 +56,8 @@ List<NavScreenModel> navScreens = [
     ),
   ),
   NavScreenModel(
-    navScreen: JournalScreen(),
-    navScreenName: "Journal",
+    navScreen: DiaryScreen(),
+    navScreenName: "Diary",
     navScreenIcon: Icon(FluentIcons.book_24_regular, color: Colors.black),
     navScreenSelectedIcon: Icon(
       FluentIcons.book_24_filled,

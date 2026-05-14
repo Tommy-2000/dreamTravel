@@ -3,9 +3,9 @@ import 'package:dreamtravel/ui/common/cards/campfire_social_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../common/slivers/sliver_title_bar.dart';
+import '../common/slivers/sliver_root_appbar.dart';
+
 
 class CampfireScreen extends ConsumerStatefulWidget {
   const CampfireScreen({super.key});
@@ -31,10 +31,19 @@ class _CampfireScreenState extends ConsumerState<CampfireScreen> {
 
     final colourScheme = Theme.of(context).colorScheme;
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverTitleBar(data: "Campfire"),
-        SliverGrid(
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverRootAppBar(sliverRootTitle: "Campfire", sliverRootFilterButtonToggled: false),
+          renderCampfireGrid(),
+        ],
+      ),
+    );
+  }
+
+  SliverGrid renderCampfireGrid() {
+    return SliverGrid(
           gridDelegate: landscapeWindow
               ? buildLandscapeQuiltedGridDelegate()
               : buildPortraitQuiltedGridDelegate(),
@@ -63,7 +72,7 @@ class _CampfireScreenState extends ConsumerState<CampfireScreen> {
                 "https://images.unsplash.com/photo-1620635063663-fce9bd4a0b1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1073",
                 "https://images.unsplash.com/photo-1698794503338-a61fc2d1929e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627",
                 "https://images.unsplash.com/photo-1760657061857-2dc900e0719e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
-              ], cardContentHeight: 176, cardContentWidth: 187,
+              ], cardContentHeight: 170, cardContentWidth: 163,
             ),
             CampfireAdventureCard(
               cardMessage:
@@ -75,12 +84,10 @@ class _CampfireScreenState extends ConsumerState<CampfireScreen> {
                 "https://images.unsplash.com/photo-1620635063663-fce9bd4a0b1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1073",
                 "https://images.unsplash.com/photo-1698794503338-a61fc2d1929e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627",
                 "https://images.unsplash.com/photo-1760657061857-2dc900e0719e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
-              ], cardContentHeight: 176, cardContentWidth: 187,
+              ], cardContentHeight: 170, cardContentWidth: 163,
             ),
           ]),
-        ),
-      ],
-    );
+        );
   }
 
   SliverQuiltedGridDelegate buildPortraitQuiltedGridDelegate() {

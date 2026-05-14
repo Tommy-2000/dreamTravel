@@ -35,12 +35,15 @@ class FilterTravelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
 
-    return MaterialButton(
-      color: colourScheme.primary,
-      splashColor: colourScheme.primary,
-      padding: EdgeInsets.all(15),
-      shape: RoundedSuperellipseBorder(borderRadius: BorderRadius.circular(35)),
-      mouseCursor: SystemMouseCursors.click,
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: colourScheme.primary,
+        overlayColor: colourScheme.surface,
+        padding: EdgeInsets.all(15),
+        shape: RoundedSuperellipseBorder(borderRadius: BorderRadius.circular(35)),
+        elevation: 2,
+        enabledMouseCursor: SystemMouseCursors.click,
+      ),
       child: Row(
         spacing: 5,
         children: [

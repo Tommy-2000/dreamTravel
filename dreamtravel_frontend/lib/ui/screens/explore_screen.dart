@@ -1,14 +1,11 @@
-import 'package:dreamtravel/ui/common/travel_search_bar.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:dreamtravel/ui/common/slivers/sliver_root_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 
-import '../../logic/api/models/search/sample_location_list.dart';
-import '../common/buttons/filter_travel_button.dart';
-import '../common/cards/location_card.dart';
-import '../common/slivers/sliver_title_bar.dart';
+import '../../logic/models/examples/sample_travel_data_list.dart';
+import '../common/cards/trip_card.dart';
 
 class ExploreScreen extends ConsumerStatefulWidget {
   const ExploreScreen({super.key});
@@ -20,8 +17,6 @@ class ExploreScreen extends ConsumerStatefulWidget {
 class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
-
-  bool filterButtonToggled = false;
 
   @override
   void didChangeDependencies() {
@@ -35,59 +30,45 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverTitleBar(data: "Go Explore!"),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: TravelSearchBar(),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverRootAppBar(
+            sliverRootTitle: "Go Explore!",
+            sliverRootFilterButtonToggled: false,
           ),
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              spacing: 10.0,
-              children: [
-                FilterTravelButton(text: 'Flights', icon: FluentIcons.airplane_24_regular, selectedIcon: FluentIcons.airplane_32_filled, isButtonToggled: filterButtonToggled),
-                FilterTravelButton(text: 'Hotels', icon: FluentIcons.bed_24_regular, selectedIcon: FluentIcons.bed_24_filled, isButtonToggled: filterButtonToggled),
-                FilterTravelButton(text: 'Travel Experiences', icon: FluentIcons.beach_24_regular, selectedIcon: FluentIcons.beach_24_filled, isButtonToggled: filterButtonToggled),
-              ],
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverGrid(
-          gridDelegate: landscapeWindow
-              ? paintLandscapeQuiltedGridDelegate()
-              : paintPortraitQuiltedGridDelegate(),
-          delegate: SliverChildBuilderDelegate(
-            addAutomaticKeepAlives: false,
-            addRepaintBoundaries: false,
-            (context, index) {
-              if (index >= sampleLocationList.length) {
-                // Check the list length
-                return null;
-              }
-              return LocationCard(
-                locationCity: sampleLocationList[index].locationCity,
-                locationCountry: sampleLocationList[index].locationCountry,
-                locationStartDate:
-                    "Starts: ${sampleLocationList[index].locationStartDate}",
-                locationEndDate:
-                    "Ends: ${sampleLocationList[index].locationEndDate}",
-                locationImageUrl: sampleLocationList[index].locationImageUrl,
-                locationCardIsLandscape: landscapeWindow,
-                locationCardIsFavourite: false,
-              );
-            },
-            childCount: sampleLocationList.length,
-          ),
-        ),
-      ],
+          SliverToBoxAdapter(child: Gap(10)),
+          renderExploreGrid(),
+        ],
+      ),
+    );
+  }
+
+  SliverGrid renderExploreGrid() {
+    return SliverGrid(
+      gridDelegate: landscapeWindow
+          ? paintLandscapeQuiltedGridDelegate()
+          : paintPortraitQuiltedGridDelegate(),
+      delegate: SliverChildBuilderDelegate(
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
+        (context, index) {
+          if (index >= sampleTravelDataList.length) {
+            // Check the list length
+            return null;
+          }
+          return TripCard(
+            tripCity: sampleTravelDataList[index].travelCity,
+            tripCountry: sampleTravelDataList[index].travelCountry,
+            tripImageUrl: sampleTravelDataList[index].travelImageUrl,
+            tripTotalCost: sampleTravelDataList[index].travelTotalCost,
+            tripCardIsLandscape: landscapeWindow,
+            tripCardIsFavourite: false,
+          );
+        },
+        childCount: sampleTravelDataList.length,
+      ),
     );
   }
 
@@ -124,5 +105,3 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
     );
   }
 }
-
-

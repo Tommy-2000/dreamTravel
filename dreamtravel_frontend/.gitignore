@@ -45,17 +45,9 @@ app.*.map.json
 /android/app/release
 /android/app/google-services.json
 
-
-# Firebase configuration files
-/firebase.json
-/amadeus-api.txt
-/.firebaserc
-lib/firebase_options_private.dart
-
 # Android Studio Problem Report
 /android/build/reports/problems/problems-report.html
 /.vscode/
 
 # Ignore the windows build for now -- will be released later
 /windows/
-/web/
