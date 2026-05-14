@@ -1,4 +1,4 @@
-import 'package:dreamtravel/logic/providers/providers.dart';
+import 'package:dreamtravel/logic/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../logic/navigation/nav_router.dart';

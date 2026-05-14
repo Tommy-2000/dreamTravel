@@ -27,17 +27,6 @@ Future<void> main() async {
   // Ensure Screen Reader support is automatically enabled if accessibility tools are enabled on the browser
   SemanticsBinding.instance.ensureSemantics();
 
-
-  // if (kDebugMode) {
-  //   // Check if the web build is rendering with CanvasKit or WASM
-  // const isRenderingWasm = bool.fromEnvironment('dart.tool.dart2wasm');
-  //   if (isRenderingWasm === true) {
-  //     print("Web build is rendering with WebAssembly");
-  //   } else {
-  //     print("Web build is rendering with CanvasKit");
-  //   }
-  // }
-
   // Run the core Flutter app from the root
   runApp(ProviderScope(child: RootApp()));
 }

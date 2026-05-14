@@ -1,18 +1,20 @@
+import 'package:dreamtravel/ui/common/cards/monthly_calendar_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 
-import '../common/slivers/sliver_title_bar.dart';
+import '../common/slivers/sliver_root_appbar.dart';
+
 
 class DiaryScreen extends ConsumerStatefulWidget {
   const DiaryScreen({super.key});
 
   @override
-  ConsumerState<DiaryScreen> createState() => _JournalScreenState();
+  ConsumerState<DiaryScreen> createState() => _DiaryScreenState();
 }
 
-class _JournalScreenState extends ConsumerState<DiaryScreen> {
+class _DiaryScreenState extends ConsumerState<DiaryScreen> {
   bool landscapeWindow = false;
   bool foldableWindow = false;
 
@@ -32,19 +34,22 @@ class _JournalScreenState extends ConsumerState<DiaryScreen> {
       padding: const EdgeInsets.all(5.0),
       child: CustomScrollView(
         slivers: <Widget>[
-          SliverTitleBar(data: "Diary"),
+          SliverRootAppBar(sliverRootTitle: "Diary", sliverRootFilterButtonToggled: false),
           SliverToBoxAdapter(child: Gap(10)),
-          SliverGrid(
-            gridDelegate: landscapeWindow
-                ? paintLandscapeQuiltedGridDelegate()
-                : paintPortraitQuiltedGridDelegate(),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => Container(color: Colors.red),
-              childCount: 5,
-            ),
-          ),
+          renderDiaryGrid(),
         ],
       ),
+    );
+  }
+
+  SliverGrid renderDiaryGrid() {
+    return SliverGrid(
+      gridDelegate: landscapeWindow
+          ? paintLandscapeQuiltedGridDelegate()
+          : paintPortraitQuiltedGridDelegate(),
+      delegate: SliverChildListDelegate([
+        MonthlyCalendarCard(),
+      ]),
     );
   }
 
@@ -52,7 +57,7 @@ class _JournalScreenState extends ConsumerState<DiaryScreen> {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 32,
       repeatPattern: QuiltedGridRepeatPattern.same,
-      pattern: [QuiltedGridTile(32, 32), QuiltedGridTile(32, 32)],
+      pattern: [QuiltedGridTile(48, 32)],
     );
   }
 
@@ -60,7 +65,7 @@ class _JournalScreenState extends ConsumerState<DiaryScreen> {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 32,
       repeatPattern: QuiltedGridRepeatPattern.same,
-      pattern: [QuiltedGridTile(16, 16), QuiltedGridTile(16, 16)],
+      pattern: [QuiltedGridTile(16, 32)],
     );
   }
 }

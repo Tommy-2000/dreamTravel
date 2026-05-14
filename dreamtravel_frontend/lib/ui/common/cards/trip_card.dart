@@ -109,6 +109,7 @@ class TripCard extends StatelessWidget {
       child: Hero(
         tag: "trip_CARD_HERO",
         child: Card(
+          color: colourScheme.primaryContainer,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Column(
@@ -144,6 +145,7 @@ class TripCard extends StatelessWidget {
                   textOverflow: TextOverflow.fade,
                 ),
                 Card(
+                  color: colourScheme.primaryContainer,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: TextCard(

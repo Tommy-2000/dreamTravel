@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'location_data.dart';
+import 'travel_data.dart';
 
-class FlightBookingData {
-  final int flightBookingId;
-  final String flightBookingName;
-  final String flightBookingImageUrl;
-  final List<FlightBoardingPass> flightBoardingPassList;
 
-  const FlightBookingData({
-    required this.flightBookingId,
-    required this.flightBookingName,
-    required this.flightBookingImageUrl,
-    required this.flightBoardingPassList,
-  });
-}
-
-class FlightBoardingPass {
-  final String passengerName;
+class FlightBoardingData {
+  final int flightBoardingNumber;
+  final String flightPassengerName;
   final Airport flightOrigin;
   final Airport flightDestination;
   final DateTime flightDepartureTime;
@@ -25,14 +13,14 @@ class FlightBoardingPass {
   final DateTime flightArrivalTime;
   final String flightGate;
   final int flightZone;
-  final String passengerSeat;
-  final String passengerClass;
+  final String flightPassengerSeat;
+  final String flightPassengerClass;
   final String flightNumber;
   final FlightDuration flightDuration;
-  final LocationData locationData;
 
-  const FlightBoardingPass({
-    required this.passengerName,
+  const FlightBoardingData({
+    required this.flightBoardingNumber,
+    required this.flightPassengerName,
     required this.flightOrigin,
     required this.flightDestination,
     required this.flightDepartureTime,
@@ -40,11 +28,10 @@ class FlightBoardingPass {
     required this.flightArrivalTime,
     required this.flightGate,
     required this.flightZone,
-    required this.passengerSeat,
-    required this.passengerClass,
+    required this.flightPassengerSeat,
+    required this.flightPassengerClass,
     required this.flightNumber,
     required this.flightDuration,
-    required this.locationData,
   });
 }
 

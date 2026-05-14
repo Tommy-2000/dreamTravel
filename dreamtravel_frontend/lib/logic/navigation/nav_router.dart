@@ -80,7 +80,7 @@ class NavRouter {
         '/bookings/flights',
         '/bookings/hotels',
         '/bookings/rentals',
-        '/journal',
+        '/diary',
         '/user',
         '/search/:searchQuery',
         '/location_details',

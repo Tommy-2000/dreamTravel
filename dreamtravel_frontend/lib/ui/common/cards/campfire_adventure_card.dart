@@ -27,7 +27,7 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(15),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Stack(
@@ -35,8 +35,8 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
             cardBackground(context),
             cardInkWell(),
             cardText(),
-            Positioned(right: 5, bottom: 50, child: CampfireReactionButton()),
-            Positioned(right: 5, bottom: 10, child: CampfireShareButton()),
+            Positioned(right: 20, bottom: 50, child: CampfireReactionButton()),
+            Positioned(right: 20, bottom: 10, child: CampfireShareButton()),
           ],
         ),
       ),
@@ -162,15 +162,18 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
       bottom: 15,
       height: 110,
       width: 250,
-      child: Text(
-        widget.cardMessage!,
-        softWrap: true,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 5,
-        style: GoogleFonts.montserrat(
-          color: Colors.white,
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Text(
+          widget.cardMessage!,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 5,
+          style: GoogleFonts.montserrat(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

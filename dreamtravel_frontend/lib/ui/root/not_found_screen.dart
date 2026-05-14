@@ -1,4 +1,3 @@
-import 'package:dreamtravel/ui/common/cards/text_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/src/misc/errors.dart';
 

@@ -3,7 +3,6 @@ import 'package:dreamtravel/logic/navigation/nav_branch.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
@@ -35,7 +34,7 @@ class _BottomNavBarScaffoldState extends State<BottomNavBarScaffold> {
         child: Container(
           color: colourScheme.primaryContainer,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
+            filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
             child: SizedBox(
               height: 60,
               child: Row(

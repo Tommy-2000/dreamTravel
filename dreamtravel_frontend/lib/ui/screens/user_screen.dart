@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../common/slivers/sliver_title_bar.dart';
+import '../common/slivers/sliver_root_appbar.dart';
 
 class UserScreen extends ConsumerStatefulWidget {
   const UserScreen({super.key});
@@ -25,26 +25,29 @@ class _UserScreenState extends ConsumerState<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final colourScheme = Theme.of(context).colorScheme;
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverTitleBar(data: "User"),
-        SliverGrid(
-          gridDelegate: landscapeWindow
-              ? buildLandscapeQuiltedGridDelegate()
-              : buildPortraitQuiltedGridDelegate(),
-          delegate: SliverChildBuilderDelegate(
-            addAutomaticKeepAlives: false,
-            addRepaintBoundaries: true,
-            (context, index) => Container(
-                color: Colors.red,
-              ),
-            childCount: 1,
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverRootAppBar(
+            sliverRootTitle: "User",
+            sliverRootFilterButtonToggled: false,
           ),
-        ),
-      ],
+          SliverGrid(
+            gridDelegate: landscapeWindow
+                ? buildLandscapeQuiltedGridDelegate()
+                : buildPortraitQuiltedGridDelegate(),
+            delegate: SliverChildBuilderDelegate(
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: true,
+              (context, index) => Container(color: Colors.red),
+              childCount: 1,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -74,5 +77,4 @@ class _UserScreenState extends ConsumerState<UserScreen> {
       ],
     );
   }
-
 }

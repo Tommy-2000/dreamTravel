@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../screens/bookings_screen.dart';
 import '../../screens/explore_screen.dart';
 import '../../screens/campfire_screen.dart';
-import '../../screens/test_screen.dart';
 import '../../screens/user_screen.dart';
 
 class NavScreenModel {
@@ -58,7 +57,7 @@ List<NavScreenModel> navScreens = [
   ),
   NavScreenModel(
     navScreen: DiaryScreen(),
-    navScreenName: "Journal",
+    navScreenName: "Diary",
     navScreenIcon: Icon(FluentIcons.book_24_regular, color: Colors.black),
     navScreenSelectedIcon: Icon(
       FluentIcons.book_24_filled,

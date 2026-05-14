@@ -51,4 +51,3 @@ app.*.map.json
 
 # Ignore the windows build for now -- will be released later
 /windows/
-/web/
