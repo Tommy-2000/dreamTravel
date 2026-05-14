@@ -42,3 +42,7 @@ This project was on pause due to work and family commitments recently. As of Mar
 
 
 > *一緒に夢に飛び込みましょう (Let’s dive into our dreams together)*
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
