@@ -1,5 +1,4 @@
-import 'package:dreamtravel/logic/models/examples/flight_boarding_data.dart';
-import 'package:dreamtravel/logic/models/examples/tour_booking_data.dart';
+
 import 'package:dreamtravel/ui/common/cards/booking_cards/booking_details_card.dart';
 import 'package:dreamtravel/ui/common/cards/booking_cards/hotel_booking_pass.dart';
 import 'package:flutter/material.dart';

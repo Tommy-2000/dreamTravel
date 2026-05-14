@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'travel_data.dart';
 
 
 class FlightBoardingData {

@@ -97,7 +97,7 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
     SearchController controller,
   ) {
     return List<ListTile>.generate(5, (int listIndex) {
-      final String suggestedItem = sampleLocationList[listIndex].travelCity;
+      final String suggestedItem = sampleTravelDataList[listIndex].travelCity;
       return ListTile(
         title: Text(suggestedItem),
         onTap: () {

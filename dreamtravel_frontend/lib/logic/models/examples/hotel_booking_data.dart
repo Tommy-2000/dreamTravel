@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'travel_data.dart';
-
 
 class HotelBookingData {
   final int flightBoardingNumber;
