@@ -1,5 +1,7 @@
 # dreamTravel
 
+[![Codemagic build status](https://api.codemagic.io/apps/6a0d825583fad12bf23a7ee4/6a0d825583fad12bf23a7ee3/status_badge.svg)](https://codemagic.io/app/6a0d825583fad12bf23a7ee4/6a0d825583fad12bf23a7ee3/latest_build)
+
 Travel booking application consisting of a Flutter front-end for Android, iOS and Web combined with a Node.JS back-end running on Microsoft Azure architecture.
 
 ## Values
