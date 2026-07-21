@@ -1,4 +1,6 @@
-import 'package:dreamtravel/ui/common/cards/booking_cards/booking_card.dart';
+import 'package:dreamtravel/constants/app_values.dart';
+import 'package:dreamtravel/state/providers.dart';
+import 'package:dreamtravel/ui/common/cards/booking_cards/folding_booking_card.dart';
 import 'package:dreamtravel/ui/common/slivers/sliver_header_delegate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../logic/models/examples/sample_flight_booking_list.dart';
+import '../../logic/sample_data/sample_booking_data.dart';
 import '../common/slivers/sliver_root_appbar.dart';
 
 class BookingsScreen extends ConsumerStatefulWidget {
@@ -26,7 +28,6 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
   bool showFlightBookings = false;
   bool showHotelBookings = false;
   bool showTourBookings = false;
-
 
   @override
   void initState() {
@@ -47,7 +48,6 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
   @override
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
-
     SliverPersistentHeader paintSliverHeader(String sliverHeaderText) {
       return SliverPersistentHeader(
         pinned: true,
@@ -73,19 +73,24 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverRootAppBar(
-            sliverRootTitle: "Bookings",
-            sliverRootFilterButtonToggled: false,
-          ),
-          SliverToBoxAdapter(child: Gap(10)),
-          renderBookingsGrid(),
-        ],
-      ),
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverRootAppBar(
+          sliverRootTitle: "Bookings",
+          sliverRootFilterButtonToggled: false,
+        ),
+        SliverToBoxAdapter(child: Gap(10)),
+        renderBookingsGrid(),
+      ],
     );
+  }
+
+  SliverReorderableList renderReorderableBookingList() {
+    return SliverReorderableList(itemBuilder: (context, index) {
+      return renderBookingCard(index);
+    }, itemCount: 1, onReorderItem: (i, f) {
+
+    });
   }
 
   SliverGrid renderBookingsGrid() {
@@ -93,81 +98,45 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
       gridDelegate: landscapeWindow
           ? paintLandscapeQuiltedGridDelegate()
           : paintPortraitQuiltedGridDelegate(),
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          if (showFlightBookings) {
-            return renderFlightBookingCard(index, index);
-          } else if (showHotelBookings) {
-            return renderHotelBookingCard(index, index);
-          } else if (showTourBookings) {
-            return renderTourBookingCard(index, index);
-          }
-        },
-        childCount: 1,
-      ),
+      delegate: SliverChildBuilderDelegate((context, index) {
+        return renderBookingCard(index);
+      }, childCount: 1),
     );
   }
 
   SliverQuiltedGridDelegate paintPortraitQuiltedGridDelegate() {
     return SliverQuiltedGridDelegate(
-      crossAxisCount: 32,
+      crossAxisCount: 64,
       repeatPattern: QuiltedGridRepeatPattern.same,
-      pattern: [QuiltedGridTile(32, 32), QuiltedGridTile(32, 32)],
+      pattern: [QuiltedGridTile(64, 64), QuiltedGridTile(64, 64)],
     );
   }
 
   SliverQuiltedGridDelegate paintLandscapeQuiltedGridDelegate() {
     return SliverQuiltedGridDelegate(
-      crossAxisCount: 32,
+      crossAxisCount: 48,
       repeatPattern: QuiltedGridRepeatPattern.same,
-      pattern: [QuiltedGridTile(16, 16), QuiltedGridTile(16, 16)],
+      pattern: [
+        QuiltedGridTile(32, 16),
+        QuiltedGridTile(32, 16),
+        QuiltedGridTile(32, 16)
+      ],
     );
   }
 }
 
-Widget renderFlightBookingCard(
-  int bookingRenderIndex,
-  int flightBoardingPassRenderIndex,
+Widget renderBookingCard(int gridRenderIndex,
 ) {
-  return BookingCard(
-    bookingData: sampleFlightBookingList[bookingRenderIndex],
-    bookingIndex: bookingRenderIndex,
-    bookingIncludesFlight: true,
-    bookingIncludesHotel: false,
-    bookingIncludesTour: false,
-    onClick: () {},
-    appIsLandscape: false,
+  return FoldingBookingCard(
+    bookingData: sampleBookingDataList[gridRenderIndex],
+    bookingIndex: gridRenderIndex,
+    bookingIncludesFlight: sampleBookingDataList[gridRenderIndex].travelData
+        .travelBookingIncludesFlight,
+    bookingIncludesHotel: sampleBookingDataList[gridRenderIndex].travelData
+        .travelBookingIncludesHotel,
+    bookingIncludesTour: sampleBookingDataList[gridRenderIndex].travelData
+        .travelBookingIncludesTour,
+    isAppLandscape: false,
   );
 }
 
-
-Widget renderHotelBookingCard(
-    int bookingRenderIndex,
-    int hotelBookingPassRenderIndex,
-    ) {
-  return BookingCard(
-    bookingData: sampleFlightBookingList[bookingRenderIndex],
-    bookingIndex: bookingRenderIndex,
-    bookingIncludesFlight: false,
-    bookingIncludesHotel: true,
-    bookingIncludesTour: false,
-    onClick: () {},
-    appIsLandscape: false,
-  );
-}
-
-
-Widget renderTourBookingCard(
-    int bookingRenderIndex,
-    int tourBookingPassRenderIndex,
-    ) {
-  return BookingCard(
-    bookingData: sampleFlightBookingList[bookingRenderIndex],
-    bookingIndex: bookingRenderIndex,
-    bookingIncludesFlight: false,
-    bookingIncludesHotel: false,
-    bookingIncludesTour: true,
-    onClick: () {},
-    appIsLandscape: false,
-  );
-}

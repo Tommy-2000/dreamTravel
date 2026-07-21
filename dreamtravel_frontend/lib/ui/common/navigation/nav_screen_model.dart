@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dreamtravel/ui/screens/diary_screen.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,10 @@ import '../../screens/user_screen.dart';
 class NavScreenModel {
   final Widget navScreen;
   final String navScreenName;
-  final Icon navScreenIcon;
-  final Icon navScreenSelectedIcon;
+  final Widget navScreenIcon;
+  final Widget navScreenSelectedIcon;
 
-  NavScreenModel({
+  const NavScreenModel({
     required this.navScreen,
     required this.navScreenName,
     required this.navScreenIcon,
@@ -67,16 +68,17 @@ List<NavScreenModel> navScreens = [
   NavScreenModel(
     navScreen: UserScreen(),
     navScreenName: "User",
-    navScreenIcon: Icon(FluentIcons.person_24_regular, color: Colors.black),
-    navScreenSelectedIcon: Icon(
-      FluentIcons.person_24_filled,
-      color: Colors.black,
+    navScreenIcon: CircleAvatar(
+      backgroundImage: CachedNetworkImageProvider(
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1974",
+      ),
+      radius: 20,
+    ),
+    navScreenSelectedIcon: CircleAvatar(
+      backgroundImage: CachedNetworkImageProvider(
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1974",
+      ),
+      radius: 20,
     ),
   ),
-  // NavScreenModel(
-  //   navScreen: TestScreen(),
-  //   navScreenName: "Test",
-  //   navScreenIcon: Icon(FluentIcons.circle_24_regular, color: Colors.black),
-  //   navScreenSelectedIcon: Icon(FluentIcons.circle_24_filled, color: Colors.black),
-  // ),
 ];
