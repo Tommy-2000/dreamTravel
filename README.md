@@ -2,7 +2,7 @@
 
 [![Codemagic build status](https://api.codemagic.io/apps/6a0d825583fad12bf23a7ee4/6a0d825583fad12bf23a7ee3/status_badge.svg)](https://codemagic.io/app/6a0d825583fad12bf23a7ee4/6a0d825583fad12bf23a7ee3/latest_build)
 
-Travel booking application consisting of a Flutter front-end for Android, iOS and Web combined with a Node.JS back-end running on Microsoft Azure architecture.
+Travel booking application consisting of a Flutter front-end for Android, iOS and Web combined with a Spring Boot back-end running on Microsoft Azure architecture.
 
 ## Values
 
@@ -29,14 +29,12 @@ Travel booking application consisting of a Flutter front-end for Android, iOS an
 
 ## Project Motivation
 
-This project was developed as a "full-stack" improvement on the TravelHopper Android project that I initially developed at university and to demonstrate my experience with cross-platform mobile application development with Flutter as well as back-end, cloud-based API development with Node.JS and Microsoft Azure. I am looking to make this flight and hotel booking platform more 'personalised' based on the user's own travel experiences and I am looking into adding new features that best place this idea into practice. If you have any other suggestions for new features that could be added to my project, create a PR with the features you recommend and share it with me on [dreamdev.tommy.2000@outlook.com](dreamdev.tommy.2000@outlook.com).
+This project was developed as a "full-stack" improvement on the TravelHopper Android project that I initially developed at university and to demonstrate my experience with cross-platform mobile application development with Flutter as well as back-end, cloud-based API development with Spring Boot and Microsoft Azure. I am looking to make this flight and hotel booking platform more 'personalised' based on the user's own travel experiences and I am looking into adding new features that best place this idea into practice. If you have any other suggestions for new features that could be added to my project, create a PR with the features you recommend and share it with me on [dreamdev.tommy.2000@outlook.com](dreamdev.tommy.2000@outlook.com).
 
 
 ## Important Note Regarding The Amadeus Self-Service API
 
 Amadeus for Developers self-service portal will be decommissioned on July 17th, 2026. Enterprise APIs remain available via the Enterprise portal. Therefore, other travel API's are being tested and implemented into the back-end side of this project with Sabre, Travelport NDC and TripAdvisor as popular and capable options managed through a API gateway using Azure API management.
-
-A TypeScript-based fork of the Amadeus Node SDK was used to perform CRUD-based calls through an Azure Function for Amadeus before being sent to the Flutter client following a BFF (Back-end For Front-end) design pattern. See [amadeus-ts by darseen](https://github.com/darseen/amadeus-ts).
 
 ## Contribute
 
