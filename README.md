@@ -55,6 +55,8 @@ This project was developed as a "full-stack" improvement on the TravelHopper And
 
 - PostgreSQL - Used as the database for both relational and vector-embedded data.
 
+- Strapi CMS - Used for travel agencies to publish custom made trips on the Explore and Search page, manage bookings and other content on the front-end.
+
 
 ## Important Note Regarding The Amadeus Self-Service API
 
