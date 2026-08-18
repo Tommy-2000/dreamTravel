@@ -1,3 +1,4 @@
+import 'package:dreamtravel/constants/app_values.dart';
 import 'package:dreamtravel/ui/common/cards/campfire_adventure_card.dart';
 import 'package:dreamtravel/ui/common/cards/campfire_social_card.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +29,13 @@ class _CampfireScreenState extends ConsumerState<CampfireScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final colourScheme = Theme.of(context).colorScheme;
-
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverRootAppBar(sliverRootTitle: "Campfire", sliverRootFilterButtonToggled: false),
-          renderCampfireGrid(),
-        ],
-      ),
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverRootAppBar(
+            sliverRootTitle: "Campfire", sliverRootFilterButtonToggled: false),
+        renderCampfireGrid(),
+      ],
     );
   }
 
@@ -72,7 +69,7 @@ class _CampfireScreenState extends ConsumerState<CampfireScreen> {
                 "https://images.unsplash.com/photo-1620635063663-fce9bd4a0b1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1073",
                 "https://images.unsplash.com/photo-1698794503338-a61fc2d1929e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627",
                 "https://images.unsplash.com/photo-1760657061857-2dc900e0719e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
-              ], cardContentHeight: 170, cardContentWidth: 163,
+              ], cardContentHeight: 168, cardContentWidth: 161,
             ),
             CampfireAdventureCard(
               cardMessage:
@@ -84,7 +81,7 @@ class _CampfireScreenState extends ConsumerState<CampfireScreen> {
                 "https://images.unsplash.com/photo-1620635063663-fce9bd4a0b1c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1073",
                 "https://images.unsplash.com/photo-1698794503338-a61fc2d1929e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627",
                 "https://images.unsplash.com/photo-1760657061857-2dc900e0719e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
-              ], cardContentHeight: 170, cardContentWidth: 163,
+              ], cardContentHeight: 168, cardContentWidth: 161,
             ),
           ]),
         );

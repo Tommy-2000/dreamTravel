@@ -1,3 +1,4 @@
+import 'package:dreamtravel/constants/app_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -27,27 +28,24 @@ class _UserScreenState extends ConsumerState<UserScreen> {
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
 
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverRootAppBar(
-            sliverRootTitle: "User",
-            sliverRootFilterButtonToggled: false,
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverRootAppBar(
+          sliverRootTitle: "User",
+          sliverRootFilterButtonToggled: false,
+        ),
+        SliverGrid(
+          gridDelegate: landscapeWindow
+              ? buildLandscapeQuiltedGridDelegate()
+              : buildPortraitQuiltedGridDelegate(),
+          delegate: SliverChildBuilderDelegate(
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: true,
+            (context, index) => Container(color: Colors.red),
+            childCount: 1,
           ),
-          SliverGrid(
-            gridDelegate: landscapeWindow
-                ? buildLandscapeQuiltedGridDelegate()
-                : buildPortraitQuiltedGridDelegate(),
-            delegate: SliverChildBuilderDelegate(
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: true,
-              (context, index) => Container(color: Colors.red),
-              childCount: 1,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

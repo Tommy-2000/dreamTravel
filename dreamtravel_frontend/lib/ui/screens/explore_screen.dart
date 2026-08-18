@@ -1,13 +1,15 @@
+import 'package:dreamtravel/data/travel_data.dart';
+import 'package:dreamtravel/state/explore_state.dart';
 import 'package:dreamtravel/ui/common/slivers/sliver_root_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 
-import '../../logic/models/examples/sample_travel_data_list.dart';
-import '../common/cards/trip_card.dart';
+import '../../constants/app_values.dart';
+import '../common/cards/travel_card.dart';
 
-class ExploreScreen extends ConsumerStatefulWidget {
+class ExploreScreen extends ConsumerStatefulWidget with ExploreState {
   const ExploreScreen({super.key});
 
   @override
@@ -27,47 +29,51 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final colourScheme = Theme.of(context).colorScheme;
 
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverRootAppBar(
-            sliverRootTitle: "Go Explore!",
-            sliverRootFilterButtonToggled: false,
-          ),
-          SliverToBoxAdapter(child: Gap(10)),
-          renderExploreGrid(),
-        ],
-      ),
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverRootAppBar(
+          sliverRootTitle: "Go Explore!",
+          sliverRootFilterButtonToggled: false,
+        ),
+        SliverToBoxAdapter(child: Gap(20)),
+        // Pass the resulting list from the screen's state provider prior to rendering the grid
+        renderExploreGrid(widget.watchTravelDataList(ref)),
+      ],
     );
   }
 
-  SliverGrid renderExploreGrid() {
+  SliverGrid renderExploreGrid(List<TravelData> travelDataList) {
     return SliverGrid(
       gridDelegate: landscapeWindow
-          ? paintLandscapeQuiltedGridDelegate()
+          ? paintLandscapeQuiltedGridDelegate() // If the device is landscape, switch the delegate method to render a landscape grid
           : paintPortraitQuiltedGridDelegate(),
+      // Otherwise, render a portrait grid
       delegate: SliverChildBuilderDelegate(
         addAutomaticKeepAlives: false,
         addRepaintBoundaries: false,
         (context, index) {
-          if (index >= sampleTravelDataList.length) {
-            // Check the list length
+          if (index >= travelDataList.length) {
+            // Check the list length before rendering anything
             return null;
           }
-          return TripCard(
-            tripCity: sampleTravelDataList[index].travelCity,
-            tripCountry: sampleTravelDataList[index].travelCountry,
-            tripImageUrl: sampleTravelDataList[index].travelImageUrl,
-            tripTotalCost: sampleTravelDataList[index].travelTotalCost,
-            tripCardIsLandscape: landscapeWindow,
-            tripCardIsFavourite: false,
+          return TravelCard(
+            travelCity: travelDataList[index].travelCity,
+            travelCountry: travelDataList[index].travelCountry,
+            travelImageUrl:
+                travelDataList[index].travelImageUrl ?? imageUrlNullAddress,
+            travelTotalCost: travelDataList[index].travelTotalCost,
+            travelCardIsLandscape: landscapeWindow,
           );
         },
-        childCount: sampleTravelDataList.length,
+        childCount: travelDataList.length,
       ),
     );
   }
@@ -75,7 +81,9 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   SliverQuiltedGridDelegate paintPortraitQuiltedGridDelegate() {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 32,
+      // 32 wide with various height sizes
       repeatPattern: QuiltedGridRepeatPattern.same,
+      // The following pattern is repeated if there is more data than there are pattern tiles
       pattern: [
         QuiltedGridTile(45, 32),
         QuiltedGridTile(45, 16),
@@ -89,7 +97,9 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   SliverQuiltedGridDelegate paintLandscapeQuiltedGridDelegate() {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 32,
+      // 32 wide with various height sizes
       repeatPattern: QuiltedGridRepeatPattern.same,
+      // The following pattern is repeated if there is more data than there are pattern tiles
       pattern: [
         QuiltedGridTile(16, 8),
         QuiltedGridTile(8, 8),

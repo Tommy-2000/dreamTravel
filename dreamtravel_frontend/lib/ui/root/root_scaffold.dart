@@ -26,11 +26,12 @@ class _RootScaffoldState extends State<RootScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    // This fixes an error on Samsung OneUI where the bottom navigation bar is covered by the system navigation
     return SafeArea(
       top: false,
       left: false,
       right: false,
-      bottom: true, // This fixes an error on Samsung OneUI where the bottom navigation bar is covered by the system navigation
+      bottom: true,
       child: Scaffold(
         extendBody: true,
         extendBodyBehindAppBar: true,
@@ -38,15 +39,13 @@ class _RootScaffoldState extends State<RootScaffold> {
         body: Row(
           children: [
             Flexible(child: widget.navigationShell),
-            if (landscapeWindow) NavRailScaffold(widget.navigationShell, widget.navigationShell.currentIndex),
+            if (landscapeWindow) NavRailScaffold(widget.navigationShell),
           ],
         ),
         bottomNavigationBar: landscapeWindow
             ? null
-            : BottomNavBarScaffold(widget.navigationShell, false),
+            : BottomNavBarScaffold(widget.navigationShell),
       ),
     );
   }
 }
-
-

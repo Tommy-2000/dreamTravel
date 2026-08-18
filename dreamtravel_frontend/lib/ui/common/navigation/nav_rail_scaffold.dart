@@ -8,11 +8,11 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 class NavRailScaffold extends StatefulWidget {
-  const NavRailScaffold(this.navigationShell, this.navigationIndex, {super.key});
+  const NavRailScaffold(this.navigationShell, {
+    super.key,
+  });
 
   final StatefulNavigationShell navigationShell;
-
-  final int navigationIndex;
 
   @override
   State<NavRailScaffold> createState() => _NavRailScaffoldState();
@@ -50,17 +50,22 @@ class _NavRailScaffoldState extends State<NavRailScaffold> {
                     setState(() {
                       iconIsSelected = true;
                     });
-                    NavBranch().goToShellBranch(navIndex, widget.navigationShell);
+                    NavBranch().goToShellBranch(
+                      navIndex,
+                      widget.navigationShell,
+                    );
                   },
                   icon: Column(
                     children: [
                       iconIsSelected
                           ? navScreens[navIndex].navScreenSelectedIcon
                           : navScreens[navIndex].navScreenIcon,
-                      Text(navScreens[navIndex].navScreenName, style: TextStyle(color: colourScheme.primary)),
+                      Text(
+                        navScreens[navIndex].navScreenName,
+                        style: TextStyle(color: colourScheme.primary),
+                      ),
                     ],
                   ),
-
                 );
               }),
             ),
