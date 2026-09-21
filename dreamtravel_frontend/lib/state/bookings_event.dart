@@ -1,0 +1,6 @@
+
+mixin class BookingsEvent {
+  
+
+}
+

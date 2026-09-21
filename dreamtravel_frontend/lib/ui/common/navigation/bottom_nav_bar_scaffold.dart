@@ -7,14 +7,14 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 class BottomNavBarScaffold extends StatefulWidget {
-  const BottomNavBarScaffold(this.navigationShell, this.navScreenIconIsSelected, {super.key});
+  const BottomNavBarScaffold(this.navigationShell, {
+    super.key,
+  });
 
   final StatefulNavigationShell navigationShell;
-  final bool navScreenIconIsSelected;
 
   @override
-  State<BottomNavBarScaffold> createState() =>
-      _BottomNavBarScaffoldState();
+  State<BottomNavBarScaffold> createState() => _BottomNavBarScaffoldState();
 }
 
 class _BottomNavBarScaffoldState extends State<BottomNavBarScaffold> {
@@ -22,7 +22,7 @@ class _BottomNavBarScaffoldState extends State<BottomNavBarScaffold> {
   Widget build(BuildContext context) {
     late Logger uiDebugLogger = Logger("uiDebugLogger");
     final colourScheme = Theme.of(context).colorScheme;
-    bool iconIsSelected = widget.navScreenIconIsSelected;
+    late bool iconIsSelected = false;
 
     if (kDebugMode) {
       print("BottomNavBarScaffold is rendering");
@@ -43,23 +43,27 @@ class _BottomNavBarScaffoldState extends State<BottomNavBarScaffold> {
                   return IconButton(
                     onPressed: () {
                       if (kDebugMode) {
-                        print(
-                          "BottomNavBarScaffold button has been tapped",
-                        );
+                        print("BottomNavBarScaffold button has been tapped");
                       }
                       setState(() {
                         iconIsSelected = true;
                       });
-                      NavBranch().goToShellBranch(navIndex, widget.navigationShell);
+                      NavBranch().goToShellBranch(
+                        navIndex,
+                        widget.navigationShell,
+                      );
                     },
-                      icon: Column(
-                        children: [
-                          iconIsSelected
-                              ? navScreens[navIndex].navScreenSelectedIcon
-                              : navScreens[navIndex].navScreenIcon,
-                          Text(navScreens[navIndex].navScreenName, style: TextStyle(color: colourScheme.primary)),
-                        ],
-                      ),
+                    icon: Column(
+                      children: [
+                        iconIsSelected
+                            ? navScreens[navIndex].navScreenSelectedIcon
+                            : navScreens[navIndex].navScreenIcon,
+                        Text(
+                          navScreens[navIndex].navScreenName,
+                          style: TextStyle(color: colourScheme.primary),
+                        ),
+                      ],
+                    ),
                   );
                 }),
               ),

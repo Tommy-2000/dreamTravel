@@ -49,5 +49,9 @@ app.*.map.json
 /android/build/reports/problems/problems-report.html
 /.vscode/
 
-# Ignore the windows build for now -- will be released later
+# Ignore the windows and macos builds for now -- will be released later
 /windows/
+/macos/
+
+# Ignore the Codemagic CI/CD file until the next commit
+codemagic.yaml
