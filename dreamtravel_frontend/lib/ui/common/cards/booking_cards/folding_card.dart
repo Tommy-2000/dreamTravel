@@ -127,7 +127,7 @@ class _FoldingCardState extends State<FoldingCard>
     return Transform(
       alignment: Alignment.topCenter,
       transform: matrix,
-      child: GestureDetector(
+      child: InkWell(
         onTap: widget.cardOnTap,
         child: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),

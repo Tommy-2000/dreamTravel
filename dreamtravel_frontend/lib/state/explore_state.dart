@@ -1,12 +1,14 @@
+import 'package:dreamtravel/data/sample_data/sample_travel_data.dart';
 import 'package:dreamtravel/data/travel_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'providers.dart';
+import 'providers/state_providers.dart';
 
 mixin class ExploreState {
-  // Travel Data
-  List<TravelData> watchTravelDataList(WidgetRef ref) =>
+  // Listen to global changes in the travelDataList state and rerender where necessary
+  AsyncValue<List<TravelData>> watchTravelDataList(WidgetRef ref) =>
       ref.watch(travelDataListProvider);
 
-  // TravelData watchTravelData(WidgetRef ref) => ref.watch(travelDataListProvider.select((travelData) => travelData));
+  // Listen to global changes in the travelData state and rerender where necessary
+  // AsyncValue<TravelData> watchTravelData(WidgetRef ref) => ref.watch(travelDataListProvider.select((travelData) => travelData.first));
 }

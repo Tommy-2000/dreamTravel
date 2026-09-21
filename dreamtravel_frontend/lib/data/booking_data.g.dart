@@ -7,7 +7,7 @@ part of 'booking_data.dart';
 // **************************************************************************
 
 _BookingData _$BookingDataFromJson(Map<String, dynamic> json) => _BookingData(
-  bookingId: (json['bookingId'] as num).toInt(),
+  bookingId: json['bookingId'] as String,
   bookingFirstName: json['bookingFirstName'] as String,
   bookingLastName: json['bookingLastName'] as String,
   bookingPassengers: (json['bookingPassengers'] as num).toInt(),

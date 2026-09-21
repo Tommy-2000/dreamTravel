@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'providers.dart';
+import 'providers/state_providers.dart';
 
 mixin class GlobalState {
   // Authentication State

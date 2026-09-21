@@ -9,7 +9,7 @@ part of 'flight_boarding_data.dart';
 _FlightBoardingData _$FlightBoardingDataFromJson(
   Map<String, dynamic> json,
 ) => _FlightBoardingData(
-  flightBoardingNumber: (json['flightBoardingNumber'] as num).toInt(),
+  flightBoardingNumber: json['flightBoardingNumber'] as String,
   flightPassengerName: json['flightPassengerName'] as String,
   flightOrigin: Airport.fromJson(json['flightOrigin'] as Map<String, dynamic>),
   flightDestination: Airport.fromJson(
@@ -52,11 +52,13 @@ Map<String, dynamic> _$FlightBoardingDataToJson(_FlightBoardingData instance) =>
 _Airport _$AirportFromJson(Map<String, dynamic> json) => _Airport(
   airportCode: json['airportCode'] as String,
   airportCity: json['airportCity'] as String,
+  airportAddress: json['airportAddress'] as String,
 );
 
 Map<String, dynamic> _$AirportToJson(_Airport instance) => <String, dynamic>{
   'airportCode': instance.airportCode,
   'airportCity': instance.airportCity,
+  'airportAddress': instance.airportAddress,
 };
 
 _FlightDuration _$FlightDurationFromJson(Map<String, dynamic> json) =>

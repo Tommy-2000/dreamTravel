@@ -1,57 +1,54 @@
 import 'package:dreamtravel/constants/app_values.dart';
 import 'package:dreamtravel/data/booking_data.dart';
+import 'package:dreamtravel/state/providers/state_providers.dart';
 import 'package:dreamtravel/ui/common/cards/text_card.dart';
 import 'package:dreamtravel/ui/common/image_not_found.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'booking_image_card.dart';
 
-class BookingSummaryCard extends StatelessWidget {
-  final BookingData bookingData;
-  final bool bookingIncludesImage;
-  final bool bookingIncludesFlight;
-  final bool bookingIncludesHotel;
-  final bool bookingIncludesTour;
+class BookingSummaryCard extends ConsumerWidget {
   final String? bookingImageUrl;
   final bool appIsLandscape;
+  final VoidCallback viewBookingCallback;
 
   const BookingSummaryCard({
     super.key,
-    required this.bookingData,
-    required this.bookingIncludesImage,
-    required this.bookingIncludesFlight,
-    required this.bookingIncludesHotel,
-    required this.bookingIncludesTour,
     this.bookingImageUrl,
     required this.appIsLandscape,
+    required this.viewBookingCallback,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colourScheme = Theme.of(context).colorScheme;
+
+    final bookingData = ref.watch(bookingDataProvider);
 
     return Padding(
       padding: const EdgeInsets.all(10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
-        child: Row(
-          spacing: 0,
-          children: <Widget>[
-            bookingIncludesImage
-                ? BookingImageCard(
-                    bookingImageUrl: bookingImageUrl ?? imageUrlNullAddress,
-                    context: context,
-                  )
-                : const ImageNotFound(),
-            bookingDetails(colourScheme),
-          ],
+        child: bookingData.when(
+          data: (data) => Row(
+            children: [
+              BookingImageCard(
+                bookingImageUrl: bookingImageUrl ?? imageUrlNullAddress,
+                context: context,
+              ),
+              bookingDetails(colourScheme, data)
+            ],
+          ),
+          error: (err, stack) => ImageNotFound(),
+          loading: () => const CircularProgressIndicator(),
         ),
       ),
     );
   }
 
-  Widget bookingDetails(ColorScheme colourScheme) {
+  Widget bookingDetails(ColorScheme colourScheme, List<BookingData> data) {
     return Card(
       key: GlobalKey(),
       child: ClipRRect(
@@ -60,7 +57,7 @@ class BookingSummaryCard extends StatelessWidget {
           spacing: 0,
           children: [
             TextCard(
-              data: "#${bookingData.bookingId}",
+              data: "#${data[0].bookingId}",
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -72,7 +69,7 @@ class BookingSummaryCard extends StatelessWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: bookingData.bookingFirstName,
+              data: data[0].bookingFirstName,
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -84,7 +81,7 @@ class BookingSummaryCard extends StatelessWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: bookingData.bookingLastName,
+              data: data[0].bookingLastName,
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -96,7 +93,7 @@ class BookingSummaryCard extends StatelessWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: "${bookingData.bookingPassengers}",
+              data: "${data[0].bookingPassengers}",
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -108,7 +105,7 @@ class BookingSummaryCard extends StatelessWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: "£${bookingData.bookingPrice}",
+              data: "£${data[0].bookingPrice}",
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -121,16 +118,24 @@ class BookingSummaryCard extends StatelessWidget {
             ),
             Row(
               children: [
-                bookingIncludesFlight
+                data[0].flightBoardingData == null &&
+                    data[0].flightBoardingData!.isEmpty
                     ? Icon(Icons.flight_rounded)
                     : const Placeholder(),
-                bookingIncludesHotel
+                data[0].hotelBookingData == null &&
+                    data[0].hotelBookingData!.isEmpty
                     ? Icon(Icons.hotel_rounded)
                     : const Placeholder(),
-                bookingIncludesTour
+                data[0].tourBookingData == null &&
+                    data[0].tourBookingData!.isEmpty
                     ? Icon(Icons.tour_rounded)
                     : const Placeholder(),
               ],
+            ),
+            MaterialButton(
+              color: colourScheme.primaryContainer,
+              onPressed: viewBookingCallback,
+              child: Text("View Booking"),
             ),
           ],
         ),

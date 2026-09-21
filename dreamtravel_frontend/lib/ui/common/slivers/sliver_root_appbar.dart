@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../logic/sample_data/sample_travel_data.dart';
+import '../../../data/sample_data/sample_travel_data.dart';
 import '../buttons/filter_travel_button.dart';
 
 class SliverRootAppBar extends StatefulWidget {
@@ -55,7 +55,7 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
               SearchAnchor(
                 builder: (BuildContext context, SearchController controller) {
                   return SearchBar(
-                    leading: Icon(FluentIcons.search_12_regular),
+                    leading: Icon(FluentIcons.search_12_regular, size: 25.0),
                     hintText: "Where will you travel next?",
                     onTap: () => {controller.openView()},
                   );
@@ -68,22 +68,25 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
                 spacing: 10.0,
                 children: [
                   FilterTravelButton(
-                    text: 'Flights',
-                    icon: FluentIcons.airplane_24_regular,
-                    selectedIcon: FluentIcons.airplane_32_filled,
+                    buttonText: 'Flights',
+                    buttonIcon: FluentIcons.airplane_24_regular,
+                    buttonSelectedIcon: FluentIcons.airplane_32_filled,
                     isButtonToggled: widget.sliverRootFilterButtonToggled,
+                    buttonCallback: () {},
                   ),
                   FilterTravelButton(
-                    text: 'Hotels',
-                    icon: FluentIcons.bed_24_regular,
-                    selectedIcon: FluentIcons.bed_24_filled,
+                    buttonText: 'Hotels',
+                    buttonIcon: FluentIcons.bed_24_regular,
+                    buttonSelectedIcon: FluentIcons.bed_24_filled,
                     isButtonToggled: widget.sliverRootFilterButtonToggled,
+                    buttonCallback: () {},
                   ),
                   FilterTravelButton(
-                    text: 'Travel Experiences',
-                    icon: FluentIcons.beach_24_regular,
-                    selectedIcon: FluentIcons.beach_24_filled,
+                    buttonText: 'Travel Experiences',
+                    buttonIcon: FluentIcons.beach_24_regular,
+                    buttonSelectedIcon: FluentIcons.beach_24_filled,
                     isButtonToggled: widget.sliverRootFilterButtonToggled,
+                    buttonCallback: () {},
                   ),
                 ],
               ),

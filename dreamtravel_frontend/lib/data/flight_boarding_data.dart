@@ -8,7 +8,7 @@ part 'flight_boarding_data.g.dart';
 @freezed
 abstract class FlightBoardingData with _$FlightBoardingData {
   const factory FlightBoardingData({
-    required int flightBoardingNumber,
+    required String flightBoardingNumber,
     required String flightPassengerName,
     required Airport flightOrigin,
     required Airport flightDestination,
@@ -34,6 +34,7 @@ abstract class Airport with _$Airport {
   const factory Airport({
     required String airportCode,
     required String airportCity,
+    required String airportAddress,
   }) = _Airport;
 
   factory Airport.fromJson(Map<String, Object?> json) =>

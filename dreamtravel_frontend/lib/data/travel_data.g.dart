@@ -7,17 +7,19 @@ part of 'travel_data.dart';
 // **************************************************************************
 
 _TravelData _$TravelDataFromJson(Map<String, dynamic> json) => _TravelData(
-  travelId: (json['travelId'] as num).toInt(),
+  travelId: json['travelId'] as String,
   travelCity: json['travelCity'] as String,
   travelCountry: json['travelCountry'] as String,
+  travelLatitude: (json['travelLatitude'] as num).toDouble(),
+  travelLongitude: (json['travelLongitude'] as num).toDouble(),
   travelStartDate: DateTime.parse(json['travelStartDate'] as String),
   travelEndDate: DateTime.parse(json['travelEndDate'] as String),
-  travelImageUrl: json['travelImageUrl'] as String?,
+  travelImageUrl: json['travelImageUrl'] as String? ?? '',
   travelDataHasImage: json['travelDataHasImage'] as bool,
   travelTotalCost: (json['travelTotalCost'] as num).toDouble(),
-  travelBookingIncludesFlight: json['travelBookingIncludesFlight'] as bool,
-  travelBookingIncludesHotel: json['travelBookingIncludesHotel'] as bool,
-  travelBookingIncludesTour: json['travelBookingIncludesTour'] as bool,
+  travelDataIncludesFlight: json['travelDataIncludesFlight'] as bool,
+  travelDataIncludesHotel: json['travelDataIncludesHotel'] as bool,
+  travelDataIncludesTour: json['travelDataIncludesTour'] as bool,
 );
 
 Map<String, dynamic> _$TravelDataToJson(_TravelData instance) =>
@@ -25,12 +27,14 @@ Map<String, dynamic> _$TravelDataToJson(_TravelData instance) =>
       'travelId': instance.travelId,
       'travelCity': instance.travelCity,
       'travelCountry': instance.travelCountry,
+      'travelLatitude': instance.travelLatitude,
+      'travelLongitude': instance.travelLongitude,
       'travelStartDate': instance.travelStartDate.toIso8601String(),
       'travelEndDate': instance.travelEndDate.toIso8601String(),
       'travelImageUrl': instance.travelImageUrl,
       'travelDataHasImage': instance.travelDataHasImage,
       'travelTotalCost': instance.travelTotalCost,
-      'travelBookingIncludesFlight': instance.travelBookingIncludesFlight,
-      'travelBookingIncludesHotel': instance.travelBookingIncludesHotel,
-      'travelBookingIncludesTour': instance.travelBookingIncludesTour,
+      'travelDataIncludesFlight': instance.travelDataIncludesFlight,
+      'travelDataIncludesHotel': instance.travelDataIncludesHotel,
+      'travelDataIncludesTour': instance.travelDataIncludesTour,
     };

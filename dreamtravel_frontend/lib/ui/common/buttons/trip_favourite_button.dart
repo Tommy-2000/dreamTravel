@@ -15,7 +15,6 @@ class TripFavouriteButton extends StatefulWidget {
 }
 
 class _TripFavouriteButtonState extends State<TripFavouriteButton> {
-  late bool locationCardIsFavourite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _TripFavouriteButtonState extends State<TripFavouriteButton> {
         enabledMouseCursor: SystemMouseCursors.click,
       ),
       child: Icon(
-        locationCardIsFavourite
+        widget.tripIsFavourite
             ? Icons.favorite_rounded
             : Icons.favorite_outline_rounded,
         color: widget.colourScheme.surface,
@@ -37,7 +36,7 @@ class _TripFavouriteButtonState extends State<TripFavouriteButton> {
           const SnackBar(content: Text("Trip added to favourites")),
         );
         setState(() {
-          locationCardIsFavourite = true;
+          // widget.tripIsFavourite = true;
         });
       },
     );

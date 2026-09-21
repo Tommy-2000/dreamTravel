@@ -8,13 +8,14 @@ part 'hotel_booking_data.g.dart';
 @freezed
 abstract class HotelBookingData with _$HotelBookingData {
   const factory HotelBookingData({
-    required int hotelBookingNumber,
+    required String hotelBookingNumber,
     required String guestFullName,
     required String hotelCheckInTime,
     required DateTime hotelCheckInDay,
     required String hotelCheckOutTime,
     required DateTime hotelCheckOutDay,
     required String hotelName,
+    required String hotelAddress,
     required String hotelManager,
     required String hotelFloor,
     required int hotelRoomNumber,

@@ -8,8 +8,8 @@ part of 'tour_booking_data.dart';
 
 _TourBookingData _$TourBookingDataFromJson(Map<String, dynamic> json) =>
     _TourBookingData(
-      tourBookingNumber: (json['tourBookingNumber'] as num).toInt(),
-      fullName: json['fullName'] as String,
+      tourBookingNumber: json['tourBookingNumber'] as String,
+      tourName: json['tourName'] as String,
       tourStartTime: DateTime.parse(json['tourStartTime'] as String),
       tourDate: json['tourDate'] as String,
       tourEndTime: DateTime.parse(json['tourEndTime'] as String),
@@ -22,7 +22,7 @@ _TourBookingData _$TourBookingDataFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$TourBookingDataToJson(_TourBookingData instance) =>
     <String, dynamic>{
       'tourBookingNumber': instance.tourBookingNumber,
-      'fullName': instance.fullName,
+      'tourName': instance.tourName,
       'tourStartTime': instance.tourStartTime.toIso8601String(),
       'tourDate': instance.tourDate,
       'tourEndTime': instance.tourEndTime.toIso8601String(),

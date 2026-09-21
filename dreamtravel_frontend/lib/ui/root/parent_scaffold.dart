@@ -1,19 +1,21 @@
 import 'package:dreamtravel/ui/common/navigation/bottom_nav_bar_scaffold.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_rail_scaffold.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/services/mouse_tracking.dart';
 import 'package:go_router/go_router.dart';
 
-class RootScaffold extends StatefulWidget {
-  const RootScaffold({Key? key, required this.navigationShell})
-    : super(key: key ?? const ValueKey("RootScaffold"));
+class ParentScaffold extends StatefulWidget {
+  const ParentScaffold({Key? key, required this.navigationShell})
+    : super(key: key ?? const ValueKey("ParentScaffold"));
 
   final StatefulNavigationShell navigationShell;
 
   @override
-  State<RootScaffold> createState() => _RootScaffoldState();
+  State<ParentScaffold> createState() => _ParentScaffoldState();
 }
 
-class _RootScaffoldState extends State<RootScaffold> {
+class _ParentScaffoldState extends State<ParentScaffold> {
   bool landscapeWindow = false;
 
   @override
@@ -26,7 +28,7 @@ class _RootScaffoldState extends State<RootScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    // This fixes an error on Samsung OneUI where the bottom navigation bar is covered by the system navigation
+    // The SafeArea widget fixes an error on Samsung OneUI where the bottom navigation bar is covered by the system navigation
     return SafeArea(
       top: false,
       left: false,
@@ -35,12 +37,16 @@ class _RootScaffoldState extends State<RootScaffold> {
       child: Scaffold(
         extendBody: true,
         extendBodyBehindAppBar: true,
+        drawerBarrierDismissible: true,
         resizeToAvoidBottomInset: true,
-        body: Row(
-          children: [
-            Flexible(child: widget.navigationShell),
-            if (landscapeWindow) NavRailScaffold(widget.navigationShell),
-          ],
+        body: Listener(
+          onPointerHover: _pointerListener,
+          child: Row(
+            children: [
+              Flexible(child: widget.navigationShell),
+              if (landscapeWindow) NavRailScaffold(widget.navigationShell),
+            ],
+          ),
         ),
         bottomNavigationBar: landscapeWindow
             ? null
@@ -48,4 +54,9 @@ class _RootScaffoldState extends State<RootScaffold> {
       ),
     );
   }
+
+  void _pointerListener(PointerEvent pointerEvent) {
+    if (kDebugMode) {
+      print("Listening to pointer at - ${pointerEvent.position.dx}X ${pointerEvent.position.dy}Y");
+    }}
 }

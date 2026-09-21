@@ -1,55 +1,38 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dreamtravel/ui/common/image_not_found.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../buttons/campfire_reaction_button.dart';
 import '../buttons/campfire_share_button.dart';
 
-class CampfireSocialCard extends StatefulWidget {
-  final String? cardMessage;
-  final String cardContent;
+class CampfireTripCard extends ConsumerStatefulWidget {
+  final String? cardBody;
+  final Uri cardImage;
   final double cardContentHeight;
   final double cardContentWidth;
 
-  const CampfireSocialCard({
+  const CampfireTripCard({
     super.key,
-    this.cardMessage,
-    required this.cardContent,
+    this.cardBody,
+    required this.cardImage,
     required this.cardContentHeight,
     required this.cardContentWidth,
   });
 
   @override
-  State<CampfireSocialCard> createState() => _CampfireSocialCardState();
+  ConsumerState<CampfireTripCard> createState() => _CampfireTripCardState();
 }
 
-class _CampfireSocialCardState extends State<CampfireSocialCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        child: Stack(
-          children: [
-            cardBackground(context),
-            cardInkWell(),
-            cardText(),
-            Positioned(right: 20, bottom: 50, child: CampfireReactionButton()),
-            Positioned(right: 20, bottom: 10, child: CampfireShareButton()),
-          ],
-        ),
-      ),
-    );
-  }
+class _CampfireTripCardState extends ConsumerState<CampfireTripCard> {
 
-  Widget cardBackground(BuildContext context) {
+  Widget cardImageBackground(BuildContext context) {
     return Positioned.fill(
       child: CachedNetworkImage(
         key: GlobalKey(),
         fit: BoxFit.cover,
-        imageUrl: widget.cardContent,
+        imageUrl: widget.cardImage.toString(),
         // Load a progress placeholder while fetching image url
         placeholder: (context, url) =>
             Center(child: const CircularProgressIndicator()),
@@ -98,7 +81,7 @@ class _CampfireSocialCardState extends State<CampfireSocialCard> {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Text(
-          widget.cardMessage!,
+          widget.cardBody!,
           softWrap: true,
           overflow: TextOverflow.ellipsis,
           maxLines: 4,
@@ -107,6 +90,25 @@ class _CampfireSocialCardState extends State<CampfireSocialCard> {
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Stack(
+          children: [
+            cardImageBackground(context),
+            cardInkWell(),
+            cardText(),
+            Positioned(right: 20, bottom: 50, child: CampfireReactionButton()),
+            Positioned(right: 20, bottom: 10, child: CampfireShareButton()),
+          ],
         ),
       ),
     );

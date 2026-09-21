@@ -1,0 +1,5 @@
+
+mixin class DiaryEvent {
+
+}
+

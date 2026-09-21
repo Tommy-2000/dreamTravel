@@ -1,4 +1,6 @@
 import 'package:dreamtravel/constants/app_values.dart';
+import 'package:dreamtravel/state/diary_event.dart';
+import 'package:dreamtravel/state/diary_state.dart';
 import 'package:dreamtravel/ui/common/cards/monthly_calendar_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,8 +9,7 @@ import 'package:gap/gap.dart';
 
 import '../common/slivers/sliver_root_appbar.dart';
 
-
-class DiaryScreen extends ConsumerStatefulWidget {
+class DiaryScreen extends ConsumerStatefulWidget with DiaryState, DiaryEvent {
   const DiaryScreen({super.key});
 
   @override
@@ -39,7 +40,8 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
         ),
         SliverToBoxAdapter(child: Gap(10)),
         renderDiaryGrid(),
-      ]);
+      ],
+    );
   }
 
   SliverGrid renderDiaryGrid() {
@@ -47,9 +49,7 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
       gridDelegate: landscapeWindow
           ? paintLandscapeQuiltedGridDelegate()
           : paintPortraitQuiltedGridDelegate(),
-      delegate: SliverChildListDelegate([
-        MonthlyCalendarCard(),
-      ]),
+      delegate: SliverChildListDelegate([MonthlyCalendarCard()]),
     );
   }
 

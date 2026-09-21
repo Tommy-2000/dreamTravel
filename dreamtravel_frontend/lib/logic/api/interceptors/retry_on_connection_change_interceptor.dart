@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dreamtravel/logic/api/interceptors/connection_retrier.dart';
+import 'package:dreamtravel/logic/api/connection_retrier.dart';
 
 class RetryOnConnectionChangeInterceptor extends Interceptor {
   final ConnectionRetrier connectionRetrier;

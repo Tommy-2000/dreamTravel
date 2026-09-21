@@ -12,7 +12,7 @@ part 'booking_data.g.dart';
 @freezed
 abstract class BookingData with _$BookingData {
   const factory BookingData({
-    required int bookingId,
+    required String bookingId,
     required String bookingFirstName,
     required String bookingLastName,
     required int bookingPassengers,

@@ -8,8 +8,8 @@ part 'tour_booking_data.g.dart';
 @freezed
 abstract class TourBookingData with _$TourBookingData {
   const factory TourBookingData({
-    required int tourBookingNumber,
-    required String fullName,
+    required String tourBookingNumber,
+    required String tourName,
     required DateTime tourStartTime,
     required String tourDate,
     required DateTime tourEndTime,

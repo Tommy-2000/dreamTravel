@@ -1,11 +1,13 @@
 import 'package:dreamtravel/constants/app_values.dart';
+import 'package:dreamtravel/state/user_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../state/user_state.dart';
 import '../common/slivers/sliver_root_appbar.dart';
 
-class UserScreen extends ConsumerStatefulWidget {
+class UserScreen extends ConsumerStatefulWidget with UserState, UserEvent {
   const UserScreen({super.key});
 
   @override

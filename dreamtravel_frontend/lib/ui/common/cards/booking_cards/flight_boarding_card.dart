@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:dreamtravel/constants/app_values.dart';
+import 'package:intl/intl.dart';
 
 class FlightBoardingCard extends StatelessWidget {
   final FlightBoardingData? flightBoardingData;
@@ -24,13 +25,15 @@ class FlightBoardingCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Card(
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextCard(
-                    data: flightBoardingData?.flightNumber ?? stringIsEmpty,
+                    data:
+                        'Flight Number: ${flightBoardingData?.flightNumber ?? stringIsEmpty}',
                     fontSize: appIsLandscape ? 20 : 15,
                     fontWeight: FontWeight.bold,
                     fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -43,9 +46,7 @@ class FlightBoardingCard extends StatelessWidget {
                   ),
                   TextCard(
                     data:
-                        flightBoardingData?.flightDepartureTime
-                            .toIso8601String() ??
-                        stringIsEmpty,
+                        'Departure: ${DateFormat.Hm().format(flightBoardingData?.flightDepartureTime ?? DateTime.now())}',
                     fontSize: appIsLandscape ? 20 : 15,
                     fontWeight: FontWeight.bold,
                     fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -58,11 +59,47 @@ class FlightBoardingCard extends StatelessWidget {
                   ),
                   TextCard(
                     data:
-                        flightBoardingData?.flightArrivalTime
-                            .toIso8601String() ??
-                        stringIsEmpty,
+                    'Arrival: ${DateFormat.Hm().format(flightBoardingData?.flightArrivalTime ?? DateTime.now())}',
                     fontSize: appIsLandscape ? 20 : 15,
                     fontWeight: FontWeight.bold,
+                    fontStyle: GoogleFonts.montserrat().fontStyle,
+                    fontColour: colourScheme.primary,
+                    minFontSize: 10,
+                    maxLines: 1,
+                    softWrap: true,
+                    textAlign: TextAlign.start,
+                    textOverflow: TextOverflow.fade,
+                  ),
+                  TextCard(
+                    data:
+                        'Boarding Day: ${DateFormat.d().format(flightBoardingData?.flightBoardingTime ?? DateTime.now())}',
+                    fontSize: appIsLandscape ? 15 : 10,
+                    fontWeight: FontWeight.normal,
+                    fontStyle: GoogleFonts.montserrat().fontStyle,
+                    fontColour: colourScheme.primary,
+                    minFontSize: 10,
+                    maxLines: 1,
+                    softWrap: true,
+                    textAlign: TextAlign.start,
+                    textOverflow: TextOverflow.fade,
+                  ),
+                  TextCard(
+                    data: 'Flight Gate: ${flightBoardingData?.flightGate ?? stringIsEmpty}',
+                    fontSize: appIsLandscape ? 15 : 10,
+                    fontWeight: FontWeight.normal,
+                    fontStyle: GoogleFonts.montserrat().fontStyle,
+                    fontColour: colourScheme.primary,
+                    minFontSize: 10,
+                    maxLines: 1,
+                    softWrap: true,
+                    textAlign: TextAlign.start,
+                    textOverflow: TextOverflow.fade,
+                  ),
+                  TextCard(
+                    data:
+                        'Flight Zone: ${flightBoardingData?.flightZone.toString() ?? stringIsEmpty}',
+                    fontSize: appIsLandscape ? 15 : 10,
+                    fontWeight: FontWeight.normal,
                     fontStyle: GoogleFonts.montserrat().fontStyle,
                     fontColour: colourScheme.primary,
                     minFontSize: 10,
@@ -72,45 +109,6 @@ class FlightBoardingCard extends StatelessWidget {
                     textOverflow: TextOverflow.fade,
                   ),
                 ],
-              ),
-              TextCard(
-                data:
-                    flightBoardingData?.flightBoardingTime.day.toString() ??
-                    stringIsEmpty,
-                fontSize: appIsLandscape ? 15 : 10,
-                fontWeight: FontWeight.normal,
-                fontStyle: GoogleFonts.montserrat().fontStyle,
-                fontColour: colourScheme.primary,
-                minFontSize: 10,
-                maxLines: 1,
-                softWrap: true,
-                textAlign: TextAlign.start,
-                textOverflow: TextOverflow.fade,
-              ),
-              TextCard(
-                data: flightBoardingData?.flightGate ?? stringIsEmpty,
-                fontSize: appIsLandscape ? 15 : 10,
-                fontWeight: FontWeight.normal,
-                fontStyle: GoogleFonts.montserrat().fontStyle,
-                fontColour: colourScheme.primary,
-                minFontSize: 10,
-                maxLines: 1,
-                softWrap: true,
-                textAlign: TextAlign.start,
-                textOverflow: TextOverflow.fade,
-              ),
-              TextCard(
-                data:
-                    flightBoardingData?.flightZone.toString() ?? stringIsEmpty,
-                fontSize: appIsLandscape ? 15 : 10,
-                fontWeight: FontWeight.normal,
-                fontStyle: GoogleFonts.montserrat().fontStyle,
-                fontColour: colourScheme.primary,
-                minFontSize: 10,
-                maxLines: 1,
-                softWrap: true,
-                textAlign: TextAlign.start,
-                textOverflow: TextOverflow.fade,
               ),
             ],
           ),
