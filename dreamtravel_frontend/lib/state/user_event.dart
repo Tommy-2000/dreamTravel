@@ -1,5 +1,0 @@
-
-mixin class UserEvent {
-
-}
-

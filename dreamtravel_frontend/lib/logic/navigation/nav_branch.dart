@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class NavBranch {
-  // Navigate to the branch according to the indexed navigation shell that ParentScaffold passes
+  // Call goToInnerBranch to navigate to the branch according to the indexed navigation shell that RootScaffold passes
   void goToShellBranch(int navIndex, StatefulNavigationShell navigationShell) {
     if (kDebugMode) {
       print("Navigated to branch in navigationShell");
@@ -14,7 +14,6 @@ class NavBranch {
     );
   }
 
-  // Navigate to a branch with routes associated with it
   void goToBranch(BuildContext context, String routePath, String? queryParameters) {
     if (kDebugMode) {
       print("Navigated to branch");

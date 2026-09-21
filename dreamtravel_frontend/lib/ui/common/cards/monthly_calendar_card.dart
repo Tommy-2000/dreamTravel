@@ -1,11 +1,12 @@
-import 'package:dreamtravel/state/global_event.dart';
-import 'package:dreamtravel/state/global_state.dart';
+import 'package:dreamtravel/ui/state/common_event.dart';
+import 'package:dreamtravel/ui/state/common_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MonthlyCalendarCard extends StatelessWidget
-    with GlobalState, GlobalEvent {
+    with CommonState, CommonEvent {
   const MonthlyCalendarCard({super.key});
 
   String _monthName(int monthNumber) {
@@ -35,52 +36,43 @@ class MonthlyCalendarCard extends StatelessWidget
         padding: EdgeInsets.all(3),
         child: Column(
           children: [
-            Card(
-              color: colourScheme.primaryContainer,
+            Flexible(
               child: Consumer(
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
                   var currentMonth = watchMonth(ref);
-                  return Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 100.0,
-                      children: [
-                        IconButton(
-                          onPressed: () =>
-                          {
-                            currentMonth = updateMonth(ref, -1),
-                            updateMonthlyCalendar(ref, currentMonth),
-                          },
-                          icon: Icon(Icons.arrow_back_rounded),
-                          iconSize: 30.0,
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () => {
+                          currentMonth = updateMonth(ref, -1),
+                          updateMonthlyCalendar(ref, currentMonth),
+                        },
+                        icon: Icon(Icons.arrow_back_rounded),
+                      ),
+                      Gap(5),
+                      Text(
+                        '${_monthName(currentMonth.month)} ${currentMonth.year}',
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
                         ),
-                        Text(
-                          '${_monthName(currentMonth.month)} ${currentMonth
-                              .year}',
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () =>
-                          {
-                            currentMonth = updateMonth(ref, 1),
-                            updateMonthlyCalendar(ref, currentMonth),
-                          },
-                          icon: Icon(Icons.arrow_forward_rounded),
-                          iconSize: 30.0,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Gap(5),
+                      IconButton(
+                        onPressed: () => {
+                          currentMonth = updateMonth(ref, 1),
+                          updateMonthlyCalendar(ref, currentMonth),
+                        },
+                        icon: Icon(Icons.arrow_forward_rounded),
+                      ),
+                    ],
                   );
                 },
               ),
             ),
-            Row(
+            Flexible(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(
                   7,
@@ -107,6 +99,7 @@ class MonthlyCalendarCard extends StatelessWidget
                   ),
                 ),
               ),
+            ),
             Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
                 return renderCalendarGrid(context, ref, watchCalendarGrid(ref), watchMonth(ref).month, watchDay(ref).day, colourScheme);

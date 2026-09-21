@@ -1,18 +1,28 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'dio_provider.dart';
+import 'interceptors/connection_retrier.dart';
+import 'interceptors/retry_on_connection_change_interceptor.dart';
 
 // Instantiate the apiProvider from the ApiProvider class
-final apiProvider = Provider.autoDispose<ApiProvider>((ref) {
-  final dio = ref.read(dioProvider);
-  return ApiProvider(dio);
-});
+final apiProvider = Provider<ApiProvider>(ApiProvider.new);
 
 class ApiProvider {
-  final Dio dio;
+  final Ref ref;
+  late Dio dio;
 
-  const ApiProvider(this.dio);
+  ApiProvider(this.ref) {
+    dio = Dio();
+    dio.options.connectTimeout = Duration(seconds: 5000);
+    dio.options.sendTimeout = Duration(seconds: 5000);
+    dio.options.receiveTimeout = Duration(seconds: 3000);
+    dio.interceptors.add(
+      RetryOnConnectionChangeInterceptor(
+        connectionRetrier: ConnectionRetrier(dio, Connectivity()),
+      ),
+    );
+  }
 
   Future<Response> getRequest({
     required String apiEndpoint,

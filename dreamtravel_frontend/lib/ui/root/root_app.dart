@@ -1,4 +1,4 @@
-import 'package:dreamtravel/state/providers/state_providers.dart';
+import 'package:dreamtravel/logic/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../logic/navigation/nav_router.dart';
@@ -18,12 +18,12 @@ class _RootScreenState extends ConsumerState<RootApp> {
       title: 'dreamTravel - Travel Booking Platform',
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
+        colorSchemeSeed: Colors.lightBlue,
         brightness: Brightness.light,
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
+        colorSchemeSeed: Colors.lightBlue,
         brightness: Brightness.dark,
       ),
       themeMode: ref.watch(themeProvider) ? ThemeMode.dark : ThemeMode.light,
