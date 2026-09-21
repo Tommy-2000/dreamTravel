@@ -1,9 +1,9 @@
 import 'package:dreamtravel/ui/common/cards/text_card.dart';
-import 'package:dreamtravel/ui/common/cards/travel_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'common/cards/trip_card.dart';
 
 @Preview(name: "UI Preview")
 class UIPreview extends StatelessWidget {
@@ -27,21 +27,23 @@ class UIPreview extends StatelessWidget {
           textAlign: TextAlign.center,
           textOverflow: TextOverflow.ellipsis,
         ),
-        TravelCard(
-          travelCity: "Naples",
-          travelCountry: "Italy",
-          travelImageUrl:
+        TripCard(
+          tripCity: "Naples",
+          tripCountry: "Italy",
+          tripImageUrl:
               "https://images.unsplash.com/photo-1715702803426-39aa0d4c39a9?&auto=format&fit=crop&q=100&w=1200",
-          travelTotalCost: 200,
-          travelCardIsLandscape: false,
+          tripTotalCost: 200,
+          tripCardIsLandscape: false,
+          tripCardIsFavourite: false,
         ),
-        TravelCard(
-          travelCity: "Naples",
-          travelCountry: "Italy",
-          travelImageUrl:
+        TripCard(
+          tripCity: "Naples",
+          tripCountry: "Italy",
+          tripImageUrl:
               "https://images.unsplash.com/photo-1715702803426-39aa0d4c39a9?&auto=format&fit=crop&q=100&w=1200",
-          travelTotalCost: 200,
-          travelCardIsLandscape: false,
+          tripTotalCost: 200,
+          tripCardIsLandscape: false,
+          tripCardIsFavourite: false,
         ),
       ],
     );

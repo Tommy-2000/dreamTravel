@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../data/sample_data/sample_travel_data.dart';
+import '../../../logic/models/examples/sample_travel_data_list.dart';
 import '../buttons/filter_travel_button.dart';
 
 class SliverRootAppBar extends StatefulWidget {
@@ -31,11 +31,17 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
     return SliverAppBar.large(
       centerTitle: true,
       expandedHeight: 200,
-      pinned: true,
       floating: true,
       snap: true,
       shape: RoundedSuperellipseBorder(borderRadius: BorderRadius.circular(35)),
       backgroundColor: colourScheme.primaryContainer,
+      title: Text(widget.sliverRootTitle),
+      titleTextStyle: GoogleFonts.montserrat(
+        fontSize: 35,
+        fontWeight: FontWeight.bold,
+        color: colourScheme.primary,
+      ),
+      automaticallyImplyLeading: false,
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.parallax,
         background: Padding(
@@ -43,19 +49,10 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                widget.sliverRootTitle,
-                style: GoogleFonts.montserrat(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: colourScheme.primary,
-                ),
-              ),
-              Gap(10),
               SearchAnchor(
                 builder: (BuildContext context, SearchController controller) {
                   return SearchBar(
-                    leading: Icon(FluentIcons.search_12_regular, size: 25.0),
+                    leading: Icon(FluentIcons.search_12_regular),
                     hintText: "Where will you travel next?",
                     onTap: () => {controller.openView()},
                   );
@@ -68,25 +65,22 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
                 spacing: 10.0,
                 children: [
                   FilterTravelButton(
-                    buttonText: 'Flights',
-                    buttonIcon: FluentIcons.airplane_24_regular,
-                    buttonSelectedIcon: FluentIcons.airplane_32_filled,
+                    text: 'Flights',
+                    icon: FluentIcons.airplane_24_regular,
+                    selectedIcon: FluentIcons.airplane_32_filled,
                     isButtonToggled: widget.sliverRootFilterButtonToggled,
-                    buttonCallback: () {},
                   ),
                   FilterTravelButton(
-                    buttonText: 'Hotels',
-                    buttonIcon: FluentIcons.bed_24_regular,
-                    buttonSelectedIcon: FluentIcons.bed_24_filled,
+                    text: 'Hotels',
+                    icon: FluentIcons.bed_24_regular,
+                    selectedIcon: FluentIcons.bed_24_filled,
                     isButtonToggled: widget.sliverRootFilterButtonToggled,
-                    buttonCallback: () {},
                   ),
                   FilterTravelButton(
-                    buttonText: 'Travel Experiences',
-                    buttonIcon: FluentIcons.beach_24_regular,
-                    buttonSelectedIcon: FluentIcons.beach_24_filled,
+                    text: 'Travel Experiences',
+                    icon: FluentIcons.beach_24_regular,
+                    selectedIcon: FluentIcons.beach_24_filled,
                     isButtonToggled: widget.sliverRootFilterButtonToggled,
-                    buttonCallback: () {},
                   ),
                 ],
               ),
@@ -102,7 +96,7 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
     BuildContext context,
     SearchController controller,
   ) {
-    return List<ListTile>.generate(7, (int listIndex) {
+    return List<ListTile>.generate(5, (int listIndex) {
       final String suggestedItem = sampleTravelDataList[listIndex].travelCity;
       return ListTile(
         title: Text(suggestedItem),

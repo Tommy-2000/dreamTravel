@@ -18,21 +18,18 @@ class TravelTypeNotifier extends Notifier<TravelType> {
 }
 
 class FilterTravelButton extends StatelessWidget {
-
-  final String buttonText;
-  final IconData buttonIcon;
-  final IconData buttonSelectedIcon;
-  final bool isButtonToggled;
-  final VoidCallback buttonCallback;
-
   const FilterTravelButton({
     super.key,
-    required this.buttonText,
-    required this.buttonIcon,
-    required this.buttonSelectedIcon,
+    required this.text,
+    required this.icon,
+    required this.selectedIcon,
     required this.isButtonToggled,
-    required this.buttonCallback,
   });
+
+  final String text;
+  final IconData icon;
+  final IconData selectedIcon;
+  final bool isButtonToggled;
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +48,16 @@ class FilterTravelButton extends StatelessWidget {
         spacing: 5,
         children: [
           isButtonToggled
-              ? Icon(buttonIcon, color: Colors.white)
-              : Icon(buttonSelectedIcon, color: Colors.white,),
-          Text(buttonText, style: GoogleFonts.montserrat(
+              ? Icon(icon, color: Colors.white)
+              : Icon(selectedIcon, color: Colors.white,),
+          Text(text, style: GoogleFonts.montserrat(
             fontSize: 18,
             fontWeight: FontWeight.normal,
             color: Colors.white,
           ),),
         ],
       ),
-      onPressed: () => buttonCallback,
+      onPressed: () {},
     );
   }
 }
