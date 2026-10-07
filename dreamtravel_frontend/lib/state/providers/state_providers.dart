@@ -1,20 +1,23 @@
+import 'dart:async';
+
 import 'package:dreamtravel/data/booking_data.dart';
-import 'package:dreamtravel/data/campfire_post_type.dart';
 import 'package:dreamtravel/data/flight_boarding_data.dart';
 import 'package:dreamtravel/data/hotel_booking_data.dart';
 import 'package:dreamtravel/data/campfire_data.dart';
-import 'package:dreamtravel/data/sample_data/sample_campfire_social_data.dart';
-import 'package:dreamtravel/data/tour_booking_data.dart';
 import 'package:dreamtravel/data/travel_data.dart';
-import 'package:dreamtravel/logic/api/repositories/booking_data_repository.dart';
-import 'package:dreamtravel/logic/api/repositories/campfire_data_repository.dart';
-import 'package:dreamtravel/logic/api/repositories/travel_data_repository.dart';
+import 'package:dreamtravel/logic/api/repositories/flight_boarding_data_repository.dart';
+import 'package:dreamtravel/logic/api/repositories/hotel_booking_data_repository.dart';
+import 'package:dreamtravel/state/notifiers/booking_data_list_notifier.dart';
+import 'package:dreamtravel/state/notifiers/booking_data_notifier.dart';
+import 'package:dreamtravel/state/notifiers/campfire_data_list_notifier.dart';
+import 'package:dreamtravel/state/notifiers/campfire_data_notifier.dart';
+import 'package:dreamtravel/state/notifiers/flight_boarding_list_notifier.dart';
 import 'package:dreamtravel/state/notifiers/search_travel_data_notifier.dart';
+import 'package:dreamtravel/state/notifiers/travel_data_list_notifier.dart';
+import 'package:dreamtravel/state/notifiers/travel_data_notifier.dart';
 import 'package:dreamtravel/state/providers/argument_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/sample_data/sample_booking_data.dart';
-import '../../data/sample_data/sample_travel_data.dart';
 import '../notifiers/auth_notifier.dart';
 import '../notifiers/day_notifier.dart';
 import '../notifiers/loyalty_notifier.dart';
@@ -39,62 +42,63 @@ final searchDataProvider = NotifierProvider<SearchDataNotifier, List>(
 
 // TravelData providers - For fetching all travel data available
 
-final travelDataListProvider = FutureProvider.autoDispose<List<TravelData>>((
-  ref,
-) {
-  return TravelDataRepository().getAllSampleTravelData();
-});
+final travelDataListProvider =
+    AsyncNotifierProvider.autoDispose<TravelDataListNotifier, List<TravelData>>(
+      TravelDataListNotifier.new,
+    );
 
-final travelDataProvider = FutureProvider.autoDispose
-    .family<TravelData, String>((ref, travelId) {
-      String travelId = ref.read(travelDetailsArgProvider);
-      TravelDataRepository travelDataRepository = ref.read(
-        travelDataRepositoryProvider,
-      );
-      return travelDataRepository.getTravelDataById(Uri.parse("uri"), travelId);
-    });
-
-// final travelDataFamilyProvider = FutureProvider.autoDispose.family<TravelData, String>((ref, travelId) {
-//   AsyncData<List<TravelData>> travelDataRepository = ref.watch(travelDataListProvider);
-// });
+final travelDataProvider =
+    AsyncNotifierProvider.autoDispose<TravelDataNotifier, TravelData>(
+      dependencies: [
+        tripDetailsArgProvider,
+      ], // This is an argument provider that returns the travelId in the notifier
+      () => TravelDataNotifier(),
+    );
 
 // CampfireData providers = For fetching all campfire data available
 
-final campfireDataListProvider = FutureProvider.autoDispose<List<CampfireData>>(
-  (ref) {
-    return CampfireDataRepository().getAllSampleCampfireData();
-  },
-);
+final campfireDataListProvider =
+    AsyncNotifierProvider.autoDispose<
+      CampfireDataListNotifier,
+      List<CampfireData>
+    >(CampfireDataListNotifier.new);
 
-// final campfirePostDataProvider = AsyncNotifierProvider.autoDispose.family<Campfire, CampfireData>((ref) {
-//   if (CampfirePostType.socialCampfirePost) {
-//
-// };
-// });
+final campfireDataProvider =
+    AsyncNotifierProvider.autoDispose<CampfireDataNotifier, CampfireData>(
+      dependencies: [campfireDetailsArgProvider],
+      CampfireDataNotifier.new,
+    );
 
 // BookingData providers - For fetching all booking data available
-final bookingDataProvider = FutureProvider.autoDispose<List<BookingData>>((
-  ref,
-) {
-  return BookingDataRepository().getAllSampleBookingData();
-});
+final bookingDataListProvider =
+    AsyncNotifierProvider.autoDispose<
+      BookingDataListNotifier,
+      List<BookingData>
+    >(BookingDataListNotifier.new);
+
+final bookingDataProvider =
+    AsyncNotifierProvider.autoDispose<BookingDataNotifier, BookingData>(
+      BookingDataNotifier.new,
+    );
+
+final flightBoardingDataListProvider =
+    AsyncNotifierProvider.autoDispose<
+      FlightBoardingListNotifier,
+      List<FlightBoardingData>
+    >(FlightBoardingListNotifier.new);
 
 final sampleFlightBoardingDataProvider =
     FutureProvider.autoDispose<List<FlightBoardingData>>((ref) {
-      return sampleFlightBoardingDataList;
+      return FlightBoardingDataRepository().getAllSampleFlightBoardingData();
     });
 
 final sampleHotelBookingDataProvider =
     FutureProvider.autoDispose<List<HotelBookingData>>((ref) {
-      return sampleHotelBookingDataList;
+      return HotelBookingDataRepository().getAllSampleHotelBookingData();
     });
 
-final sampleTourBookingDataProvider =
-    FutureProvider.autoDispose<List<TourBookingData>>((ref) {
-      return sampleTourBookingDataList;
-    });
 
-// UI providers
+// UI util providers
 final themeProvider = NotifierProvider<ThemeNotifier, bool>(ThemeNotifier.new);
 
 final currentDayProvider = NotifierProvider<DayNotifier, DateTime>(
