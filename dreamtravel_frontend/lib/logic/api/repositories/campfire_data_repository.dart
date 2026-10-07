@@ -5,9 +5,10 @@ import 'package:dreamtravel/data/campfire_post_type.dart';
 import 'package:dreamtravel/data/sample_data/sample_campfire_social_data.dart';
 import 'package:dreamtravel/logic/api/api_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
-final campfireDataRepository = FutureProvider<CampfireDataRepository>((ref) {
+import '../../../constants/api_strings.dart';
+
+final campfireDataRepositoryProvider = Provider<CampfireDataRepository>((ref) {
   return CampfireDataRepository();
 });
 
@@ -18,79 +19,68 @@ class CampfireDataRepository {
     return sampleCampfireDataList;
   }
 
-  FutureOr<List<CampfireData>> getAllCampfireData(Uri responseUri) async {
+  FutureOr<List<CampfireData>> getAllCampfireData() async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/",
     );
     return futureResponse.data;
   }
 
-  FutureOr<CampfireData> getCampfireDataById(
-    Uri responseUri,
-    Uuid campfireId,
-  ) async {
+  FutureOr<CampfireData> getCampfireDataById(String campfireId) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfireId",
     );
     return futureResponse.data;
   }
 
-  FutureOr<CampfireData> getCampfireDataByBody(
-    Uri responseUri,
-    String campfireBody,
-  ) async {
+  FutureOr<CampfireData> getCampfireDataByBody(String campfireBody) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfireBody",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataByPostDate(
-    Uri responseUri,
     DateTime campfirePostDate,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfirePostDate",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataByUpdatedDate(
-    Uri responseUri,
     DateTime campfireUpdatedDate,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfireUpdatedDate",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataByCampfirePostType(
-    Uri responseUri,
     CampfirePostType campfirePostType,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfirePostType",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataByTotalFavourites(
-    Uri responseUri,
     int campfireFavourites,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfireFavourites",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataByTotalComments(
-    Uri responseUri,
-    List<String> campfireComments,
+    int campfireTotalComments,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/campfire/query=$campfireTotalComments",
     );
     return futureResponse.data;
   }

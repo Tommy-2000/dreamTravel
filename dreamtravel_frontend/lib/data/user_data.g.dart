@@ -12,10 +12,8 @@ _UserData _$UserDataFromJson(Map<String, dynamic> json) => _UserData(
   userLastName: json['userLastName'] as String,
   userGenderIdentity: json['userGenderIdentity'] as String,
   userAge: (json['userAge'] as num).toInt(),
-  userStreetAddress: json['userStreetAddress'] as String,
   userCity: json['userCity'] as String,
   userCountry: json['userCountry'] as String,
-  userPostCode: json['userPostCode'] as String,
   userNearestAirport:
       json['userNearestAirport'] as String? ?? 'Unknown Airport',
   userFavouriteLocations:
@@ -41,10 +39,8 @@ Map<String, dynamic> _$UserDataToJson(_UserData instance) => <String, dynamic>{
   'userLastName': instance.userLastName,
   'userGenderIdentity': instance.userGenderIdentity,
   'userAge': instance.userAge,
-  'userStreetAddress': instance.userStreetAddress,
   'userCity': instance.userCity,
   'userCountry': instance.userCountry,
-  'userPostCode': instance.userPostCode,
   'userNearestAirport': instance.userNearestAirport,
   'userFavouriteLocations': instance.userFavouriteLocations,
   'userFavouriteSocialPosts': instance.userFavouriteSocialPosts,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+
 part 'flight_boarding_data.freezed.dart';
 
 part 'flight_boarding_data.g.dart';
@@ -25,8 +26,10 @@ abstract class FlightBoardingData with _$FlightBoardingData {
     required FlightDuration flightDuration,
   }) = _FlightBoardingData;
 
-  factory FlightBoardingData.fromJson(Map<String, Object?> json) =>
+
+  factory FlightBoardingData.fromJson(Map<String, dynamic> json) =>
       _$FlightBoardingDataFromJson(json);
+
 }
 
 @freezed
@@ -36,6 +39,9 @@ abstract class Airport with _$Airport {
     required String airportCity,
     required String airportAddress,
   }) = _Airport;
+
+  // Constructor method for generating getters and setters
+  const Airport._();
 
   factory Airport.fromJson(Map<String, Object?> json) =>
       _$AirportFromJson(json);
@@ -47,6 +53,9 @@ abstract class FlightDuration with _$FlightDuration {
     required int flightHours,
     required int flightMinutes,
   }) = _FlightDuration;
+
+  // Constructor method for generating getters and setters
+  const FlightDuration._();
 
   factory FlightDuration.fromJson(Map<String, Object?> json) =>
       _$FlightDurationFromJson(json);

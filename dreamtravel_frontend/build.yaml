@@ -16,3 +16,4 @@ targets:
           - lib/data/travel_data.dart
           - lib/data/campfire_data.dart
           - lib/data/user_data.dart
+          - lib/data/search_result.dart
