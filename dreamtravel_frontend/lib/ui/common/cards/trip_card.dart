@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:dreamtravel/ui/common/buttons/trip_favourite_button.dart';
-import 'package:dreamtravel/ui/common/buttons/trip_info_button.dart';
 import 'package:dreamtravel/ui/common/cards/rounded_card.dart';
 import 'package:dreamtravel/ui/common/cards/text_card.dart';
 import 'package:dreamtravel/ui/common/image_not_found.dart';
@@ -9,6 +8,7 @@ import 'package:dreamtravel/ui/common/responsive_render.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../buttons/trip_details_button.dart';
 import '../delegates/parallax_flow_delegate.dart';
 
 class TripCard extends StatefulWidget {
