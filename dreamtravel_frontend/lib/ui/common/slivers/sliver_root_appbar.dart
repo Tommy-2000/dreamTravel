@@ -30,7 +30,7 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
 
     return SliverAppBar.large(
       centerTitle: true,
-      expandedHeight: 200,
+      expandedHeight: 150,
       pinned: true,
       floating: true,
       snap: true,
@@ -50,17 +50,6 @@ class _SliverRootAppBarState extends State<SliverRootAppBar> {
                   fontWeight: FontWeight.bold,
                   color: colourScheme.primary,
                 ),
-              ),
-              Gap(10),
-              SearchAnchor(
-                builder: (BuildContext context, SearchController controller) {
-                  return SearchBar(
-                    leading: Icon(FluentIcons.search_12_regular, size: 25.0),
-                    hintText: "Where will you travel next?",
-                    onTap: () => {controller.openView()},
-                  );
-                },
-                suggestionsBuilder: renderSearchSuggestions,
               ),
               Gap(10),
               Row(

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dreamtravel/ui/screens/diary_screen.dart';
+import 'package:dreamtravel/ui/screens/search_screen.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,15 @@ List<NavScreenModel> navScreens = [
     ),
     navScreenSelectedIcon: Icon(
       FluentIcons.ticket_horizontal_24_filled,
+      color: Colors.black,
+    ),
+  ),
+  NavScreenModel(
+    navScreen: SearchScreen(),
+    navScreenName: "Search",
+    navScreenIcon: Icon(FluentIcons.search_12_regular, color: Colors.black),
+    navScreenSelectedIcon: Icon(
+      FluentIcons.search_12_filled,
       color: Colors.black,
     ),
   ),

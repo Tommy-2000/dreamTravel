@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+
+class RoundedStatefulCard extends StatefulWidget {
+  const RoundedStatefulCard({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  State<RoundedStatefulCard> createState() => _RoundedStatefulCardState();
+}
+
+class _RoundedStatefulCardState extends State<RoundedStatefulCard> {
+  @override
+  Widget build(BuildContext context) {
+    final colourScheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Card(
+        color: colourScheme.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(40)),
+        ),
+        borderOnForeground: true,
+        semanticContainer: true,
+        elevation: 10,
+        child: widget.child,
+      ),
+    );
+  }
+}

@@ -26,46 +26,44 @@ class CampfireTripCard extends ConsumerStatefulWidget {
 }
 
 class _CampfireTripCardState extends ConsumerState<CampfireTripCard> {
-
   Widget cardImageBackground(BuildContext context) {
-    return Positioned.fill(
-      child: CachedNetworkImage(
-        key: GlobalKey(),
-        fit: BoxFit.cover,
-        imageUrl: widget.cardImage.toString(),
-        // Load a progress placeholder while fetching image url
-        placeholder: (context, url) =>
-            Center(child: const CircularProgressIndicator()),
-        errorWidget: (context, url, error) =>
-            Center(child: SizedBox(child: ImageNotFound())),
-      ),
+    return CachedNetworkImage(
+      key: GlobalKey(),
+      fit: BoxFit.cover,
+      imageUrl: widget.cardImage.toString(),
+      // Load a progress placeholder while fetching image url
+      placeholder: (context, url) =>
+          Center(child: const CircularProgressIndicator()),
+      errorWidget: (context, url, error) =>
+          Center(child: SizedBox(child: ImageNotFound())),
     );
   }
 
   Widget cardInkWell() {
     bool cardOnHover = false;
-    return Positioned.fill(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(50),
-        mouseCursor: SystemMouseCursors.click,
-        onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Image card has been tapped")),
-          );
-        },
-        onHover: (hoverValue) {
-          setState(() {
-            cardOnHover = hoverValue;
-          });
-        },
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.transparent, Colors.black.withValues(alpha: 0.7)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: const [0.6, 0.95],
-            ),
+    return InkWell(
+      borderRadius: BorderRadius.circular(50),
+      mouseCursor: SystemMouseCursors.click,
+      onTap: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Image card has been tapped")),
+        );
+      },
+      onHover: (hoverValue) {
+        setState(() {
+          cardOnHover = hoverValue;
+        });
+      },
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.transparent,
+              Colors.black.withValues(alpha: 0.7),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.6, 0.95],
           ),
         ),
       ),
@@ -73,23 +71,17 @@ class _CampfireTripCardState extends ConsumerState<CampfireTripCard> {
   }
 
   Widget cardText() {
-    return Positioned(
-      left: 15,
-      bottom: 25,
-      height: 80,
-      width: 250,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Text(
-          widget.cardBody!,
-          softWrap: true,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 4,
-          style: GoogleFonts.montserrat(
-            color: Colors.white,
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Text(
+        widget.cardBody!,
+        softWrap: true,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 4,
+        style: GoogleFonts.montserrat(
+          color: Colors.white,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
@@ -103,9 +95,15 @@ class _CampfireTripCardState extends ConsumerState<CampfireTripCard> {
         borderRadius: BorderRadius.circular(50),
         child: Stack(
           children: [
-            cardImageBackground(context),
-            cardInkWell(),
-            cardText(),
+            Positioned.fill(child: cardImageBackground(context)),
+            Positioned.fill(child: cardInkWell()),
+            Positioned(
+              left: 15,
+              bottom: 25,
+              height: 80,
+              width: 250,
+              child: cardText(),
+            ),
             Positioned(right: 20, bottom: 50, child: CampfireReactionButton()),
             Positioned(right: 20, bottom: 10, child: CampfireShareButton()),
           ],

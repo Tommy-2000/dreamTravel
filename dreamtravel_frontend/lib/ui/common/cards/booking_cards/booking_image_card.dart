@@ -19,7 +19,6 @@ class BookingImageCard extends StatelessWidget {
       key: GlobalKey(),
       child: CachedNetworkImage(
         width: 275,
-        memCacheWidth: 200,
         fit: BoxFit.cover,
         imageUrl: bookingImageUrl,
         // Load a progress placeholder while fetching image url

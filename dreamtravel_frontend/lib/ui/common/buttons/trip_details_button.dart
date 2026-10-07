@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class TripInfoButton extends StatefulWidget {
+class TripDetailsButton extends StatefulWidget {
   final ColorScheme colourScheme;
   final VoidCallback buttonCallback;
 
-  const TripInfoButton({
+  const TripDetailsButton({
     super.key,
     required this.colourScheme,
     required this.buttonCallback,
   });
 
   @override
-  State<TripInfoButton> createState() => _TripInfoButtonState();
+  State<TripDetailsButton> createState() => _TripDetailsButtonState();
 }
 
-class _TripInfoButtonState extends State<TripInfoButton> {
+class _TripDetailsButtonState extends State<TripDetailsButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

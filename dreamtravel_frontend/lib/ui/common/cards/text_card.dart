@@ -1,9 +1,22 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dreamtravel/ui/common/cards/rounded_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextCard extends StatelessWidget {
-  const TextCard({super.key, required this.data, required this.fontSize, required this.fontWeight, required this.fontStyle, required this.fontColour, required this.minFontSize, required this.maxLines, required this.softWrap, required this.textAlign, required this.textOverflow});
+  const TextCard({
+    super.key,
+    required this.data,
+    required this.fontSize,
+    required this.fontWeight,
+    required this.fontStyle,
+    required this.fontColour,
+    required this.minFontSize,
+    required this.maxLines,
+    required this.softWrap,
+    required this.textAlign,
+    required this.textOverflow,
+  });
 
   final String data;
   final double fontSize;
@@ -18,7 +31,6 @@ class TextCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.all(3),
       child: AutoSizeText(

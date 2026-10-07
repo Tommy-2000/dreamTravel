@@ -27,7 +27,8 @@ class _RootScreenState extends ConsumerState<RootApp> {
         brightness: Brightness.dark,
       ),
       themeMode: ref.watch(themeProvider) ? ThemeMode.dark : ThemeMode.light,
-      routerConfig: NavRouter().routerConfig,
+      routerConfig: ref.watch(navRouter),
+      // Riverpod is bound to the NavRouter so that GoRouter can react to state changes throughout the app
     );
   }
 }

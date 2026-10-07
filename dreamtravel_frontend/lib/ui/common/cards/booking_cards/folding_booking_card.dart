@@ -1,19 +1,15 @@
 import 'package:dreamtravel/constants/app_values.dart';
 import 'package:dreamtravel/data/booking_data.dart';
 import 'package:dreamtravel/data/placeholder_data.dart';
-import 'package:dreamtravel/data/sample_data/faker_booking_data.dart';
 import 'package:dreamtravel/state/providers/state_providers.dart';
 import 'package:dreamtravel/ui/common/cards/booking_cards/booking_summary_card.dart';
-import 'package:dreamtravel/ui/common/cards/booking_cards/flight_barcode_card.dart';
 import 'package:dreamtravel/ui/common/cards/booking_cards/folding_card.dart';
-import 'package:dreamtravel/ui/common/cards/booking_cards/hotel_barcode_card.dart';
 import 'package:dreamtravel/ui/common/cards/booking_cards/hotel_booking_card.dart';
 import 'package:dreamtravel/ui/common/cards/booking_cards/tour_booking_card.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
+import '../../../../data/sample_data/sample_booking_data.dart';
 import 'flight_boarding_card.dart';
 
 class FoldingBookingCard extends ConsumerStatefulWidget {
@@ -74,7 +70,7 @@ class _FoldingBookingCardState extends ConsumerState<FoldingBookingCard> {
       ),
       childBack: _backCard,
       // Render an empty card widget for the back of the FoldingChild while folding
-      childHeight: 300.0,
+      childHeight: 200.0,
     );
   }
 
@@ -90,7 +86,7 @@ class _FoldingBookingCardState extends ConsumerState<FoldingBookingCard> {
         appIsLandscape: widget.isAppLandscape,
       ),
       childBack: _backCard,
-      childHeight: 300.0,
+      childHeight: 200.0,
     );
   }
 
@@ -106,7 +102,7 @@ class _FoldingBookingCardState extends ConsumerState<FoldingBookingCard> {
         appIsLandscape: widget.isAppLandscape,
       ),
       childBack: _backCard,
-      childHeight: 300.0,
+      childHeight: 200.0,
     );
   }
 
@@ -122,7 +118,7 @@ class _FoldingBookingCardState extends ConsumerState<FoldingBookingCard> {
         appIsLandscape: widget.isAppLandscape,
       ),
       childBack: _backCard,
-      childHeight: 300.0,
+      childHeight: 200.0,
     );
   }
 
@@ -142,11 +138,11 @@ class _FoldingBookingCardState extends ConsumerState<FoldingBookingCard> {
 
   @override
   Widget build(BuildContext context) {
-    final bookingData = ref.watch(bookingDataProvider);
+    final bookingDataList = ref.watch(bookingDataListProvider);
 
     return Column(
       children: [
-        bookingData.when(
+        bookingDataList.when(
           data: (data) => FoldingCard(
             cardChildren: renderFoldingCardChildren(
               data.single,
@@ -154,7 +150,7 @@ class _FoldingBookingCardState extends ConsumerState<FoldingBookingCard> {
             ),
             cardIsOpen: _bookingCardToggled,
             cardOnTap: () => _foldBookingOnTap(
-              data.single,
+              data.first,
             ), // Navigates to the booking details screen
           ),
           error: (err, stack) => FoldingCard(
