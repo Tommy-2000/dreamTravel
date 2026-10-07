@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BookingData {
 
- String get bookingId; String get bookingFirstName; String get bookingLastName; int get bookingPassengers; double get bookingPrice; TravelData get travelData; List<FlightBoardingData>? get flightBoardingData; List<HotelBookingData>? get hotelBookingData; List<TourBookingData>? get tourBookingData;
+ String get bookingId; String get bookingFirstName; String get bookingLastName; int get bookingPassengers; double get bookingTotalCost; TravelData get travelData; List<FlightBoardingData>? get flightBoardingData; List<HotelBookingData>? get hotelBookingData; List<TourBookingData>? get tourBookingData;
 /// Create a copy of BookingData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $BookingDataCopyWith<BookingData> get copyWith => _$BookingDataCopyWithImpl<Book
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingData&&(identical(other.bookingId, bookingId) || other.bookingId == bookingId)&&(identical(other.bookingFirstName, bookingFirstName) || other.bookingFirstName == bookingFirstName)&&(identical(other.bookingLastName, bookingLastName) || other.bookingLastName == bookingLastName)&&(identical(other.bookingPassengers, bookingPassengers) || other.bookingPassengers == bookingPassengers)&&(identical(other.bookingPrice, bookingPrice) || other.bookingPrice == bookingPrice)&&(identical(other.travelData, travelData) || other.travelData == travelData)&&const DeepCollectionEquality().equals(other.flightBoardingData, flightBoardingData)&&const DeepCollectionEquality().equals(other.hotelBookingData, hotelBookingData)&&const DeepCollectionEquality().equals(other.tourBookingData, tourBookingData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingData&&(identical(other.bookingId, bookingId) || other.bookingId == bookingId)&&(identical(other.bookingFirstName, bookingFirstName) || other.bookingFirstName == bookingFirstName)&&(identical(other.bookingLastName, bookingLastName) || other.bookingLastName == bookingLastName)&&(identical(other.bookingPassengers, bookingPassengers) || other.bookingPassengers == bookingPassengers)&&(identical(other.bookingTotalCost, bookingTotalCost) || other.bookingTotalCost == bookingTotalCost)&&(identical(other.travelData, travelData) || other.travelData == travelData)&&const DeepCollectionEquality().equals(other.flightBoardingData, flightBoardingData)&&const DeepCollectionEquality().equals(other.hotelBookingData, hotelBookingData)&&const DeepCollectionEquality().equals(other.tourBookingData, tourBookingData));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bookingId,bookingFirstName,bookingLastName,bookingPassengers,bookingPrice,travelData,const DeepCollectionEquality().hash(flightBoardingData),const DeepCollectionEquality().hash(hotelBookingData),const DeepCollectionEquality().hash(tourBookingData));
+int get hashCode => Object.hash(runtimeType,bookingId,bookingFirstName,bookingLastName,bookingPassengers,bookingTotalCost,travelData,const DeepCollectionEquality().hash(flightBoardingData),const DeepCollectionEquality().hash(hotelBookingData),const DeepCollectionEquality().hash(tourBookingData));
 
 @override
 String toString() {
-  return 'BookingData(bookingId: $bookingId, bookingFirstName: $bookingFirstName, bookingLastName: $bookingLastName, bookingPassengers: $bookingPassengers, bookingPrice: $bookingPrice, travelData: $travelData, flightBoardingData: $flightBoardingData, hotelBookingData: $hotelBookingData, tourBookingData: $tourBookingData)';
+  return 'BookingData(bookingId: $bookingId, bookingFirstName: $bookingFirstName, bookingLastName: $bookingLastName, bookingPassengers: $bookingPassengers, bookingTotalCost: $bookingTotalCost, travelData: $travelData, flightBoardingData: $flightBoardingData, hotelBookingData: $hotelBookingData, tourBookingData: $tourBookingData)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $BookingDataCopyWith<$Res>  {
   factory $BookingDataCopyWith(BookingData value, $Res Function(BookingData) _then) = _$BookingDataCopyWithImpl;
 @useResult
 $Res call({
- String bookingId, String bookingFirstName, String bookingLastName, int bookingPassengers, double bookingPrice, TravelData travelData, List<FlightBoardingData>? flightBoardingData, List<HotelBookingData>? hotelBookingData, List<TourBookingData>? tourBookingData
+ String bookingId, String bookingFirstName, String bookingLastName, int bookingPassengers, double bookingTotalCost, TravelData travelData, List<FlightBoardingData>? flightBoardingData, List<HotelBookingData>? hotelBookingData, List<TourBookingData>? tourBookingData
 });
 
 
@@ -65,13 +65,13 @@ class _$BookingDataCopyWithImpl<$Res>
 
 /// Create a copy of BookingData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bookingId = null,Object? bookingFirstName = null,Object? bookingLastName = null,Object? bookingPassengers = null,Object? bookingPrice = null,Object? travelData = null,Object? flightBoardingData = freezed,Object? hotelBookingData = freezed,Object? tourBookingData = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bookingId = null,Object? bookingFirstName = null,Object? bookingLastName = null,Object? bookingPassengers = null,Object? bookingTotalCost = null,Object? travelData = null,Object? flightBoardingData = freezed,Object? hotelBookingData = freezed,Object? tourBookingData = freezed,}) {
   return _then(_self.copyWith(
 bookingId: null == bookingId ? _self.bookingId : bookingId // ignore: cast_nullable_to_non_nullable
 as String,bookingFirstName: null == bookingFirstName ? _self.bookingFirstName : bookingFirstName // ignore: cast_nullable_to_non_nullable
 as String,bookingLastName: null == bookingLastName ? _self.bookingLastName : bookingLastName // ignore: cast_nullable_to_non_nullable
 as String,bookingPassengers: null == bookingPassengers ? _self.bookingPassengers : bookingPassengers // ignore: cast_nullable_to_non_nullable
-as int,bookingPrice: null == bookingPrice ? _self.bookingPrice : bookingPrice // ignore: cast_nullable_to_non_nullable
+as int,bookingTotalCost: null == bookingTotalCost ? _self.bookingTotalCost : bookingTotalCost // ignore: cast_nullable_to_non_nullable
 as double,travelData: null == travelData ? _self.travelData : travelData // ignore: cast_nullable_to_non_nullable
 as TravelData,flightBoardingData: freezed == flightBoardingData ? _self.flightBoardingData : flightBoardingData // ignore: cast_nullable_to_non_nullable
 as List<FlightBoardingData>?,hotelBookingData: freezed == hotelBookingData ? _self.hotelBookingData : hotelBookingData // ignore: cast_nullable_to_non_nullable
@@ -170,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String bookingId,  String bookingFirstName,  String bookingLastName,  int bookingPassengers,  double bookingPrice,  TravelData travelData,  List<FlightBoardingData>? flightBoardingData,  List<HotelBookingData>? hotelBookingData,  List<TourBookingData>? tourBookingData)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String bookingId,  String bookingFirstName,  String bookingLastName,  int bookingPassengers,  double bookingTotalCost,  TravelData travelData,  List<FlightBoardingData>? flightBoardingData,  List<HotelBookingData>? hotelBookingData,  List<TourBookingData>? tourBookingData)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BookingData() when $default != null:
-return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_that.bookingPassengers,_that.bookingPrice,_that.travelData,_that.flightBoardingData,_that.hotelBookingData,_that.tourBookingData);case _:
+return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_that.bookingPassengers,_that.bookingTotalCost,_that.travelData,_that.flightBoardingData,_that.hotelBookingData,_that.tourBookingData);case _:
   return orElse();
 
 }
@@ -191,10 +191,10 @@ return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String bookingId,  String bookingFirstName,  String bookingLastName,  int bookingPassengers,  double bookingPrice,  TravelData travelData,  List<FlightBoardingData>? flightBoardingData,  List<HotelBookingData>? hotelBookingData,  List<TourBookingData>? tourBookingData)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String bookingId,  String bookingFirstName,  String bookingLastName,  int bookingPassengers,  double bookingTotalCost,  TravelData travelData,  List<FlightBoardingData>? flightBoardingData,  List<HotelBookingData>? hotelBookingData,  List<TourBookingData>? tourBookingData)  $default,) {final _that = this;
 switch (_that) {
 case _BookingData():
-return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_that.bookingPassengers,_that.bookingPrice,_that.travelData,_that.flightBoardingData,_that.hotelBookingData,_that.tourBookingData);case _:
+return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_that.bookingPassengers,_that.bookingTotalCost,_that.travelData,_that.flightBoardingData,_that.hotelBookingData,_that.tourBookingData);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -211,10 +211,10 @@ return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String bookingId,  String bookingFirstName,  String bookingLastName,  int bookingPassengers,  double bookingPrice,  TravelData travelData,  List<FlightBoardingData>? flightBoardingData,  List<HotelBookingData>? hotelBookingData,  List<TourBookingData>? tourBookingData)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String bookingId,  String bookingFirstName,  String bookingLastName,  int bookingPassengers,  double bookingTotalCost,  TravelData travelData,  List<FlightBoardingData>? flightBoardingData,  List<HotelBookingData>? hotelBookingData,  List<TourBookingData>? tourBookingData)?  $default,) {final _that = this;
 switch (_that) {
 case _BookingData() when $default != null:
-return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_that.bookingPassengers,_that.bookingPrice,_that.travelData,_that.flightBoardingData,_that.hotelBookingData,_that.tourBookingData);case _:
+return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_that.bookingPassengers,_that.bookingTotalCost,_that.travelData,_that.flightBoardingData,_that.hotelBookingData,_that.tourBookingData);case _:
   return null;
 
 }
@@ -226,17 +226,17 @@ return $default(_that.bookingId,_that.bookingFirstName,_that.bookingLastName,_th
 @JsonSerializable()
 
 class _BookingData implements BookingData {
-  const _BookingData({required this.bookingId, required this.bookingFirstName, required this.bookingLastName, required this.bookingPassengers, required this.bookingPrice, required this.travelData, required final  List<FlightBoardingData>? flightBoardingData, required final  List<HotelBookingData>? hotelBookingData, required final  List<TourBookingData>? tourBookingData}): _flightBoardingData = flightBoardingData,_hotelBookingData = hotelBookingData,_tourBookingData = tourBookingData;
+  const _BookingData({required this.bookingId, required this.bookingFirstName, required this.bookingLastName, required this.bookingPassengers, required this.bookingTotalCost, required this.travelData, final  List<FlightBoardingData>? flightBoardingData = const [], final  List<HotelBookingData>? hotelBookingData = const [], final  List<TourBookingData>? tourBookingData = const []}): _flightBoardingData = flightBoardingData,_hotelBookingData = hotelBookingData,_tourBookingData = tourBookingData;
   factory _BookingData.fromJson(Map<String, dynamic> json) => _$BookingDataFromJson(json);
 
 @override final  String bookingId;
 @override final  String bookingFirstName;
 @override final  String bookingLastName;
 @override final  int bookingPassengers;
-@override final  double bookingPrice;
+@override final  double bookingTotalCost;
 @override final  TravelData travelData;
  final  List<FlightBoardingData>? _flightBoardingData;
-@override List<FlightBoardingData>? get flightBoardingData {
+@override@JsonKey() List<FlightBoardingData>? get flightBoardingData {
   final value = _flightBoardingData;
   if (value == null) return null;
   if (_flightBoardingData is EqualUnmodifiableListView) return _flightBoardingData;
@@ -245,7 +245,7 @@ class _BookingData implements BookingData {
 }
 
  final  List<HotelBookingData>? _hotelBookingData;
-@override List<HotelBookingData>? get hotelBookingData {
+@override@JsonKey() List<HotelBookingData>? get hotelBookingData {
   final value = _hotelBookingData;
   if (value == null) return null;
   if (_hotelBookingData is EqualUnmodifiableListView) return _hotelBookingData;
@@ -254,7 +254,7 @@ class _BookingData implements BookingData {
 }
 
  final  List<TourBookingData>? _tourBookingData;
-@override List<TourBookingData>? get tourBookingData {
+@override@JsonKey() List<TourBookingData>? get tourBookingData {
   final value = _tourBookingData;
   if (value == null) return null;
   if (_tourBookingData is EqualUnmodifiableListView) return _tourBookingData;
@@ -276,16 +276,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookingData&&(identical(other.bookingId, bookingId) || other.bookingId == bookingId)&&(identical(other.bookingFirstName, bookingFirstName) || other.bookingFirstName == bookingFirstName)&&(identical(other.bookingLastName, bookingLastName) || other.bookingLastName == bookingLastName)&&(identical(other.bookingPassengers, bookingPassengers) || other.bookingPassengers == bookingPassengers)&&(identical(other.bookingPrice, bookingPrice) || other.bookingPrice == bookingPrice)&&(identical(other.travelData, travelData) || other.travelData == travelData)&&const DeepCollectionEquality().equals(other._flightBoardingData, _flightBoardingData)&&const DeepCollectionEquality().equals(other._hotelBookingData, _hotelBookingData)&&const DeepCollectionEquality().equals(other._tourBookingData, _tourBookingData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookingData&&(identical(other.bookingId, bookingId) || other.bookingId == bookingId)&&(identical(other.bookingFirstName, bookingFirstName) || other.bookingFirstName == bookingFirstName)&&(identical(other.bookingLastName, bookingLastName) || other.bookingLastName == bookingLastName)&&(identical(other.bookingPassengers, bookingPassengers) || other.bookingPassengers == bookingPassengers)&&(identical(other.bookingTotalCost, bookingTotalCost) || other.bookingTotalCost == bookingTotalCost)&&(identical(other.travelData, travelData) || other.travelData == travelData)&&const DeepCollectionEquality().equals(other._flightBoardingData, _flightBoardingData)&&const DeepCollectionEquality().equals(other._hotelBookingData, _hotelBookingData)&&const DeepCollectionEquality().equals(other._tourBookingData, _tourBookingData));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bookingId,bookingFirstName,bookingLastName,bookingPassengers,bookingPrice,travelData,const DeepCollectionEquality().hash(_flightBoardingData),const DeepCollectionEquality().hash(_hotelBookingData),const DeepCollectionEquality().hash(_tourBookingData));
+int get hashCode => Object.hash(runtimeType,bookingId,bookingFirstName,bookingLastName,bookingPassengers,bookingTotalCost,travelData,const DeepCollectionEquality().hash(_flightBoardingData),const DeepCollectionEquality().hash(_hotelBookingData),const DeepCollectionEquality().hash(_tourBookingData));
 
 @override
 String toString() {
-  return 'BookingData(bookingId: $bookingId, bookingFirstName: $bookingFirstName, bookingLastName: $bookingLastName, bookingPassengers: $bookingPassengers, bookingPrice: $bookingPrice, travelData: $travelData, flightBoardingData: $flightBoardingData, hotelBookingData: $hotelBookingData, tourBookingData: $tourBookingData)';
+  return 'BookingData(bookingId: $bookingId, bookingFirstName: $bookingFirstName, bookingLastName: $bookingLastName, bookingPassengers: $bookingPassengers, bookingTotalCost: $bookingTotalCost, travelData: $travelData, flightBoardingData: $flightBoardingData, hotelBookingData: $hotelBookingData, tourBookingData: $tourBookingData)';
 }
 
 
@@ -296,7 +296,7 @@ abstract mixin class _$BookingDataCopyWith<$Res> implements $BookingDataCopyWith
   factory _$BookingDataCopyWith(_BookingData value, $Res Function(_BookingData) _then) = __$BookingDataCopyWithImpl;
 @override @useResult
 $Res call({
- String bookingId, String bookingFirstName, String bookingLastName, int bookingPassengers, double bookingPrice, TravelData travelData, List<FlightBoardingData>? flightBoardingData, List<HotelBookingData>? hotelBookingData, List<TourBookingData>? tourBookingData
+ String bookingId, String bookingFirstName, String bookingLastName, int bookingPassengers, double bookingTotalCost, TravelData travelData, List<FlightBoardingData>? flightBoardingData, List<HotelBookingData>? hotelBookingData, List<TourBookingData>? tourBookingData
 });
 
 
@@ -313,13 +313,13 @@ class __$BookingDataCopyWithImpl<$Res>
 
 /// Create a copy of BookingData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bookingId = null,Object? bookingFirstName = null,Object? bookingLastName = null,Object? bookingPassengers = null,Object? bookingPrice = null,Object? travelData = null,Object? flightBoardingData = freezed,Object? hotelBookingData = freezed,Object? tourBookingData = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bookingId = null,Object? bookingFirstName = null,Object? bookingLastName = null,Object? bookingPassengers = null,Object? bookingTotalCost = null,Object? travelData = null,Object? flightBoardingData = freezed,Object? hotelBookingData = freezed,Object? tourBookingData = freezed,}) {
   return _then(_BookingData(
 bookingId: null == bookingId ? _self.bookingId : bookingId // ignore: cast_nullable_to_non_nullable
 as String,bookingFirstName: null == bookingFirstName ? _self.bookingFirstName : bookingFirstName // ignore: cast_nullable_to_non_nullable
 as String,bookingLastName: null == bookingLastName ? _self.bookingLastName : bookingLastName // ignore: cast_nullable_to_non_nullable
 as String,bookingPassengers: null == bookingPassengers ? _self.bookingPassengers : bookingPassengers // ignore: cast_nullable_to_non_nullable
-as int,bookingPrice: null == bookingPrice ? _self.bookingPrice : bookingPrice // ignore: cast_nullable_to_non_nullable
+as int,bookingTotalCost: null == bookingTotalCost ? _self.bookingTotalCost : bookingTotalCost // ignore: cast_nullable_to_non_nullable
 as double,travelData: null == travelData ? _self.travelData : travelData // ignore: cast_nullable_to_non_nullable
 as TravelData,flightBoardingData: freezed == flightBoardingData ? _self._flightBoardingData : flightBoardingData // ignore: cast_nullable_to_non_nullable
 as List<FlightBoardingData>?,hotelBookingData: freezed == hotelBookingData ? _self._hotelBookingData : hotelBookingData // ignore: cast_nullable_to_non_nullable

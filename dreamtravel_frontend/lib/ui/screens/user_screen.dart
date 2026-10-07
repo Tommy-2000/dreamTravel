@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../state/user_state.dart';
+import '../common/responsive_render.dart';
 import '../common/slivers/sliver_root_appbar.dart';
 
 class UserScreen extends ConsumerStatefulWidget with UserState, UserEvent {
@@ -15,15 +16,26 @@ class UserScreen extends ConsumerStatefulWidget with UserState, UserEvent {
 }
 
 class _UserScreenState extends ConsumerState<UserScreen> {
-  bool landscapeWindow = false;
-  bool foldableWindow = false;
+  late ResponsiveRender _responsiveRender;
+  late ScrollController _userScrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _userScrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _userScrollController.dispose();
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Check the width of the window using MediaQuery if greater than 800 in a state change
-    final double windowWidth = MediaQuery.of(context).size.width;
-    landscapeWindow = windowWidth > 800;
+    // ResponsiveRender notifies this screen if any responsive screen changes are detected
+    _responsiveRender = ResponsiveRender(context);
   }
 
   @override
@@ -37,7 +49,10 @@ class _UserScreenState extends ConsumerState<UserScreen> {
           sliverRootFilterButtonToggled: false,
         ),
         SliverGrid(
-          gridDelegate: landscapeWindow
+          gridDelegate:
+              _responsiveRender.screenIsExtraLarge &&
+                  _responsiveRender.screenIsLarge &&
+                  _responsiveRender.screenIsMedium
               ? buildLandscapeQuiltedGridDelegate()
               : buildPortraitQuiltedGridDelegate(),
           delegate: SliverChildBuilderDelegate(

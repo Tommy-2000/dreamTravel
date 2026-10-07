@@ -19,6 +19,7 @@ abstract class TourBookingData with _$TourBookingData {
     required bool languageInterpreterIncluded,
   }) = _TourBookingData;
 
-  factory TourBookingData.fromJson(Map<String, Object?> json) =>
+  factory TourBookingData.fromJson(Map<String, dynamic> json) =>
       _$TourBookingDataFromJson(json);
+
 }

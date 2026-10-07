@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:uuid/uuid.dart';
-
 import 'campfire_post_type.dart';
 
 
@@ -14,7 +12,7 @@ part 'campfire_data.g.dart';
 @freezed
 abstract class CampfireData with _$CampfireData {
   const factory CampfireData({
-    required List<int> campfireId,
+    required String campfireId,
     required String campfireBody,
     required DateTime campfirePostDate,
     required DateTime campfireUpdatedDate,
@@ -24,6 +22,6 @@ abstract class CampfireData with _$CampfireData {
     required List<String> campfirePostComments,
   }) = _CampfireData;
 
-  factory CampfireData.fromJson(Map<String, Object?> json) =>
-      _$CampfireDataFromJson(json);
+  factory CampfireData.fromJson(Map<String, dynamic> json) => _$CampfireDataFromJson(json);
+
 }

@@ -2,14 +2,18 @@ import 'dart:async';
 
 import 'package:dreamtravel/data/booking_data.dart';
 import 'package:dreamtravel/data/flight_boarding_data.dart';
+import 'package:dreamtravel/data/hotel_booking_data.dart';
 import 'package:dreamtravel/data/sample_data/sample_booking_data.dart';
+import 'package:dreamtravel/data/tour_booking_data.dart';
+import 'package:dreamtravel/data/travel_data.dart';
 import 'package:dreamtravel/logic/api/api_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final bookingDataRepository = FutureProvider<BookingDataRepository>((ref) {
+import '../../../constants/api_strings.dart';
+
+final bookingDataRepositoryProvider = Provider<BookingDataRepository>((ref) {
   return BookingDataRepository();
 });
-
 
 class BookingDataRepository {
   late final ApiProvider apiProvider;
@@ -18,99 +22,90 @@ class BookingDataRepository {
     return sampleBookingDataList;
   }
 
-  FutureOr<List<BookingData>> getAllBookingData(Uri responseUri) async {
+  FutureOr<List<BookingData>> getAllBookingData() async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/",
     );
     return futureResponse.data;
   }
 
   FutureOr<BookingData> getBookingDataById(
-    Uri responseUri,
     String bookingId,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$bookingId",
     );
     return futureResponse.data;
   }
 
-  FutureOr<BookingData> getBookingDataByCity(
-    Uri responseUri,
-    String bookingCity,
+  FutureOr<BookingData> getBookingDataByFirstName(
+    String bookingFirstName,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$bookingFirstName",
     );
     return futureResponse.data;
   }
 
-  FutureOr<BookingData> getBookingDataByCountry(
-    Uri responseUri,
-    String bookingCountry,
+  FutureOr<BookingData> getBookingDataByLastName(
+    String bookingLastName,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$bookingLastName",
     );
     return futureResponse.data;
   }
 
-  FutureOr<BookingData> getBookingDataByStartDate(
-    Uri responseUri,
-    DateTime bookingStartDate,
+  FutureOr<BookingData> getBookingDataByPassengers(
+    int bookingPassengers,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
-    );
-    return futureResponse.data;
-  }
-
-  FutureOr<BookingData> getBookingDataByEndDate(
-    Uri responseUri,
-    DateTime bookingEndDate,
-  ) async {
-    final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$bookingPassengers",
     );
     return futureResponse.data;
   }
 
   FutureOr<BookingData> getBookingDataByTotalCost(
-    Uri responseUri,
     double bookingTotalCost,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$bookingTotalCost",
     );
     return futureResponse.data;
   }
 
-  FutureOr<BookingData> getFlightOnlyBookingData(
-    Uri responseUri,
-    bool bookingDataIncludesFlight,
+  FutureOr<BookingData> getBookingDataByTravelData(
+    TravelData travelData,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$travelData",
     );
     return futureResponse.data;
   }
 
-  FutureOr<BookingData> getHotelOnlyBookingData(
-    Uri responseUri,
-    bool bookingDataIncludesHotel,
+  FutureOr<BookingData> getBookingDataByFlightBoardingData(
+    FlightBoardingData flightBoardingData,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$flightBoardingData",
     );
     return futureResponse.data;
   }
 
-  FutureOr<BookingData> getTourOnlyBookingData(
-    Uri responseUri,
-    bool bookingDataIncludesTour,
+  FutureOr<BookingData> getBookingDataByHotelBookingData(
+    HotelBookingData hotelBookingData,
   ) async {
     final futureResponse = await apiProvider.getRequest(
-      apiEndpoint: responseUri.host,
+      apiEndpoint: "$springTestApi/bookings/query=$hotelBookingData",
+    );
+    return futureResponse.data;
+  }
+
+  FutureOr<BookingData> getBookingDataByTourBookingData(
+    TourBookingData tourBookingData,
+  ) async {
+    final futureResponse = await apiProvider.getRequest(
+      apiEndpoint: "$springTestApi/bookings/query=$tourBookingData",
     );
     return futureResponse.data;
   }

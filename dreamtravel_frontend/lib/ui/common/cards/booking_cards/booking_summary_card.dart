@@ -25,30 +25,27 @@ class BookingSummaryCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colourScheme = Theme.of(context).colorScheme;
 
-    final bookingData = ref.watch(bookingDataProvider);
+    final bookingDataList = ref.watch(bookingDataListProvider);
 
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        child: bookingData.when(
-          data: (data) => Row(
-            children: [
-              BookingImageCard(
-                bookingImageUrl: bookingImageUrl ?? imageUrlNullAddress,
-                context: context,
-              ),
-              bookingDetails(colourScheme, data)
-            ],
-          ),
-          error: (err, stack) => ImageNotFound(),
-          loading: () => const CircularProgressIndicator(),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(75),
+      child: bookingDataList.when(
+        data: (data) => Row(
+          children: [
+            BookingImageCard(
+              bookingImageUrl: bookingImageUrl ?? imageUrlNullAddress,
+              context: context,
+            ),
+            renderBookingDetails(colourScheme, data)
+          ],
         ),
+        error: (err, stack) => ImageNotFound(),
+        loading: () => const CircularProgressIndicator(),
       ),
     );
   }
 
-  Widget bookingDetails(ColorScheme colourScheme, List<BookingData> data) {
+  Widget renderBookingDetails(ColorScheme colourScheme, List<BookingData> data) {
     return Card(
       key: GlobalKey(),
       child: ClipRRect(
@@ -57,7 +54,7 @@ class BookingSummaryCard extends ConsumerWidget {
           spacing: 0,
           children: [
             TextCard(
-              data: "#${data[0].bookingId}",
+              data: "#${data.first.bookingId}",
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -69,7 +66,7 @@ class BookingSummaryCard extends ConsumerWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: data[0].bookingFirstName,
+              data: data.first.bookingFirstName,
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -81,7 +78,7 @@ class BookingSummaryCard extends ConsumerWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: data[0].bookingLastName,
+              data: data.first.bookingLastName,
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -93,7 +90,7 @@ class BookingSummaryCard extends ConsumerWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: "${data[0].bookingPassengers}",
+              data: "${data.first.bookingPassengers}",
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -105,7 +102,7 @@ class BookingSummaryCard extends ConsumerWidget {
               textOverflow: TextOverflow.fade,
             ),
             TextCard(
-              data: "£${data[0].bookingPrice}",
+              data: "£${data.first.bookingTotalCost}",
               fontSize: appIsLandscape ? 20 : 15,
               fontWeight: FontWeight.bold,
               fontStyle: GoogleFonts.montserrat().fontStyle,
@@ -118,18 +115,18 @@ class BookingSummaryCard extends ConsumerWidget {
             ),
             Row(
               children: [
-                data[0].flightBoardingData == null &&
-                    data[0].flightBoardingData!.isEmpty
+                data.first.flightBoardingData == null &&
+                    data.first.flightBoardingData!.isEmpty
                     ? Icon(Icons.flight_rounded)
-                    : const Placeholder(),
-                data[0].hotelBookingData == null &&
-                    data[0].hotelBookingData!.isEmpty
+                    : renderDebugErrorCard(),
+                data.first.hotelBookingData == null &&
+                    data.first.hotelBookingData!.isEmpty
                     ? Icon(Icons.hotel_rounded)
-                    : const Placeholder(),
-                data[0].tourBookingData == null &&
-                    data[0].tourBookingData!.isEmpty
+                    : renderDebugErrorCard(),
+                data.first.tourBookingData == null &&
+                    data.first.tourBookingData!.isEmpty
                     ? Icon(Icons.tour_rounded)
-                    : const Placeholder(),
+                    : renderDebugErrorCard(),
               ],
             ),
             MaterialButton(
@@ -142,4 +139,9 @@ class BookingSummaryCard extends ConsumerWidget {
       ),
     );
   }
+
+  Card renderDebugErrorCard() {
+    return Card(child: Column(children: [Text("${StackTrace.current}")]));
+  }
+
 }
