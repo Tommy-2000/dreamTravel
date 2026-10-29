@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:dreamtravel/data/booking_data.dart';
+import 'package:dreamtravel/data/campfire_data.dart';
 import 'package:dreamtravel/data/flight_boarding_data.dart';
 import 'package:dreamtravel/data/hotel_booking_data.dart';
-import 'package:dreamtravel/data/campfire_data.dart';
 import 'package:dreamtravel/data/travel_data.dart';
+import 'package:dreamtravel/data/user_data.dart';
 import 'package:dreamtravel/logic/api/repositories/flight_boarding_data_repository.dart';
 import 'package:dreamtravel/logic/api/repositories/hotel_booking_data_repository.dart';
 import 'package:dreamtravel/state/notifiers/booking_data_list_notifier.dart';
@@ -26,8 +25,20 @@ import '../notifiers/monthly_calendar_notifier.dart';
 import '../notifiers/theme_notifier.dart';
 import '../notifiers/year_notifier.dart';
 
+// App Startup providers
+final appStartupProvider = FutureProvider<void>((ref) async {
+  ref.onDispose(() {
+    // Invalidate the providers that initialise on startup
+    ref.invalidate(authProvider);
+    ref.invalidate(travelDataListProvider);
+  });
+});
+
 // Authentication providers
-final authProvider = NotifierProvider<AuthNotifier, bool>(AuthNotifier.new);
+final authProvider = AsyncNotifierProvider<AuthNotifier, UserData>(
+  isAutoDispose: false,
+  AuthNotifier.new,
+);
 
 // Loyalty providers
 final loyaltyProvider = NotifierProvider<LoyaltyNotifier, bool>(
@@ -96,7 +107,6 @@ final sampleHotelBookingDataProvider =
     FutureProvider.autoDispose<List<HotelBookingData>>((ref) {
       return HotelBookingDataRepository().getAllSampleHotelBookingData();
     });
-
 
 // UI util providers
 final themeProvider = NotifierProvider<ThemeNotifier, bool>(ThemeNotifier.new);

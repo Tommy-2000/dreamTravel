@@ -12,14 +12,14 @@ final hotelBookingDataRepository = Provider<HotelBookingDataRepository>((ref) {
 });
 
 class HotelBookingDataRepository {
-  late final ApiProvider apiProvider;
+  late final ApiProvider _apiProvider;
 
   List<HotelBookingData> getAllSampleHotelBookingData() {
     return sampleHotelBookingDataList;
   }
 
   FutureOr<List<HotelBookingData>> getAllHotelBookingData() async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/",
     );
     return futureResponse.data;
@@ -28,7 +28,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByBookingNumber(
     String hotelBookingNumber,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$hotelBookingNumber",
     );
     return futureResponse.data;
@@ -37,7 +37,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByCheckInTime(
     String hotelCheckInTime,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$hotelCheckInTime",
     );
     return futureResponse.data;
@@ -46,7 +46,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByCheckInDay(
     DateTime hotelCheckInDay,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$hotelCheckInDay",
     );
     return futureResponse.data;
@@ -55,7 +55,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByCheckOutTime(
     String hotelCheckOutTime,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$hotelCheckOutTime",
     );
     return futureResponse.data;
@@ -64,7 +64,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByCheckOutDay(
     DateTime hotelCheckOutDay,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$hotelCheckOutDay",
     );
     return futureResponse.data;
@@ -73,7 +73,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByHotelName(
     String hotelName,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$hotelName",
     );
     return futureResponse.data;
@@ -82,7 +82,7 @@ class HotelBookingDataRepository {
   FutureOr<HotelBookingData> getHotelBookingDataByHotelAddress(
     String guestFullName,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/hotel/query=$guestFullName",
     );
     return futureResponse.data;

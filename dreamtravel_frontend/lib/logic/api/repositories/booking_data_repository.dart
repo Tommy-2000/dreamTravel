@@ -16,14 +16,14 @@ final bookingDataRepositoryProvider = Provider<BookingDataRepository>((ref) {
 });
 
 class BookingDataRepository {
-  late final ApiProvider apiProvider;
+  late final ApiProvider _apiProvider;
 
   List<BookingData> getAllSampleBookingData() {
     return sampleBookingDataList;
   }
 
   FutureOr<List<BookingData>> getAllBookingData() async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/",
     );
     return futureResponse.data;
@@ -32,7 +32,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataById(
     String bookingId,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$bookingId",
     );
     return futureResponse.data;
@@ -41,7 +41,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByFirstName(
     String bookingFirstName,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$bookingFirstName",
     );
     return futureResponse.data;
@@ -50,7 +50,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByLastName(
     String bookingLastName,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$bookingLastName",
     );
     return futureResponse.data;
@@ -59,7 +59,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByPassengers(
     int bookingPassengers,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$bookingPassengers",
     );
     return futureResponse.data;
@@ -68,7 +68,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByTotalCost(
     double bookingTotalCost,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$bookingTotalCost",
     );
     return futureResponse.data;
@@ -77,7 +77,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByTravelData(
     TravelData travelData,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$travelData",
     );
     return futureResponse.data;
@@ -86,7 +86,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByFlightBoardingData(
     FlightBoardingData flightBoardingData,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$flightBoardingData",
     );
     return futureResponse.data;
@@ -95,7 +95,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByHotelBookingData(
     HotelBookingData hotelBookingData,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$hotelBookingData",
     );
     return futureResponse.data;
@@ -104,7 +104,7 @@ class BookingDataRepository {
   FutureOr<BookingData> getBookingDataByTourBookingData(
     TourBookingData tourBookingData,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/query=$tourBookingData",
     );
     return futureResponse.data;

@@ -12,35 +12,35 @@ final travelDataRepositoryProvider = Provider<TravelDataRepository>((ref) {
 });
 
 class TravelDataRepository {
-  late final ApiProvider apiProvider;
+  late final ApiProvider _apiProvider;
 
   List<TravelData> getAllSampleTravelData() {
     return sampleTravelDataList;
   }
 
   FutureOr<List<TravelData>> getAllTravelData() async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/",
     );
     return futureResponse.data;
   }
 
   FutureOr<TravelData> getTravelDataById(String travelId) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelId",
     );
     return futureResponse.data;
   }
 
   FutureOr<TravelData> getTravelDataByCity(String travelCity) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelCity",
     );
     return futureResponse.data;
   }
 
   FutureOr<TravelData> getTravelDataByCountry(String travelCountry) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelCountry",
     );
     return futureResponse.data;
@@ -49,21 +49,21 @@ class TravelDataRepository {
   FutureOr<TravelData> getTravelDataByStartDate(
     DateTime travelStartDate,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelStartDate",
     );
     return futureResponse.data;
   }
 
   FutureOr<TravelData> getTravelDataByEndDate(DateTime travelEndDate) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelEndDate",
     );
     return futureResponse.data;
   }
 
   FutureOr<TravelData> getTravelDataByTotalCost(double travelTotalCost) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelTotalCost",
     );
     return futureResponse.data;
@@ -72,7 +72,7 @@ class TravelDataRepository {
   FutureOr<TravelData> getFlightOnlyTravelData(
     bool travelDataIncludesFlight,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelDataIncludesFlight",
     );
     return futureResponse.data;
@@ -81,7 +81,7 @@ class TravelDataRepository {
   FutureOr<TravelData> getHotelOnlyTravelData(
     bool travelDataIncludesHotel,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelDataIncludesHotel",
     );
     return futureResponse.data;
@@ -90,7 +90,7 @@ class TravelDataRepository {
   FutureOr<TravelData> getTourOnlyTravelData(
     bool travelDataIncludesTour,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/travel/query=$travelDataIncludesTour",
     );
     return futureResponse.data;

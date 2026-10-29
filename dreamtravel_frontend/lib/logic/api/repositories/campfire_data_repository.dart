@@ -13,28 +13,28 @@ final campfireDataRepositoryProvider = Provider<CampfireDataRepository>((ref) {
 });
 
 class CampfireDataRepository {
-  late final ApiProvider apiProvider;
+  late final ApiProvider _apiProvider;
 
   List<CampfireData> getAllSampleCampfireData() {
     return sampleCampfireDataList;
   }
 
   FutureOr<List<CampfireData>> getAllCampfireData() async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataById(String campfireId) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfireId",
     );
     return futureResponse.data;
   }
 
   FutureOr<CampfireData> getCampfireDataByBody(String campfireBody) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfireBody",
     );
     return futureResponse.data;
@@ -43,7 +43,7 @@ class CampfireDataRepository {
   FutureOr<CampfireData> getCampfireDataByPostDate(
     DateTime campfirePostDate,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfirePostDate",
     );
     return futureResponse.data;
@@ -52,7 +52,7 @@ class CampfireDataRepository {
   FutureOr<CampfireData> getCampfireDataByUpdatedDate(
     DateTime campfireUpdatedDate,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfireUpdatedDate",
     );
     return futureResponse.data;
@@ -61,7 +61,7 @@ class CampfireDataRepository {
   FutureOr<CampfireData> getCampfireDataByCampfirePostType(
     CampfirePostType campfirePostType,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfirePostType",
     );
     return futureResponse.data;
@@ -70,7 +70,7 @@ class CampfireDataRepository {
   FutureOr<CampfireData> getCampfireDataByTotalFavourites(
     int campfireFavourites,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfireFavourites",
     );
     return futureResponse.data;
@@ -79,7 +79,7 @@ class CampfireDataRepository {
   FutureOr<CampfireData> getCampfireDataByTotalComments(
     int campfireTotalComments,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/campfire/query=$campfireTotalComments",
     );
     return futureResponse.data;

@@ -14,14 +14,14 @@ final flightBoardingDataRepository = Provider<FlightBoardingDataRepository>((
 });
 
 class FlightBoardingDataRepository {
-  late final ApiProvider apiProvider;
+  late final ApiProvider _apiProvider;
 
   List<FlightBoardingData> getAllSampleFlightBoardingData() {
     return sampleFlightBoardingDataList;
   }
 
   FutureOr<List<FlightBoardingData>> getAllFlightBoardingData() async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/",
     );
     return futureResponse.data;
@@ -30,7 +30,7 @@ class FlightBoardingDataRepository {
   FutureOr<FlightBoardingData> getFlightBoardingDataById(
     String bookingId,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/query=$bookingId",
     );
     return futureResponse.data;
@@ -39,7 +39,7 @@ class FlightBoardingDataRepository {
   FutureOr<FlightBoardingData> getFlightBoardingDataByCity(
     String bookingCity,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/query=$bookingCity",
     );
     return futureResponse.data;
@@ -48,7 +48,7 @@ class FlightBoardingDataRepository {
   FutureOr<FlightBoardingData> getFlightBoardingDataByCountry(
     String bookingCountry,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/query=$bookingCountry",
     );
     return futureResponse.data;
@@ -57,7 +57,7 @@ class FlightBoardingDataRepository {
   FutureOr<FlightBoardingData> getFlightBoardingDataByStartDate(
     DateTime bookingStartDate,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/query=$bookingStartDate",
     );
     return futureResponse.data;
@@ -66,7 +66,7 @@ class FlightBoardingDataRepository {
   FutureOr<FlightBoardingData> getFlightBoardingDataByEndDate(
     DateTime bookingEndDate,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/query=$bookingEndDate",
     );
     return futureResponse.data;
@@ -75,7 +75,7 @@ class FlightBoardingDataRepository {
   FutureOr<FlightBoardingData> getFlightBoardingDataByTotalCost(
     double bookingTotalCost,
   ) async {
-    final futureResponse = await apiProvider.getRequest(
+    final futureResponse = await _apiProvider.getRequest(
       apiEndpoint: "$springTestApi/bookings/flights/query=$bookingTotalCost",
     );
     return futureResponse.data;

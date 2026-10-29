@@ -1,12 +1,11 @@
-import 'package:dreamtravel/ui/root/child_scaffold.dart';
 import 'package:dreamtravel/ui/root/not_found_screen.dart';
 import 'package:dreamtravel/ui/screens/booking_details_screen.dart';
 import 'package:dreamtravel/ui/screens/campfire_details_screen.dart';
 import 'package:dreamtravel/ui/screens/search_screen.dart';
 import 'package:dreamtravel/ui/screens/trip_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../ui/common/navigation/nav_screen_model.dart';
 import '../../ui/root/parent_scaffold.dart';
@@ -114,7 +113,7 @@ final navRouter = Provider.autoDispose((ref) {
           ),
         ],
         // redirect: (context, state) {
-        //   final authState = context.read(authProvider);
+        //   final authState = ref.read(authProvider);
         // },
       ),
     ],
