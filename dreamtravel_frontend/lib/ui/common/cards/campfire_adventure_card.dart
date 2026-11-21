@@ -46,7 +46,7 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
                 fit: BoxFit.cover,
                 height: widget.cardContentHeight,
                 width: widget.cardContentWidth,
-                imageUrl: widget.cardImageList[1],
+                imageUrl: widget.cardImageList[1].toString(),
                 // Load a progress placeholder while fetching image url
                 placeholder: (context, url) =>
                     Center(child: const CircularProgressIndicator()),
@@ -57,7 +57,7 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
                 fit: BoxFit.cover,
                 height: widget.cardContentHeight,
                 width: widget.cardContentWidth,
-                imageUrl: widget.cardImageList[2],
+                imageUrl: widget.cardImageList[2].toString(),
                 // Load a progress placeholder while fetching image url
                 placeholder: (context, url) =>
                     Center(child: const CircularProgressIndicator()),
@@ -72,7 +72,7 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
                 fit: BoxFit.cover,
                 height: widget.cardContentHeight,
                 width: widget.cardContentWidth,
-                imageUrl: widget.cardImageList[3],
+                imageUrl: widget.cardImageList[3].toString(),
                 // Load a progress placeholder while fetching image url
                 placeholder: (context, url) =>
                     Center(child: const CircularProgressIndicator()),
@@ -83,7 +83,7 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
                 fit: BoxFit.cover,
                 height: widget.cardContentHeight,
                 width: widget.cardContentWidth,
-                imageUrl: widget.cardImageList[4],
+                imageUrl: widget.cardImageList[4].toString(),
                 // Load a progress placeholder while fetching image url
                 placeholder: (context, url) =>
                     Center(child: const CircularProgressIndicator()),
@@ -94,7 +94,7 @@ class _CampfireAdventureCardState extends State<CampfireAdventureCard> {
                 fit: BoxFit.cover,
                 height: widget.cardContentHeight,
                 width: widget.cardContentWidth,
-                imageUrl: widget.cardImageList[5],
+                imageUrl: widget.cardImageList[5].toString(),
                 // Load a progress placeholder while fetching image url
                 placeholder: (context, url) =>
                     Center(child: const CircularProgressIndicator()),

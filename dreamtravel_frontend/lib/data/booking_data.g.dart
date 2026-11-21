@@ -11,17 +11,23 @@ _BookingData _$BookingDataFromJson(Map<String, dynamic> json) => _BookingData(
   bookingFirstName: json['bookingFirstName'] as String,
   bookingLastName: json['bookingLastName'] as String,
   bookingPassengers: (json['bookingPassengers'] as num).toInt(),
-  bookingPrice: (json['bookingPrice'] as num).toDouble(),
+  bookingTotalCost: (json['bookingTotalCost'] as num).toDouble(),
   travelData: TravelData.fromJson(json['travelData'] as Map<String, dynamic>),
-  flightBoardingData: (json['flightBoardingData'] as List<dynamic>?)
-      ?.map((e) => FlightBoardingData.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  hotelBookingData: (json['hotelBookingData'] as List<dynamic>?)
-      ?.map((e) => HotelBookingData.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  tourBookingData: (json['tourBookingData'] as List<dynamic>?)
-      ?.map((e) => TourBookingData.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  flightBoardingData:
+      (json['flightBoardingData'] as List<dynamic>?)
+          ?.map((e) => FlightBoardingData.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  hotelBookingData:
+      (json['hotelBookingData'] as List<dynamic>?)
+          ?.map((e) => HotelBookingData.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  tourBookingData:
+      (json['tourBookingData'] as List<dynamic>?)
+          ?.map((e) => TourBookingData.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$BookingDataToJson(_BookingData instance) =>
@@ -30,7 +36,7 @@ Map<String, dynamic> _$BookingDataToJson(_BookingData instance) =>
       'bookingFirstName': instance.bookingFirstName,
       'bookingLastName': instance.bookingLastName,
       'bookingPassengers': instance.bookingPassengers,
-      'bookingPrice': instance.bookingPrice,
+      'bookingTotalCost': instance.bookingTotalCost,
       'travelData': instance.travelData,
       'flightBoardingData': instance.flightBoardingData,
       'hotelBookingData': instance.hotelBookingData,

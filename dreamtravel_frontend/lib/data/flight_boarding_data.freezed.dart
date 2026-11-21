@@ -569,8 +569,8 @@ return $default(_that.airportCode,_that.airportCity,_that.airportAddress);case _
 /// @nodoc
 @JsonSerializable()
 
-class _Airport implements Airport {
-  const _Airport({required this.airportCode, required this.airportCity, required this.airportAddress});
+class _Airport extends Airport {
+  const _Airport({required this.airportCode, required this.airportCity, required this.airportAddress}): super._();
   factory _Airport.fromJson(Map<String, dynamic> json) => _$AirportFromJson(json);
 
 @override final  String airportCode;
@@ -837,8 +837,8 @@ return $default(_that.flightHours,_that.flightMinutes);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _FlightDuration implements FlightDuration {
-  const _FlightDuration({required this.flightHours, required this.flightMinutes});
+class _FlightDuration extends FlightDuration {
+  const _FlightDuration({required this.flightHours, required this.flightMinutes}): super._();
   factory _FlightDuration.fromJson(Map<String, dynamic> json) => _$FlightDurationFromJson(json);
 
 @override final  int flightHours;

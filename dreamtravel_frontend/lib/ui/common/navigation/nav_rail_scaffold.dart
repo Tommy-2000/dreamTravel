@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dreamtravel/logic/navigation/nav_branch.dart';
+import 'package:dreamtravel/ui/common/navigation/nav_scaffold_painter.dart';
 import 'package:dreamtravel/ui/common/navigation/nav_screen_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 class NavRailScaffold extends StatefulWidget {
-  const NavRailScaffold(this.navigationShell, {
-    super.key,
-  });
+  const NavRailScaffold(this.navigationShell, {super.key});
 
   final StatefulNavigationShell navigationShell;
 

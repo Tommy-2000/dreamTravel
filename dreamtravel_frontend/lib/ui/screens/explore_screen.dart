@@ -1,20 +1,24 @@
 import 'package:dreamtravel/data/travel_data.dart';
+import 'package:dreamtravel/logic/navigation/nav_branch.dart';
 import 'package:dreamtravel/state/explore_event.dart';
 import 'package:dreamtravel/state/explore_state.dart';
+import 'package:dreamtravel/state/global_state.dart';
+import 'package:dreamtravel/ui/common/responsive_render.dart';
 import 'package:dreamtravel/ui/common/slivers/sliver_root_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/app_values.dart';
-import '../common/cards/travel_card.dart';
+import '../common/cards/trip_card.dart';
 import '../common/slivers/sliver_header_delegate.dart';
 
 class ExploreScreen extends ConsumerStatefulWidget
-    with ExploreState, ExploreEvent {
+    with GlobalState, ExploreState, ExploreEvent {
   const ExploreScreen({super.key});
 
   @override
@@ -22,8 +26,8 @@ class ExploreScreen extends ConsumerStatefulWidget
 }
 
 class _ExploreScreenState extends ConsumerState<ExploreScreen> {
-  bool landscapeWindow = false;
-  bool foldableWindow = false;
+  late ResponsiveRender _responsiveRender;
+  late ScrollController _exploreScrollController;
 
   SliverPersistentHeader paintSliverHeader(String sliverHeaderText) {
     return SliverPersistentHeader(
@@ -53,36 +57,28 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   RenderObjectWidget renderExploreGrid(
     AsyncValue<List<TravelData>> asyncTravelDataList,
   ) {
-    return switch (asyncTravelDataList) {
-      AsyncData(:final value) => SliverGrid(
-        gridDelegate: landscapeWindow
-            ? paintLandscapeQuiltedGridDelegate() // If the device is landscape, switch the delegate method to render a landscape grid
-            : paintPortraitQuiltedGridDelegate(),
-        // Otherwise, render a portrait grid
-        delegate: renderSliverChildrenBuilder(
-          value,
-        ), // Render the children components as Sliver widgets within the SliverGrid
-      ),
-      AsyncLoading() => SliverToBoxAdapter(
-        child: const Center(child: CircularProgressIndicator()),
-      ),
-      AsyncError() => SliverToBoxAdapter(
-        child: Card(
-          child: Column(
-            children: [
-              Text(
-                "Error rendering travel data, see StackTrace below",
-                style: GoogleFonts.montserrat(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text("${StackTrace.current}"),
-            ],
-          ),
-        ),
-      ),
-    };
+    switch (asyncTravelDataList) {
+      case AsyncData(:final value):
+        return SliverGrid(
+          gridDelegate:
+              _responsiveRender.screenIsExtraLarge &&
+                  _responsiveRender.screenIsLarge &&
+                  _responsiveRender.screenIsMedium
+              ? paintLandscapeQuiltedGridDelegate()
+              // If the device is extra large, large or medium, switch the delegate method to render a landscape grid
+              : paintPortraitQuiltedGridDelegate(),
+          // Otherwise, render a portrait grid
+          delegate: renderSliverChildrenBuilder(
+            value,
+          ), // Render the children components as Sliver widgets within the SliverGrid
+        );
+      case AsyncLoading():
+        return SliverToBoxAdapter(
+          child: const Center(child: CircularProgressIndicator()),
+        );
+      case AsyncError():
+        return renderTripErrorCard();
+    }
   }
 
   SliverChildBuilderDelegate renderSliverChildrenBuilder(
@@ -96,20 +92,31 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
           // Check the list length before rendering anything
           return null;
         }
-        return renderTravelCard(travelDataList, index);
+        return renderTripCard(travelDataList, index);
       },
       childCount: travelDataList.length,
     );
   }
 
-  Widget renderTravelCard(List<TravelData> travelDataList, int renderIndex) {
-    return TravelCard(
+  TripCard renderTripCard(List<TravelData> travelDataList, int renderIndex) {
+    return TripCard(
+      responsiveRender: _responsiveRender,
+      tripCardHeroTag: travelDataList[renderIndex]
+          .travelId, // The travel id is used as a argument parameter when launching the travel details
       travelCity: travelDataList[renderIndex].travelCity,
       travelCountry: travelDataList[renderIndex].travelCountry,
       travelImageUrl:
           travelDataList[renderIndex].travelImageUrl ?? imageUrlNullAddress,
       travelTotalCost: travelDataList[renderIndex].travelTotalCost,
-      appIsLandscape: landscapeWindow,
+      tripCardOnTap: () {
+        NavBranch().goToBranch(context, 'routePath', 'queryParameters');
+      },
+    );
+  }
+
+  RenderObjectWidget renderTripErrorCard() {
+    return SliverToBoxAdapter(
+      child: Card(child: Column(children: [Text("${StackTrace.current}")])),
     );
   }
 
@@ -151,6 +158,25 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _exploreScrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _exploreScrollController.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // ResponsiveRender notifies this screen if any responsive screen changes are detected
+    _responsiveRender = ResponsiveRender(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Listen in to state changes in the travelDataList before rendering or rerendering any components
     final asyncTravelDataList = widget.watchTravelDataList(ref);
@@ -158,8 +184,9 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
     // paintSliverHeader("Latest Adventures");
 
     return CustomScrollView(
-      scrollCacheExtent: ScrollCacheExtent.viewport(100),
+      controller: _exploreScrollController,
       // Should improve rendering performance
+      scrollCacheExtent: ScrollCacheExtent.viewport(100),
       slivers: <Widget>[
         SliverRootAppBar(
           sliverRootTitle: "Go Explore!",
@@ -171,18 +198,5 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
         renderExploreGrid(asyncTravelDataList),
       ],
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Check the width of the window using MediaQuery if greater than 800 in a state change
-    final double windowWidth = MediaQuery.of(context).size.width;
-    landscapeWindow = windowWidth > 800;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

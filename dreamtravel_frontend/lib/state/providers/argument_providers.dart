@@ -1,31 +1,21 @@
-import 'package:dreamtravel/state/notifiers/trip_details_notifier.dart';
+import 'package:dreamtravel/state/arg_notifiers/trip_arg_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tripDetailsArgProvider = NotifierProvider<TripDetailsNotifier, String>(
-  isAutoDispose: true,
-  TripDetailsNotifier.new,
-);
+import '../arg_notifiers/booking_arg_notifier.dart';
+import '../arg_notifiers/campfire_arg_notifier.dart';
 
-final bookingDetailsArgProvider = Provider.autoDispose<String>(
-  (ref) => throw Exception("Argument must be provided"),
-);
+// ArgProviders are used for handling arguments in state when navigating between child screens within a parent scaffold
+final tripDetailsArgProvider =
+    AsyncNotifierProvider.autoDispose<TripArgNotifier, String>(
+      TripArgNotifier.new,
+    );
 
-final flightBoardingDetailsArgProvider = Provider.autoDispose<String>(
-  (ref) => throw Exception("Argument must be provided"),
-);
+final campfireDetailsArgProvider =
+    AsyncNotifierProvider.autoDispose<CampfireArgNotifier, String>(
+      CampfireArgNotifier.new,
+    );
 
-final hotelBookingDetailsArgProvider = Provider.autoDispose<String>(
-  (ref) => throw Exception("Argument must be provided"),
-);
-
-final tourBookingDetailsArgProvider = Provider.autoDispose<String>(
-  (ref) => throw Exception("Argument must be provided"),
-);
-
-final campfireSocialDetailsArgProvider = Provider.autoDispose<String>(
-  (ref) => throw Exception("Argument must be provided"),
-);
-
-final campfireAdventureDetailsArgProvider = Provider.autoDispose<String>(
-  (ref) => throw Exception("Argument must be provided"),
-);
+final bookingDetailsArgProvider =
+    AsyncNotifierProvider.autoDispose<BookingArgNotifier, String>(
+      BookingArgNotifier.new,
+    );

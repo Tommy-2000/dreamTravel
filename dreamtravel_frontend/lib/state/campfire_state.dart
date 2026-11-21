@@ -1,5 +1,4 @@
 import 'package:dreamtravel/data/campfire_data.dart';
-import 'package:dreamtravel/data/travel_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'providers/state_providers.dart';

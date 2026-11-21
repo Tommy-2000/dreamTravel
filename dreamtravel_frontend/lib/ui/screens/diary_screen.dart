@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 
+import '../common/responsive_render.dart';
 import '../common/slivers/sliver_root_appbar.dart';
 
 class DiaryScreen extends ConsumerStatefulWidget with DiaryState, DiaryEvent {
@@ -17,15 +18,26 @@ class DiaryScreen extends ConsumerStatefulWidget with DiaryState, DiaryEvent {
 }
 
 class _DiaryScreenState extends ConsumerState<DiaryScreen> {
-  bool landscapeWindow = false;
-  bool foldableWindow = false;
+  late ResponsiveRender _responsiveRender;
+  late ScrollController _diaryScrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _diaryScrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _diaryScrollController.dispose();
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Check the width of the window using MediaQuery if greater than 800 in a state change
-    final double windowWidth = MediaQuery.of(context).size.width;
-    landscapeWindow = windowWidth > 800;
+    // ResponsiveRender notifies this screen if any responsive screen changes are detected
+    _responsiveRender = ResponsiveRender(context);
   }
 
   @override
@@ -46,7 +58,9 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
 
   SliverGrid renderDiaryGrid() {
     return SliverGrid(
-      gridDelegate: landscapeWindow
+      gridDelegate: _responsiveRender.screenIsExtraLarge &&
+          _responsiveRender.screenIsLarge &&
+          _responsiveRender.screenIsMedium
           ? paintLandscapeQuiltedGridDelegate()
           : paintPortraitQuiltedGridDelegate(),
       delegate: SliverChildListDelegate([MonthlyCalendarCard()]),

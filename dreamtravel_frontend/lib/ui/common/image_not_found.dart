@@ -8,7 +8,7 @@ class ImageNotFound extends StatelessWidget {
     return Stack(
       alignment: AlignmentGeometry.center,
       children: [
-        Icon(Icons.image_not_supported_rounded, size: 100.0),
+        Icon(Icons.image_not_supported_rounded, size: 50.0),
       ],
     );
   }

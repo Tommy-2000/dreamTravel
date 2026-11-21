@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 final sampleCampfireDataList = [
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "1",
     campfireBody:
         "I had an INCREDIBLE trip in Hawaii with my brother and husband and saw dolphins by the...",
     campfirePostDate: DateTime.utc(2026, 12, 31),
@@ -19,7 +19,7 @@ final sampleCampfireDataList = [
     campfirePostComments: ["", ""],
   ),
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "2",
     campfireBody:
         "I had an INCREDIBLE trip in Hawaii with my brother and husband and saw dolphins by the...",
     campfirePostDate: DateTime.utc(2026, 12, 31),
@@ -34,7 +34,7 @@ final sampleCampfireDataList = [
     campfirePostComments: ["", ""],
   ),
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "3",
     campfireBody:
         "Just had a wonderful time all throughout Japan and saw some BEAUTIFUL cherry blossoms (or sakura as they are called) and...",
     campfirePostDate: DateTime.utc(2026, 12, 31),
@@ -64,7 +64,7 @@ final sampleCampfireDataList = [
     campfirePostComments: ["", ""],
   ),
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "4",
     campfireBody:
         "Just had a wonderful time all throughout Japan and saw some BEAUTIFUL cherry blossoms (or sakura as they are called) and...",
     campfirePostDate: DateTime.utc(2026, 12, 31),
@@ -94,7 +94,7 @@ final sampleCampfireDataList = [
     campfirePostComments: ["", ""],
   ),
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "5",
     campfireBody:
         "I had an INCREDIBLE trip in Hawaii with my brother and husband and saw dolphins by the...",
     campfirePostDate: DateTime.utc(2026, 12, 31),
@@ -109,7 +109,7 @@ final sampleCampfireDataList = [
     campfirePostComments: ["", ""],
   ),
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "6",
     campfireBody:
         "I had an INCREDIBLE trip in Hawaii with my brother and husband and saw dolphins by the...",
     campfirePostDate: DateTime.utc(2026, 12, 31),
@@ -124,7 +124,7 @@ final sampleCampfireDataList = [
     campfirePostComments: ["", ""],
   ),
   CampfireData(
-    campfireId: Uuid.parse(""),
+    campfireId: "7",
     campfireBody:
         "Just had a wonderful time all throughout Japan and saw some BEAUTIFUL cherry blossoms (or sakura as they are called) and...",
     campfirePostDate: DateTime.utc(2026, 12, 31),

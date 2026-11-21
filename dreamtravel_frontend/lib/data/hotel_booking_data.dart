@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+
 part 'hotel_booking_data.freezed.dart';
 
 part 'hotel_booking_data.g.dart';
@@ -21,6 +22,7 @@ abstract class HotelBookingData with _$HotelBookingData {
     required int hotelRoomNumber,
   }) = _HotelBookingData;
 
-  factory HotelBookingData.fromJson(Map<String, Object?> json) =>
+  factory HotelBookingData.fromJson(Map<String, dynamic> json) =>
       _$HotelBookingDataFromJson(json);
+
 }

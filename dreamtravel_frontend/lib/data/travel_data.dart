@@ -22,6 +22,7 @@ abstract class TravelData with _$TravelData {
     required bool travelDataIncludesTour,
   }) = _TravelData;
 
-  factory TravelData.fromJson(Map<String, Object?> json) =>
+  factory TravelData.fromJson(Map<String, dynamic> json) =>
       _$TravelDataFromJson(json);
+
 }

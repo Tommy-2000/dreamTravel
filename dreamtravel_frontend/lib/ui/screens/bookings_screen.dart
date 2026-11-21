@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../common/responsive_render.dart';
 import '../common/slivers/sliver_root_appbar.dart';
 
 class BookingsScreen extends ConsumerStatefulWidget
@@ -25,30 +26,14 @@ class BookingsScreen extends ConsumerStatefulWidget
 }
 
 class _BookingsScreenState extends ConsumerState<BookingsScreen> {
-  bool landscapeWindow = false;
-  bool foldableWindow = false;
+  late ResponsiveRender _responsiveRender;
+  late ScrollController _bookingsScrollController;
 
   bool filterButtonToggled = false;
 
   bool showFlightBookings = false;
   bool showHotelBookings = false;
   bool showTourBookings = false;
-
-  @override
-  void initState() {
-    super.initState();
-    showFlightBookings = true;
-    showHotelBookings = false;
-    showTourBookings = false;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Check the width of the window using MediaQuery if greater than 800 in a state change
-    final double windowWidth = MediaQuery.of(context).size.width;
-    landscapeWindow = windowWidth > 800;
-  }
 
   SliverPersistentHeader paintSliverHeader(String sliverHeaderText) {
     return SliverPersistentHeader(
@@ -75,64 +60,30 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // Listen in to state changes in the bookingDataList before rendering or rerendering any components
-    final asyncBookingDataList = widget.watchBookingDataList(ref);
-
-    // paintSliverHeader("Recent Bookings");
-
-    return CustomScrollView(
-      // Should improve rendering performance
-    scrollCacheExtent: ScrollCacheExtent.viewport(100),
-      slivers: <Widget>[
-        SliverRootAppBar(
-          sliverRootTitle: "Bookings",
-          sliverRootFilterButtonToggled: false,
-        ),
-        SliverToBoxAdapter(child: Gap(10)),
-        SliverToBoxAdapter(
-          child: CreateBookingCard(appIsLandscape: landscapeWindow),
-        ),
-        // Pass the async list from the screen's state future provider prior to rendering the grid
-        renderBookingsGrid(asyncBookingDataList),
-      ],
-    );
-  }
-
   RenderObjectWidget renderBookingsGrid(
     AsyncValue<List<BookingData>> asyncBookingDataList,
   ) {
-    return switch (asyncBookingDataList) {
-      AsyncData(:final value) => SliverGrid(
-        gridDelegate: landscapeWindow
-            ? paintLandscapeQuiltedGridDelegate() // If the device is landscape, switch the delegate method to render a landscape grid
-            : paintPortraitQuiltedGridDelegate(),
-        // Otherwise, render a portrait grid
-        delegate: renderSliverChildrenBuilder(
-          value,
-        ), // Render the children components as Sliver widgets within the SliverGrid
-      ),
-      AsyncLoading() => SliverToBoxAdapter(
-        child: const Center(child: CircularProgressIndicator()),
-      ),
-      AsyncError() => SliverToBoxAdapter(
-        child: Card(
-          child: Column(
-            children: [
-              Text(
-                "Error rendering booking data, see StackTrace below",
-                style: GoogleFonts.montserrat(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text("${StackTrace.current}"),
-            ],
-          ),
-        ),
-      ),
-    };
+    switch (asyncBookingDataList) {
+      case AsyncData(:final value):
+        return SliverGrid(
+          gridDelegate:
+              _responsiveRender.screenIsExtraLarge &&
+                  _responsiveRender.screenIsLarge &&
+                  _responsiveRender.screenIsMedium
+              ? paintLandscapeQuiltedGridDelegate() // If the device is landscape, switch the delegate method to render a landscape grid
+              : paintPortraitQuiltedGridDelegate(),
+          // Otherwise, render a portrait grid
+          delegate: renderSliverChildrenBuilder(
+            value,
+          ), // Render the children components as Sliver widgets within the SliverGrid
+        );
+      case AsyncLoading():
+        return SliverToBoxAdapter(
+          child: const Center(child: CircularProgressIndicator()),
+        );
+      case AsyncError():
+        return renderDebugErrorCard();
+    }
   }
 
   SliverChildBuilderDelegate renderSliverChildrenBuilder(
@@ -161,6 +112,12 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
     );
   }
 
+  RenderObjectWidget renderDebugErrorCard() {
+    return SliverToBoxAdapter(
+      child: Card(child: Column(children: [Text("${StackTrace.current}")])),
+    );
+  }
+
   SliverQuiltedGridDelegate paintPortraitQuiltedGridDelegate() {
     return SliverQuiltedGridDelegate(
       crossAxisCount: 64,
@@ -177,6 +134,51 @@ class _BookingsScreenState extends ConsumerState<BookingsScreen> {
         QuiltedGridTile(32, 16),
         QuiltedGridTile(32, 16),
         QuiltedGridTile(32, 16),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    showFlightBookings = true;
+    showHotelBookings = false;
+    showTourBookings = false;
+    _bookingsScrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bookingsScrollController.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // ResponsiveRender notifies this screen if any responsive screen changes are detected
+    _responsiveRender = ResponsiveRender(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Listen in to state changes in the bookingDataList before rendering or rerendering any components
+    final asyncBookingDataList = widget.watchBookingDataList(ref);
+
+    // paintSliverHeader("Recent Bookings");
+
+    return CustomScrollView(
+      // Should improve rendering performance
+      scrollCacheExtent: ScrollCacheExtent.viewport(100),
+      slivers: <Widget>[
+        SliverRootAppBar(
+          sliverRootTitle: "Bookings",
+          sliverRootFilterButtonToggled: false,
+        ),
+        SliverToBoxAdapter(child: Gap(10)),
+        SliverToBoxAdapter(child: CreateBookingCard()),
+        // Pass the async list from the screen's state future provider prior to rendering the grid
+        renderBookingsGrid(asyncBookingDataList),
       ],
     );
   }
